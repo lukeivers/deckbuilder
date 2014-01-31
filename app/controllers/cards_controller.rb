@@ -4,7 +4,7 @@ class CardsController < ApplicationController
   # GET /cards
   # GET /cards.json
   def index
-    @cards = Card.all
+    @cards = CardDatabaseCard.all
   end
 
   # GET /cards/1
@@ -14,7 +14,7 @@ class CardsController < ApplicationController
 
   # GET /cards/new
   def new
-    @card = Card.new
+    @card = CardDatabaseCard.new
   end
 
   # GET /cards/1/edit
@@ -24,11 +24,11 @@ class CardsController < ApplicationController
   # POST /cards
   # POST /cards.json
   def create
-    @card = Card.new(card_params)
+    @card = CardDatabaseCard.new(card_params)
 
     respond_to do |format|
       if @card.save
-        format.html { redirect_to @card, notice: 'Card was successfully created.' }
+        format.html { redirect_to @card, notice: 'CardDatabaseCard was successfully created.' }
         format.json { render action: 'show', status: :created, location: @card }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class CardsController < ApplicationController
   def update
     respond_to do |format|
       if @card.update(card_params)
-        format.html { redirect_to @card, notice: 'Card was successfully updated.' }
+        format.html { redirect_to @card, notice: 'CardDatabaseCard was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -64,7 +64,7 @@ class CardsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_card
-      @card = Card.find(params[:id])
+      @card = CardDatabaseCard.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

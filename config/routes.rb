@@ -1,4 +1,6 @@
 Deckbuilder::Application.routes.draw do
+  resources :decks
+
   resources :hclasses
 
   resources :cards

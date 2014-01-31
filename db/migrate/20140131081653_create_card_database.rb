@@ -1,6 +1,7 @@
-class CreateMinions < ActiveRecord::Migration
+class CreateCardDatabaseCards < ActiveRecord::Migration
   def change
-    create_table :cards do |t|
+    create_table :card_database_cards do |t|
+      t.string :type
       t.references :hclass, index: true
       t.integer :cost
       t.integer :attack
@@ -10,8 +11,6 @@ class CreateMinions < ActiveRecord::Migration
       t.boolean :stealth
       t.boolean :divine_shield
       t.boolean :windfury
-      t.boolean :silenced
-      t.boolean :frozen
       t.boolean :targetable
       t.boolean :playable
       t.references :deathrattle

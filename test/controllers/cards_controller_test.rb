@@ -17,7 +17,7 @@ class CardsControllerTest < ActionController::TestCase
   end
 
   test "should create card" do
-    assert_difference('Card.count') do
+    assert_difference('CardDatabaseCard.count') do
       post :create, card: { cost: @card.cost, hclass_id: @card.hclass_id, type: @card.type }
     end
 
@@ -40,7 +40,7 @@ class CardsControllerTest < ActionController::TestCase
   end
 
   test "should destroy card" do
-    assert_difference('Card.count', -1) do
+    assert_difference('CardDatabaseCard.count', -1) do
       delete :destroy, id: @card
     end
 
