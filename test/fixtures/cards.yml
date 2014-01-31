@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  type: 
+  hclass_id: 
+  cost: 1
+
+two:
+  type: 
+  hclass_id: 
+  cost: 1
