@@ -42,6 +42,16 @@ class Cards
         Card.new(name: 'Murloc Raider',  attack: 2, health: 1, cost: 1, type: :minion),
         Card.new(name: 'Murloc Tidecaller',  effect: 'Whenever a Murloc is summoned, gain +1 Attack', attack: 1, health: 2, cost: 1, type: :minion),
         Card.new(name: 'Secretkeeper',  effect: 'Whenever a Secret is played, gain +1/+1', attack: 1, health: 2, cost: 1, type: :minion),
+        Card.new(name: 'Shieldbearer',  effect: 'Taunt', attack: 0, health: 4, cost: 1, type: :minion),
+        Card.new(name: 'Southsea Deckhand',  effect: 'Has Charge while you have a weapon equipped', attack: 2, health: 1, cost: 1, type: :minion),
+        Card.new(name: 'Stonetusk Board',  effect: 'Charge', attack: 1, health: 1, cost: 1, type: :minion),
+        Card.new(name: 'Voodoo Doctor',  battlecry: 'Restore 2 Health', attack: 2, health: 1, cost: 1, type: :minion),
+        Card.new(name: 'Worgen Infiltrator',  effect: 'Stealth', attack: 2, health: 1, cost: 1, type: :minion),
+        Card.new(name: 'Young Dragonhawk',  effect: 'Windfury', attack: 1, health: 1, cost: 1, type: :minion),
+        Card.new(name: 'Young Priestess',  effect: 'At the end of your turn, give another random friendly minion +1 Health', attack: 2, health: 1, cost: 1, type: :minion),
+        Card.new(name: 'Amani Berserker',  effect: 'Enrage: +3 Attack', attack: 2, health: 3, cost: 2, type: :minion),
+        Card.new(name: 'Ancient Watcher',  effect: 'Can\'t Attack', attack: 4, health: 5, cost: 2, type: :minion),
+        Card.new(name: 'Bloodfen Raptor',  attack: 3, health: 2, cost: 2, type: :minion),
 	]
     end
 
