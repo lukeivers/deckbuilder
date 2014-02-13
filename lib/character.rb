@@ -12,6 +12,11 @@ class Character
 
   def deal_damage(amount)
     @health -= amount
+    if health <= 0
+      true
+    else
+      false
+    end
   end
 
   def freeze
@@ -43,6 +48,10 @@ class Character
     possible = true
     possible = false if frozen?
     possible
+  end
+
+  def dead?
+    @health <= 0
   end
 
 end
