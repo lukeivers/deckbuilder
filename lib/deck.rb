@@ -7,12 +7,11 @@ class Deck
   def initialize(opts = {})
     @deck_class = opts[:deck_class]
     self.init_cards
-    self.shuffle
   end
 
   def init_cards
     @cards = Array.new
-    @cards.concat Cards.get('Elven Archer', 2)
+    @cards.concat Cards.get('Goldshire Footman', 2)
     @cards.concat Cards.get('Arcane Missiles', 2)
     @cards.concat Cards.get('Frostbolt', 2)
     @cards.concat Cards.get('Acidic Swamp Ooze', 2)
@@ -28,6 +27,7 @@ class Deck
     @cards.concat Cards.get('Archmage', 1)
     @cards.concat Cards.get('Stormwind Champion', 1)
     @cards.concat Cards.get('Flamestrike', 2)
+    self.shuffle
   end
 
   def shuffle

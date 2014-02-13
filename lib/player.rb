@@ -6,14 +6,24 @@ require './weapon'
 require 'pp'
 
 class Player < Character
-  attr_accessor :deck, :hand, :max_mana, :mana, :health, :opponent, :minions, :weapon
+  attr_accessor :deck, :hand, :max_mana, :mana, :health, :opponent, :minions, :weapon, :wins
 
   def initialize(opts = {})
     @hand = Array.new
     @minions = Array.new
     @max_mana = 0
     @weapon = nil
+    @wins = 0
     super
+  end
+
+  def reset
+    @hand = Array.new
+    @minions = Array.new
+    @max_mana = 0
+    @health = 30
+    @weapon = nil
+    @deck.init_cards
   end
 
   def set_opponent(opponent)
@@ -91,22 +101,25 @@ class Player < Character
       end
     end
 
-    determine_targets
 
-    @minions.each do |minion|
-      if minion.can_attack?
-        target = @available_targets[0]
-        target_name = target.name
-        puts @name + '\'s ' + minion.name + ' attacked ' + target_name + '.'
-        dead = minion.attack_target(target)
-        if dead
-          puts self.name + ' killed ' + target_name + '.'
-          if target == opponent
-            break
-          end
-          @available_targets.delete(target)
-          if @available_targets.size == 0
-            self.determine_targets
+    if @minions.size > 0
+      determine_targets
+
+      @minions.each do |minion|
+        if minion.can_attack?
+          target = @available_targets[0]
+          target_name = target.name
+          puts @name + '\'s ' + minion.name + ' attacked ' + target_name + '.'
+          dead = minion.attack_target(target)
+          if dead
+            puts self.name + ' killed ' + target_name + '.'
+            if target == opponent
+              break
+            end
+            @available_targets.delete(target)
+            if @available_targets.size == 0
+              self.determine_targets
+            end
           end
         end
       end
