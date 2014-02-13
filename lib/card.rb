@@ -39,6 +39,9 @@ class Card
         if @battlecry
           Card.parse(self.battlecry, self, player, minion)
         end
+        if @effect
+          Card.parse(self.effect, self, player, minion)
+        end
         player.add_minion(minion)
       when :spell
         Card.parse(self.effect, self, player)
@@ -82,6 +85,8 @@ class Card
         @draw_amount = words[1].to_i
       end
       player.draw(@draw_amount)
+    elsif words[0] == 'taunt'
+      minion.taunt = true
     end
   end
 end

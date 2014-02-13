@@ -28,6 +28,10 @@ class Player < Character
     @minions << minion
   end
 
+  def destroy_minion(minion)
+    @minions.delete(minion)
+  end
+
   def draw(amount = 1)
     hand.concat deck.draw(amount)
   end
@@ -64,25 +68,47 @@ class Player < Character
 
   end
 
+  def determine_targets
+    @available_targets = Array.new
+    @opponent.minions.each do |minion|
+      if minion.taunt?
+        @available_targets << minion
+      end
+    end
+    if @available_targets.length == 0
+      @available_targets << @opponent
+      @available_targets.concat @opponent.minions
+    end
+  end
+
   def play
     @hand.sort { |a, b| a.cost <=> b.cost }
     @hand.reverse.each do |card|
       if @mana > card.cost
         card.play(self)
         puts @name + ' played ' + card.name + '.'
-        @hand.slice!(@hand.index(card))
+        @hand.delete(card)
       end
     end
 
-    @available_targets = Array.new
-    @available_targets << @opponent
-    @available_targets.concat @opponent.minions
+    determine_targets
 
     @minions.each do |minion|
       if minion.can_attack?
-        target = @opponent
-        puts @name + '\'s ' + minion.name + ' attacked ' + target.name + '.'
-        minion.attack_target(target)
+        target = @available_targets[0]
+        target_name = target.name
+        puts @name + '\'s ' + minion.name + ' attacked ' + target_name + '.'
+        dead = minion.attack_target(target)
+        if dead
+          puts self.name + ' killed ' + target_name + '.'
+          if target == opponent
+            break
+          end
+          @available_targets.delete(target)
+          if @available_targets.size == 0
+            self.determine_targets
+          end
+        end
       end
     end
   end
