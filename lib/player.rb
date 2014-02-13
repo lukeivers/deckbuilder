@@ -79,7 +79,7 @@ class Player < Character
     @available_targets.concat @opponent.minions
 
     @minions.each do |minion|
-      if not minion.frozen?
+      if minion.can_attack?
         target = @opponent
         puts @name + '\'s ' + minion.name + ' attacked ' + target.name + '.'
         minion.attack_target(target)

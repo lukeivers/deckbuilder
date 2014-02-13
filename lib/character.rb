@@ -39,4 +39,10 @@ class Character
     target.deal_damage(@attack)
   end
 
+  def can_attack?
+    possible = true
+    possible = false if frozen?
+    possible
+  end
+
 end

@@ -2,15 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="87c2d7c1-958a-4233-8e18-631529e1c979" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/weapon.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/card.rb" afterPath="$PROJECT_DIR$/lib/card.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/cards.rb" afterPath="$PROJECT_DIR$/lib/cards.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/character.rb" afterPath="$PROJECT_DIR$/lib/character.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/deck.rb" afterPath="$PROJECT_DIR$/lib/deck.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/minion.rb" afterPath="$PROJECT_DIR$/lib/minion.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/play.rb" afterPath="$PROJECT_DIR$/lib/play.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/player.rb" afterPath="$PROJECT_DIR$/lib/player.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="deckbuilder.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -45,7 +41,7 @@
       <file leaf-file-name="player.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/player.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="84" column="29" selection-start="1543" selection-end="1543" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1410">
+            <state line="81" column="27" selection-start="1409" selection-end="1409" vertical-scroll-proportion="0.0" vertical-offset="633" max-vertical-offset="1410">
               <folding />
             </state>
           </provider>
@@ -63,7 +59,7 @@
       <file leaf-file-name="character.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/character.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="23" selection-start="241" selection-end="241" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="705">
+            <state line="44" column="12" selection-start="747" selection-end="747" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="795">
               <folding />
             </state>
           </provider>
@@ -72,7 +68,7 @@
       <file leaf-file-name="minion.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/minion.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="92" selection-start="218" selection-end="218" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="225">
+            <state line="21" column="5" selection-start="474" selection-end="474" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="420">
               <folding />
             </state>
           </provider>
@@ -87,19 +83,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cards.rb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="cards.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/cards.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="11" selection-start="11" selection-end="11" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="705">
+            <state line="9" column="96" selection-start="490" selection-end="490" vertical-scroll-proportion="0.17374517" vertical-offset="0" max-vertical-offset="777">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="card.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="card.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/card.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="59" column="45" selection-start="1846" selection-end="1846" vertical-scroll-proportion="1.1389961" vertical-offset="0" max-vertical-offset="1380">
+            <state line="57" column="10" selection-start="1728" selection-end="1728" vertical-scroll-proportion="0.0" vertical-offset="435" max-vertical-offset="1380">
               <folding />
             </state>
           </provider>
@@ -141,13 +137,13 @@
         <option value="$PROJECT_DIR$/db/migrate/20140131081653_create_card_database.rb" />
         <option value="$PROJECT_DIR$/lib/tasks/character.rb" />
         <option value="$PROJECT_DIR$/lib/weapon.rb" />
-        <option value="$PROJECT_DIR$/lib/cards.rb" />
         <option value="$PROJECT_DIR$/lib/play.rb" />
-        <option value="$PROJECT_DIR$/lib/character.rb" />
-        <option value="$PROJECT_DIR$/lib/minion.rb" />
-        <option value="$PROJECT_DIR$/lib/player.rb" />
         <option value="$PROJECT_DIR$/lib/deck.rb" />
         <option value="$PROJECT_DIR$/lib/card.rb" />
+        <option value="$PROJECT_DIR$/lib/minion.rb" />
+        <option value="$PROJECT_DIR$/lib/character.rb" />
+        <option value="$PROJECT_DIR$/lib/player.rb" />
+        <option value="$PROJECT_DIR$/lib/cards.rb" />
       </list>
     </option>
   </component>
@@ -643,34 +639,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/minion.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="92" selection-start="218" selection-end="218" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="225">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/character.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="23" selection-start="241" selection-end="241" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="705">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/weapon.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="2" selection-start="50" selection-end="50" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="195">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/player.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="29" selection-start="1543" selection-end="1543" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1410">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/play.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="80" column="77" selection-start="1815" selection-end="1815" vertical-scroll-proportion="0.0" vertical-offset="483" max-vertical-offset="1290">
@@ -685,16 +653,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/cards.rb">
+    <entry file="file://$PROJECT_DIR$/lib/card.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="11" selection-start="11" selection-end="11" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="777">
+        <state line="57" column="10" selection-start="1728" selection-end="1728" vertical-scroll-proportion="0.0" vertical-offset="435" max-vertical-offset="1380">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/card.rb">
+    <entry file="file://$PROJECT_DIR$/lib/minion.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="45" selection-start="1846" selection-end="1846" vertical-scroll-proportion="1.1389961" vertical-offset="0" max-vertical-offset="1380">
+        <state line="21" column="5" selection-start="474" selection-end="474" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="420">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/character.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="12" selection-start="747" selection-end="747" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="795">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/weapon.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="2" selection-start="50" selection-end="50" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="195">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/player.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="81" column="27" selection-start="1409" selection-end="1409" vertical-scroll-proportion="0.0" vertical-offset="633" max-vertical-offset="1410">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/cards.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="96" selection-start="490" selection-end="490" vertical-scroll-proportion="0.17374517" vertical-offset="0" max-vertical-offset="777">
           <folding />
         </state>
       </provider>

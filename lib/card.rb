@@ -54,7 +54,7 @@ class Card
         available_targets << player.opponent
         available_targets.concat player.opponent.minions
         if words.length == 3 or (words[3] == 'to' and words[5] == 'character')
-          available_targets.sort { |a, b| a.health <=> b.health }
+          available_targets.sort! { |a, b| a.health <=> b.health }
           target = available_targets[0]
           target.deal_damage(damage_amount)
           puts player.name + ' dealt ' + damage_amount.to_s + ' damage to ' + target.name + ' with a ' + card.name + '.'
