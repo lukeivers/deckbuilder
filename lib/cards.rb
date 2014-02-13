@@ -29,8 +29,21 @@ class Cards
         Card.new(name: 'Flamestrike', effect: 'Deal 4 damage to all enemy minions', cost: 7, deck_class: 'Mage',
                  type: :spell),
         Card.new(name: 'The Coin', effect: 'Gain 1 Mana Crystal this turn only', cost: 0, type: :spell),
-    ]
-  end
+	Card.new(name: 'Wisp', attack: 1, health: 1, cost: 0, type: :minion),
+	Card.new(name: 'Abusive Sergeant', battlecry: 'Give a minion +2 Attach this turn', attack: 2, health: 1, cost: 1, type: :minion), 
+	Card.new(name: 'Argent Squire',  effect: 'Divine Shield', attack: 1, health: 1, cost: 1, type: :minion),  
+        Card.new(name: 'Angry Chicken',  effect: 'Enrage: +5 Attack', attack: 1, health: 1, cost: 1, type: :minion),
+        Card.new(name: 'Bloodsail Corsair',  battlecry: 'Remove 1 Durability from your opponent\'s weapon', attack: 1, health: 2, cost: 1, type: :minion),
+        Card.new(name: 'Goldshire Footman',  effect: 'Taunt', attack: 1, health: 2, cost: 1, type: :minion),
+        Card.new(name: 'Grimscale Oracle',  effect: 'ALL other Murlocs have +1 Attack', attack: 1, health: 1, cost: 1, type: :minion),
+        Card.new(name: 'Hungry Crab',  battlecry: 'Destroy a Murloc and gain +2/+2', attack: 1, health: 2, cost: 1, type: :minion),
+        Card.new(name: 'Leper Gnome',  effect: 'Deathrattle: Deal 2 damage to the enemy hero', attack: 2, health: 1, cost: 1, type: :minion),
+        Card.new(name: 'Lightwarden',  effect: 'Whenever a character is healed, gain +2 attack', attack: 1, health: 2, cost: 1, type: :minion),
+        Card.new(name: 'Murloc Raider',  attack: 2, health: 1, cost: 1, type: :minion),
+        Card.new(name: 'Murloc Tidecaller',  effect: 'Whenever a Murloc is summoned, gain +1 Attack', attack: 1, health: 2, cost: 1, type: :minion),
+        Card.new(name: 'Secretkeeper',  effect: 'Whenever a Secret is played, gain +1/+1', attack: 1, health: 2, cost: 1, type: :minion),
+	]
+    end
 
   def self.get(name, amount=1)
     result = Array.new
