@@ -2,7 +2,6 @@
 <module type="RUBY_MODULE" version="4">
   <component name="CompassSettings">
     <option name="compassExecutableFilePath" value="$USER_HOME$/.rbenv/versions/1.9.3-p429/lib/ruby/gems/1.9.1/gems/compass-0.13.alpha.6/bin/compass" />
-    <option name="compassSupportEnabled" value="true" />
   </component>
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$" />
