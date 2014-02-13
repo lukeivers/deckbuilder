@@ -49,6 +49,9 @@ class Cards
         Card.new(name: 'Worgen Infiltrator',  effect: 'Stealth', attack: 2, health: 1, cost: 1, type: :minion),
         Card.new(name: 'Young Dragonhawk',  effect: 'Windfury', attack: 1, health: 1, cost: 1, type: :minion),
         Card.new(name: 'Young Priestess',  effect: 'At the end of your turn, give another random friendly minion +1 Health', attack: 2, health: 1, cost: 1, type: :minion),
+        Card.new(name: 'Amani Berserker',  effect: 'Enrage: +3 Attack', attack: 2, health: 3, cost: 2, type: :minion),
+        Card.new(name: 'Ancient Watcher',  effect: 'Can\'t Attack', attack: 4, health: 5, cost: 2, type: :minion),
+        Card.new(name: 'Bloodfen Raptor',  attack: 3, health: 2, cost: 2, type: :minion),
 	]
     end
 
