@@ -1,5 +1,5 @@
-require 'cards'
-require 'card'
+require './cards'
+require './card'
 
 class Deck
   attr_accessor :deck_class, :cards
@@ -31,7 +31,7 @@ class Deck
   end
 
   def shuffle
-    @cards.shuffle
+    @cards.shuffle!
   end
 
   def draw(amount)

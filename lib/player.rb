@@ -1,20 +1,27 @@
-require 'deck'
-require 'cards'
-require 'card'
-require 'character'
+require './deck'
+require './cards'
+require './card'
+require './character'
+require './weapon'
+require 'pp'
 
 class Player < Character
-  attr_accessor :deck, :hand, :max_mana, :mana, :name, :health, :opponent, :minions
+  attr_accessor :deck, :hand, :max_mana, :mana, :health, :opponent, :minions, :weapon
 
   def initialize(opts = {})
     @hand = Array.new
     @minions = Array.new
-    @name = opts[:name]
+    @max_mana = 0
+    @weapon = nil
     super
   end
 
   def set_opponent(opponent)
     @opponent = opponent
+  end
+
+  def set_weapon(weapon)
+    @weapon = nil
   end
 
   def add_minion(minion)
@@ -26,7 +33,11 @@ class Player < Character
   end
 
   def add_card(card)
-    hand << card
+    if Array === card
+      hand.concat card
+    else
+      hand << card
+    end
   end
 
   def add_mana_crystal(amount = 1)
@@ -38,7 +49,7 @@ class Player < Character
   end
 
   def remove_mana(amount)
-    @mana -= cost
+    @mana -= amount
   end
 
   def start_round
@@ -49,11 +60,29 @@ class Player < Character
     super
   end
 
+  def mulligan
+
+  end
+
   def play
     @hand.sort { |a, b| a.cost <=> b.cost }
     @hand.reverse.each do |card|
       if @mana > card.cost
         card.play(self)
+        puts @name + ' played ' + card.name + '.'
+        @hand.slice!(@hand.index(card))
+      end
+    end
+
+    @available_targets = Array.new
+    @available_targets << @opponent
+    @available_targets.concat @opponent.minions
+
+    @minions.each do |minion|
+      if not minion.frozen?
+        target = @opponent
+        puts @name + '\'s ' + minion.name + ' attacked ' + target.name + '.'
+        minion.attack_target(target)
       end
     end
   end

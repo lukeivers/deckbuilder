@@ -1,7 +1,7 @@
-require 'player'
-require 'deck'
-require 'card'
-require 'cards'
+require './player'
+require './deck'
+require './card'
+require './cards'
 
 puts 'Starting Hearthstone Deckbuilder'
 
@@ -50,6 +50,7 @@ puts 'Adding coin card to coin toss loser'
 
 @game_running = true
 @winning_player = nil
+@rounds = 0
 
 while @game_running do
   puts 'Starting turn for current player'
@@ -62,10 +63,10 @@ while @game_running do
 
   puts 'Checking if everyone is still alive'
   if @current_player.dead?
-    @winning_player = other_player
+    @winning_player = @other_player
     @game_running = false
   elsif @other_player.dead?
-    @winning_player = current_player
+    @winning_player = @current_player
     @game_running = false
   end
 
@@ -73,6 +74,8 @@ while @game_running do
   temp = @other_player
   @other_player = @current_player
   @current_player = temp
+
+  @rounds += 1
 end
 
-puts @winning_player.name + ' has won the game!'
+puts @winning_player.name + ' has won the game in ' + @rounds.to_s + ' rounds!'

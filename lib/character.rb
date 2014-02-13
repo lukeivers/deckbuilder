@@ -1,10 +1,11 @@
 class Character
-  attr_accessor :health, :max_health, :attack, :frozen, :thawing
+  attr_accessor :health, :max_health, :attack, :frozen, :thawing, :name
 
   def initialize(opts = {})
     @max_health = opts[:max_health] || 30
     @health = @max_health
     @attack = opts[:attack] || 0
+    @name = opts[:name]
     @frozen = false
     @thawing = false
   end
@@ -15,6 +16,10 @@ class Character
 
   def freeze
     @frozen = true
+  end
+
+  def frozen?
+    @frozen
   end
 
   def thaw
@@ -28,6 +33,10 @@ class Character
     elsif @thawing
       self.thaw
     end
+  end
+
+  def attack_target(target)
+    target.deal_damage(@attack)
   end
 
 end
