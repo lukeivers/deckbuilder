@@ -2,6 +2,7 @@ require './player'
 require './deck'
 require './card'
 require './cards'
+require './decks'
 
 puts 'Starting Hearthstone Deckbuilder'
 
@@ -12,15 +13,15 @@ puts 'Creating second player'
 @player2 = Player.new(name: 'Player 2')
 
 puts 'Assigning deck to first player'
-@player1.deck = Deck.new(deck_class: 'mage')
+@player1.deck = Decks.get(name: 'Goldshire Footman')
 
 puts 'Assigning deck to second player'
-@player2.deck = Deck.new(deck_class: 'mage')
+@player2.deck = Decks.get(name: 'Elven Archer')
 
 @player1.set_opponent(@player2)
 @player2.set_opponent(@player1)
 
-100.times do
+1000.times do
   @game_running = true
   @winning_player = nil
   @rounds = 0

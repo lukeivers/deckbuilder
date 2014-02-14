@@ -1,8 +1,7 @@
 require './card'
 
 class Cards
-  def self.cards
-    return [
+  @cards = [
         Card.new(name: 'Elven Archer', battlecry: 'Deal 1 damage', attack: 1, health: 1, cost: 1, type: :minion),
         Card.new(name: 'Arcane Missiles', effect: 'Deal 3 damage randomly split among enemy characters', cost: 1,
                  deck_class: 'Mage', type: :spell),
@@ -53,11 +52,10 @@ class Cards
         Card.new(name: 'Ancient Watcher',  effect: 'Can\'t Attack', attack: 4, health: 5, cost: 2, type: :minion),
         Card.new(name: 'Bloodfen Raptor',  attack: 3, health: 2, cost: 2, type: :minion),
 	]
-    end
 
   def self.get(name, amount=1)
     result = Array.new
-    card = cards.find { |card| card.name == name }
+    card = @cards.find { |card| card.name == name }
     amount.times do
       result << card.dup
     end
