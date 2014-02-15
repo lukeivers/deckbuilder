@@ -1,11 +1,11 @@
 require './cards/minion'
 
-class NoviceEngineer < Minion
+class GnomishInventor < Minion
   def initialize
-    @cost = 2
-    @attack = 1
-    @max_health = 1
-    @name = "Novice Engineer"
+    @cost = 4
+    @name = 'Gnomish Inventor'
+    @attack = 2
+    @max_health = 4
     super
   end
   def play(player)

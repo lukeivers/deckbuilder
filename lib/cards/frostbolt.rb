@@ -1,14 +1,17 @@
-require './spell'
+require './cards/spell'
 
 class Frostbolt < Spell
   def initialize
     @cost = 2
     @name = 'Frostbolt'
+    @damage = 3
+    super
   end
   def play(player)
     super
-    target = player.best_target(3, true)
-    target.deal_damage(3)
+    damage = @damage + player.spell_damage
+    target = player.best_target(damage, true)
+    target.deal_damage(damage)
     target.freeze
   end
 end

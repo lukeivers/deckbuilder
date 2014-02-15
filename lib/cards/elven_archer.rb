@@ -1,12 +1,12 @@
-require './minion'
+require './cards/minion'
 
 class ElvenArcher < Minion
   def initialize
-    super
     @name = "Elven Archer"
     @cost = 1
     @attack = 1
     @max_health = 1
+    super
   end
 
   def play(player)

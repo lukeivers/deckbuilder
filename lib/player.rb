@@ -7,7 +7,8 @@ require './weapon'
 class Player
   include Character
 
-  attr_accessor :deck, :hand, :max_mana, :mana, :opponent, :minions, :weapon, :wins
+  attr_accessor :deck, :hand, :max_mana, :mana, :opponent, :minions, :weapon, :wins, :spell_damage
+  attr_accessor :global_attack_bonus, :global_health_bonus
 
   def initialize(opts = {})
     @max_health = 30
@@ -16,6 +17,9 @@ class Player
     @minions = Array.new
     @max_mana = 0
     @weapon = nil
+    @spell_damage = 0
+    @global_attack_bonus = 0
+    @global_health_bonus = 0
     @wins = 0
     super
   end
@@ -29,11 +33,22 @@ class Player
     @deck.init_cards
   end
 
+  def add_global_attack_bonus(bonus)
+    @global_attack_bonus += bonus
+  end
+  def add_global_health_bonus(bonus)
+    @global_health_bonus += bonus
+  end
+
+  def add_spell_damage(amount)
+    @spell_damage += amount
+  end
+
   def grant_minion_bonus(attack_bonus = nil, health_bonus = nil)
     bonus_minion = @minions.sort {|a, b| a.health <=> b.health}.last
     if health_bonus
       health_int = health_bonus.to_i
-      if health_int >= 0
+      if health_int > 0
         bonus_minion = @minions.sort {|a, b| a.health <=> b.health}.first
       end
     end
@@ -119,6 +134,13 @@ class Player
       end
     end
     target
+  end
+
+  def best_smurfing_target
+    targets = determine_targets(true)
+    targets.delete @opponent
+    targets.sort {|a, b| a.attack <=> b.attack}
+    targets.last
   end
 
   def random_target(evades_taunt=false)

@@ -1,16 +1,15 @@
 require './cards/minion'
 
-class AcidicSwampOoze < Minion
+class ShatteredSunCleric < Minion
   def initialize
-    @cost = 2
+    @cost = 3
+    @name = 'Shattered Sun Cleric'
     @attack = 3
     @max_health = 2
-    @name = "Acidic Swamp Ooze"
     super
   end
-
   def play(player)
     super
-    player.opponent.set_weapon(nil)
+    player.grant_minion_bonus(1, 1)
   end
 end
