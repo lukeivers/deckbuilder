@@ -17,7 +17,7 @@ class Cards
         Card.new(name: 'Fireball', effect: 'Deal 6 damage', cost: 4, deck_class: 'Mage', type: :spell),
         Card.new(name: 'Polymorph', effect: 'Transform a minion into a 1/1 Sheep', cost: 4, deck_class: 'Mage',
                  type: :spell),
-        Card.new(name: 'Chillwind Yeti', attack: 4, health: 5, cost: 4, type: :minion),
+	ChillwindYeti.new,
         Card.new(name: 'Gurubashi Berserker', effect: 'Whenever this minion takes damage, gain +3 Attack', attack: 2,
                  health: 7, cost: 5, type: :minion),
         Card.new(name: 'Archmage', effect: 'Spell Damage +1', attack: 4, health: 7, cost: 6, type: :minion),
