@@ -1,17 +1,16 @@
 require './logger'
-require './card'
-require './player'
-require './deck'
 require './cards'
+require './players'
+require './deck'
 require './decks'
 
 Logger.log 'Starting Hearthstone Deckbuilder'
 
 Logger.log 'Creating first player'
-@player1 = Player.new(name: 'Player 1')
+@player1 = Players.get(name: 'Simple Bot')
 
 Logger.log 'Creating second player'
-@player2 = Player.new(name: 'Player 2')
+@player2 = Players.get(name: 'Simple Bot')
 
 Logger.log 'Assigning deck to first player'
 @player1.deck = Decks.get(name: 'Goldshire Footman')

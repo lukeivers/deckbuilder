@@ -12,7 +12,6 @@ class Player
 
   def initialize(opts = {})
     @max_health = 30
-    @name = opts[:name]
     @hand = Array.new
     @minions = Array.new
     @max_mana = 0
@@ -44,16 +43,16 @@ class Player
     @spell_damage += amount
   end
 
-  def grant_minion_bonus(attack_bonus = nil, health_bonus = nil)
-    bonus_minion = @minions.sort {|a, b| a.health <=> b.health}.last
-    if health_bonus
-      health_int = health_bonus.to_i
-      if health_int > 0
-        bonus_minion = @minions.sort {|a, b| a.health <=> b.health}.first
-      end
-    end
+  def choose_bonus_minion(attack_bonus = nil, health_bonus = nil)
+    @minions.first
+  end
+
+  def grant_minion_bonus(attack_bonus = '0', health_bonus = '0')
+    health_int = health_bonus.to_i
+    attack_int = attack_bonus.to_i
+    bonus_minion = self.choose_bonus_minion(attack_int, health_int)
     bonus_minion.add_max_health(health_int)
-    bonus_minion.add_attack(attack_bonus.to_i)
+    bonus_minion.add_attack(attack_int)
   end
 
   def set_opponent(opponent)
@@ -125,22 +124,13 @@ class Player
   end
 
   def best_target(damage, evades_taunt=false)
-    targets = determine_targets(evades_taunt)
-    targets.sort {|a, b| a.health <=> b.health}
-    target = targets[0]
-    targets.each do |potential_target|
-      if potential_target.health <= damage
-        target = potential_target
-      end
-    end
-    target
+    determine_targets(evades_taunt).first
   end
 
   def best_smurfing_target
     targets = determine_targets(true)
     targets.delete @opponent
-    targets.sort {|a, b| a.attack <=> b.attack}
-    targets.last
+    targets.first
   end
 
   def random_target(evades_taunt=false)
@@ -148,37 +138,5 @@ class Player
   end
 
   def play
-    @hand.sort { |a, b| a.cost <=> b.cost }
-    @hand.reverse.each do |card|
-      if @mana > card.cost
-        card.play(self)
-        Logger.log @name + ' played ' + card.name + '.'
-        @hand.delete(card)
-      end
-    end
-
-
-    if @minions.size > 0
-      targets = determine_targets
-
-      @minions.each do |minion|
-        if minion.can_attack?
-          target = targets[0]
-          target_name = target.name
-          Logger.log @name + '\'s ' + minion.name + ' attacked ' + target_name + '.'
-          dead = minion.attack_target(target)
-          if dead == -1
-            Logger.log self.name + ' killed ' + target_name + '.'
-            if target == opponent
-              break
-            end
-            targets.delete(target)
-            if targets.size == 0
-              targets = determine_targets
-            end
-          end
-        end
-      end
-    end
   end
 end
