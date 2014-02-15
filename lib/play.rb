@@ -10,7 +10,7 @@ Logger.log 'Creating first player'
 @player1 = Players.get(name: 'Simple Bot')
 
 Logger.log 'Creating second player'
-@player2 = Players.get(name: 'Simple Bot')
+@player2 = Players.get(name: 'Random Bot')
 
 Logger.log 'Assigning deck to first player'
 @player1.deck = Decks.get(name: 'Goldshire Footman')
@@ -21,7 +21,9 @@ Logger.log 'Assigning deck to second player'
 @player1.set_opponent(@player2)
 @player2.set_opponent(@player1)
 
-10000.times do
+number_of_games = 1000
+
+number_of_games.times do
   @game_running = true
   @winning_player = nil
   @rounds = 0
@@ -33,10 +35,12 @@ Logger.log 'Assigning deck to second player'
   @current_player = nil
   coin = rand(2)
   if coin == 0
+    @player1.coin_wins += 1
     @current_player = @player1
     @other_player = @player2
     Logger.log 'Player 1 won the toss'
   else
+    @player2.coin_wins += 1
     @current_player = @player2
     @other_player = @player1
     Logger.log 'Player 2 won the toss'
@@ -87,5 +91,7 @@ Logger.log 'Assigning deck to second player'
   @winning_player.wins += 1
 end
 
-puts @player1.name + ' ended with ' + @player1.wins.to_s + '.'
-puts @player2.name + ' ended with ' + @player2.wins.to_s + '.'
+puts @player1.name + ' ended with ' + (@player1.wins.to_f / number_of_games * 100).to_s + ' game wins and ' +
+         (@player1.coin_wins.to_f / number_of_games * 100).to_s + ' coin toss wins.'
+puts @player2.name + ' ended with ' + (@player2.wins.to_f / number_of_games * 100).to_s + ' game wins and ' +
+         (@player2.coin_wins.to_f / number_of_games * 100).to_s + ' coin toss wins.'

@@ -8,6 +8,7 @@ module Character
   end
 
   def deal_damage(amount, source = nil)
+    Logger.log self.name + ' was dealt ' + amount.to_s + ' damage'  + (source.nil? ? '.' : ' from ' + source.name + '.')
     @health -= amount
     if health <= 0
       -1
@@ -38,7 +39,12 @@ module Character
   end
 
   def attack_target(target)
-    target.deal_damage(@attack, self)
+    damage = target.deal_damage(@attack, self)
+    if target.minion?
+      self.deal_damage(target.attack, target)
+    end
+    Logger.log @owner.name + '\'s ' + self.name + ' attacked ' + target.name + ' for ' + damage.to_s + '.'
+    damage
   end
 
   def can_attack?
@@ -49,5 +55,9 @@ module Character
 
   def dead?
     @health <= 0
+  end
+
+  def minion?
+    false
   end
 end

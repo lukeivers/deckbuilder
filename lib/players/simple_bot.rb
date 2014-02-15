@@ -33,6 +33,29 @@ class SimpleBot < Player
     targets.last
   end
 
+  def mulligan
+    super
+    one_mana = nil
+    two_mana = nil
+    three_mana = nil
+    number_discards = 0
+    @hand.each do |card|
+      if card.cost > 3 or (card.cost == 1 and one_mana) or (card.cost == 2 and two_mana) or (card.cost == 3 and three_mana)
+        @deck.add_card(card)
+        @hand.delete card
+        number_discards += 1
+      end
+      if card.cost == 1
+        one_mana = card
+      elsif card.cost == 2
+        two_mana = card
+      elsif card.cost == 3
+        three_mana = card
+      end
+    end
+    self.draw(number_discards)
+  end
+
   def play
     @hand.sort { |a, b| a.cost <=> b.cost }
     @hand.reverse.each do |card|
@@ -51,7 +74,6 @@ class SimpleBot < Player
         if minion.can_attack?
           target = targets[0]
           target_name = target.name
-          Logger.log @name + '\'s ' + minion.name + ' attacked ' + target_name + '.'
           dead = minion.attack_target(target)
           if dead == -1
             Logger.log self.name + ' killed ' + target_name + '.'

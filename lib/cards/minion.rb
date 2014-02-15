@@ -73,7 +73,13 @@ class Minion < Card
   end
 
   def die
+    Logger.log self.name + ' died.'
     owner.destroy_minion(self)
     owner.add_spell_damage(-(@spell_damage))
   end
+
+  def minion?
+    true
+  end
+
 end

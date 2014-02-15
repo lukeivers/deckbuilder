@@ -8,7 +8,7 @@ class Player
   include Character
 
   attr_accessor :deck, :hand, :max_mana, :mana, :opponent, :minions, :weapon, :wins, :spell_damage
-  attr_accessor :global_attack_bonus, :global_health_bonus
+  attr_accessor :global_attack_bonus, :global_health_bonus, :coin_wins
 
   def initialize(opts = {})
     @max_health = 30
@@ -20,6 +20,7 @@ class Player
     @global_attack_bonus = 0
     @global_health_bonus = 0
     @wins = 0
+    @coin_wins = 0
     super
   end
 
@@ -124,17 +125,19 @@ class Player
   end
 
   def best_target(damage, evades_taunt=false)
-    determine_targets(evades_taunt).first
+    random_target(evades_taunt)
   end
 
   def best_smurfing_target
-    targets = determine_targets(true)
-    targets.delete @opponent
-    targets.first
+    random_target(true, false)
   end
 
-  def random_target(evades_taunt=false)
-    determine_targets(evades_taunt).shuffle.first
+  def random_target(evades_taunt=false, include_opponent=true)
+    targets = determine_targets(evades_taunt)
+    if not include_opponent
+      targets.delete @opponent
+    end
+    targets.shuffle.first
   end
 
   def play

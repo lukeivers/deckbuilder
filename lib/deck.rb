@@ -26,4 +26,8 @@ class Deck
   def draw(amount)
     @cards.slice!(0, amount)
   end
+
+  def add_card(card)
+    @cards << card
+  end
 end
