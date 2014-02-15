@@ -9,6 +9,4 @@ class ChillwindYeti < Minion
     @name = "Chillwind Yeti"
   end
 
-  def play(player)
-  end
 end

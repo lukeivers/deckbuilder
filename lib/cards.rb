@@ -14,7 +14,7 @@ class Cards
         GnomishInventor.new,
         Fireball.new,
         Polymorph.new,
-        Minion.new(name: 'Chillwind Yeti', attack: 4, max_health: 5, cost: 4),
+	ChillwindYeti.new,
         GurubashiBerserker.new,
         Minion.new(name: 'Archmage', spell_damage: 1, attack: 4, max_health: 7, cost: 6),
         StormwindChampion.new,
