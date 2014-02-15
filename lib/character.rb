@@ -1,21 +1,18 @@
-class Character
+module Character
   attr_accessor :health, :max_health, :attack, :frozen, :thawing, :name
 
   def initialize(opts = {})
-    @max_health = opts[:max_health] || 30
     @health = @max_health
-    @attack = opts[:attack] || 0
-    @name = opts[:name]
     @frozen = false
     @thawing = false
   end
 
-  def deal_damage(amount)
+  def deal_damage(amount, source = nil)
     @health -= amount
     if health <= 0
-      true
+      -1
     else
-      false
+      amount
     end
   end
 
@@ -41,7 +38,7 @@ class Character
   end
 
   def attack_target(target)
-    target.deal_damage(@attack)
+    target.deal_damage(@attack, self)
   end
 
   def can_attack?
@@ -53,5 +50,4 @@ class Character
   def dead?
     @health <= 0
   end
-
 end

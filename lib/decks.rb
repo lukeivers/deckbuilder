@@ -6,7 +6,7 @@ class Decks
       name: 'Goldshire Footman',
       class: 'Mage',
       cards: [
-          { name: 'Goldshire Footman', amount: 2 },
+          { name: 'Shieldbearer', amount: 2 },
           { name: 'Arcane Missiles', amount: 2 },
           { name: 'Acidic Swamp Ooze', amount: 2},
           { name: 'Novice Engineer', amount: 2},

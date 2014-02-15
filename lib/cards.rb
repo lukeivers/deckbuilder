@@ -1,15 +1,13 @@
 require './card'
+Dir["./cards/*.rb"].each { |file| require file }
 
 class Cards
   @cards = [
-        Card.new(name: 'Elven Archer', battlecry: 'Deal 1 damage', attack: 1, health: 1, cost: 1, type: :minion),
-        Card.new(name: 'Arcane Missiles', effect: 'Deal 3 damage randomly split among enemy characters', cost: 1,
-                 deck_class: 'Mage', type: :spell),
-        Card.new(name: 'Frostbolt', effect: 'Deal 3 damage to a character and freeze it', cost: 2, deck_class: 'Mage',
-                 type: :spell),
-        Card.new(name: 'Acidic Swamp Ooze', battlecry: 'Destroy your opponent\'s weapon', attack: 3, health: 2,
-                 cost: 2, type: :minion),
-        Card.new(name: 'Novice Engineer', battlecry: 'Draw a card', attack: 1, health: 1, cost: 2, type: :minion),
+        ElvenArcher.new,
+        ArcaneMissiles.new,
+        Frostbolt.new,
+        AcidicSwampOoze.new,
+        NoviceEngineer.new,
         Card.new(name: 'Arcane Intellect', effect: 'Draw 2 cards', cost: 3, deck_class: 'Mage', type: :spell),
         Card.new(name: 'Shattered Sun Cleric', battlecry: 'Give a friendly minion +1/+1', attack: 3, health: 2,
                  cost: 3, type: :minion),
@@ -29,7 +27,7 @@ class Cards
                  type: :spell),
         Card.new(name: 'The Coin', effect: 'Gain 1 Mana Crystal this turn only', cost: 0, type: :spell),
 	      Card.new(name: 'Wisp', attack: 1, health: 1, cost: 0, type: :minion),
-	      Card.new(name: 'Abusive Sergeant', battlecry: 'Give a minion +2 Attach this turn', attack: 2, health: 1, cost: 1, type: :minion),
+	      Card.new(name: 'Abusive Sergeant', battlecry: 'Give a minion +2 Attack this turn', attack: 2, health: 1, cost: 1, type: :minion),
 	      Card.new(name: 'Argent Squire',  effect: 'Divine Shield', attack: 1, health: 1, cost: 1, type: :minion),
         Card.new(name: 'Angry Chicken',  effect: 'Enrage: +5 Attack', attack: 1, health: 1, cost: 1, type: :minion),
         Card.new(name: 'Bloodsail Corsair',  battlecry: 'Remove 1 Durability from your opponent\'s weapon', attack: 1, health: 2, cost: 1, type: :minion),

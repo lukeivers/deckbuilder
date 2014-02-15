@@ -3,12 +3,15 @@ require './cards'
 require './card'
 require './character'
 require './weapon'
-require 'pp'
 
-class Player < Character
-  attr_accessor :deck, :hand, :max_mana, :mana, :health, :opponent, :minions, :weapon, :wins
+class Player
+  include Character
+
+  attr_accessor :deck, :hand, :max_mana, :mana, :opponent, :minions, :weapon, :wins
 
   def initialize(opts = {})
+    @max_health = 30
+    @name = opts[:name]
     @hand = Array.new
     @minions = Array.new
     @max_mana = 0
@@ -26,12 +29,24 @@ class Player < Character
     @deck.init_cards
   end
 
+  def grant_minion_bonus(attack_bonus = nil, health_bonus = nil)
+    bonus_minion = @minions.sort {|a, b| a.health <=> b.health}.last
+    if health_bonus
+      health_int = health_bonus.to_i
+      if health_int >= 0
+        bonus_minion = @minions.sort {|a, b| a.health <=> b.health}.first
+      end
+    end
+    bonus_minion.add_max_health(health_int)
+    bonus_minion.add_attack(attack_bonus.to_i)
+  end
+
   def set_opponent(opponent)
     @opponent = opponent
   end
 
   def set_weapon(weapon)
-    @weapon = nil
+    @weapon = weapon
   end
 
   def add_minion(minion)
@@ -78,17 +93,36 @@ class Player < Character
 
   end
 
-  def determine_targets
-    @available_targets = Array.new
-    @opponent.minions.each do |minion|
-      if minion.taunt?
-        @available_targets << minion
+  def determine_targets(evades_taunt=false)
+    available_targets = Array.new
+    if not evades_taunt
+      @opponent.minions.each do |minion|
+        if minion.taunt?
+          available_targets << minion
+        end
       end
     end
-    if @available_targets.length == 0
-      @available_targets << @opponent
-      @available_targets.concat @opponent.minions
+    if available_targets.length == 0
+      available_targets << @opponent
+      available_targets.concat @opponent.minions
     end
+    available_targets
+  end
+
+  def best_target(damage, evades_taunt=false)
+    targets = determine_targets(evades_taunt)
+    targets.sort {|a, b| a.health <=> b.health}
+    target = targets[0]
+    targets.each do |potential_target|
+      if potential_target.health <= damage
+        target = potential_target
+      end
+    end
+    target
+  end
+
+  def random_target(evades_taunt=false)
+    determine_targets(evades_taunt).shuffle.first
   end
 
   def play
@@ -96,29 +130,29 @@ class Player < Character
     @hand.reverse.each do |card|
       if @mana > card.cost
         card.play(self)
-        puts @name + ' played ' + card.name + '.'
+        Logger.log @name + ' played ' + card.name + '.'
         @hand.delete(card)
       end
     end
 
 
     if @minions.size > 0
-      determine_targets
+      targets = determine_targets
 
       @minions.each do |minion|
         if minion.can_attack?
-          target = @available_targets[0]
+          target = targets[0]
           target_name = target.name
-          puts @name + '\'s ' + minion.name + ' attacked ' + target_name + '.'
+          Logger.log @name + '\'s ' + minion.name + ' attacked ' + target_name + '.'
           dead = minion.attack_target(target)
-          if dead
-            puts self.name + ' killed ' + target_name + '.'
+          if dead == -1
+            Logger.log self.name + ' killed ' + target_name + '.'
             if target == opponent
               break
             end
-            @available_targets.delete(target)
-            if @available_targets.size == 0
-              self.determine_targets
+            targets.delete(target)
+            if targets.size == 0
+              targets = determine_targets
             end
           end
         end
