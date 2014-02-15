@@ -1,4 +1,4 @@
-require './minion'
+require './cards/minion'
 
 class ChillwindYeti < Minion
   def initialize

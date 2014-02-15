@@ -1,14 +1,12 @@
-require './minion'
+require './cards/minion'
 
 class RiverCrocolisk < Minion
   def initialize
-    super
     @cost = 2
     @attack = 2
     @max_health = 3
     @name = "River Crocolisk"
+    super
   end
 
-  def play(player)
-  end
 end
