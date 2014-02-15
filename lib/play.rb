@@ -13,7 +13,7 @@ Logger.log 'Creating second player'
 @player2 = Players.get(name: 'Random Bot')
 
 Logger.log 'Assigning deck to first player'
-@player1.deck = Decks.get(name: 'Goldshire Footman')
+@player1.deck = Decks.get(name: 'Elven Archer')
 
 Logger.log 'Assigning deck to second player'
 @player2.deck = Decks.get(name: 'Elven Archer')
