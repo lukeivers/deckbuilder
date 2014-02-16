@@ -7,8 +7,7 @@ class RandomBot < Player
   end
 
   def play
-    @hand.sort { |a, b| a.cost <=> b.cost }
-    @hand.reverse.each do |card|
+    @hand.shuffle.each do |card|
       if @mana > card.cost
         card.play(self)
         Logger.log @name + ' played ' + card.name + '.'
@@ -22,17 +21,18 @@ class RandomBot < Player
 
       @minions.each do |minion|
         if minion.can_attack?
-          target = targets[0]
-          target_name = target.name
-          dead = minion.attack_target(target)
-          if dead == -1
-            Logger.log self.name + ' killed ' + target_name + '.'
-            if target == opponent
-              break
-            end
-            targets.delete(target)
+          target = targets.shuffle.first
+          if target == nil or target.dead?
+            targets.delete target
             if targets.size == 0
               targets = determine_targets
+            end
+            target = targets.shuffle.first
+          end
+          minion.attack_target(target)
+          if target.dead?
+            if target == opponent
+              break
             end
           end
         end

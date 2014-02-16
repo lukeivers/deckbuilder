@@ -68,21 +68,16 @@ class SimpleBot < Player
 
 
     if @minions.size > 0
-      targets = determine_targets
 
       @minions.each do |minion|
         if minion.can_attack?
-          target = targets[0]
-          target_name = target.name
-          dead = minion.attack_target(target)
-          if dead == -1
-            Logger.log self.name + ' killed ' + target_name + '.'
+          targets = determine_targets
+          target = targets.find {|targ| targ.health <= minion.attack}
+          target = targets.first if target == nil
+          minion.attack_target(target)
+          if target.dead?
             if target == opponent
               break
-            end
-            targets.delete(target)
-            if targets.size == 0
-              targets = determine_targets
             end
           end
         end
@@ -91,3 +86,10 @@ class SimpleBot < Player
   end
 
 end
+
+
+
+
+
+
+

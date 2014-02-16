@@ -9,7 +9,7 @@ class WaterElemental < Minion
     super
   end
   def attack_target(target)
-    damage = super
+    damage = super(target)
     if damage > 0
       target.freeze
     end

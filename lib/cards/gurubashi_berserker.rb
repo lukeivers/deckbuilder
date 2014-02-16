@@ -13,5 +13,6 @@ class GurubashiBerserker < Minion
     if amount > 0 and not dead?
       @attack += 3
     end
+    amount
   end
 end

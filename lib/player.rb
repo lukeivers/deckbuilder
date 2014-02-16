@@ -8,7 +8,7 @@ class Player
   include Character
 
   attr_accessor :deck, :hand, :max_mana, :mana, :opponent, :minions, :weapon, :wins, :spell_damage
-  attr_accessor :global_attack_bonus, :global_health_bonus, :coin_wins
+  attr_accessor :global_attack_bonus, :global_health_bonus, :coin_wins, :fatigue_damage
 
   def initialize(opts = {})
     @max_health = 30
@@ -21,6 +21,7 @@ class Player
     @global_health_bonus = 0
     @wins = 0
     @coin_wins = 0
+    @fatigue_damage = 0
     super
   end
 
@@ -30,6 +31,10 @@ class Player
     @max_mana = 0
     @health = 30
     @weapon = nil
+    @spell_damage = 0
+    @global_attack_bonus = 0
+    @global_health_bonus = 0
+    @fatigue_damage = 0
     @deck.init_cards
   end
 
@@ -73,7 +78,16 @@ class Player
   end
 
   def draw(amount = 1)
+    result = deck.draw(amount)
+    if result.size < amount
+      (amount - result.size).times { self.fatigue_damage }
+    end
     hand.concat deck.draw(amount)
+  end
+
+  def fatigue_damage
+    @fatigue_damage += 1
+    self.deal_damage(@fatigue_damage)
   end
 
   def add_card(card)

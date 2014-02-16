@@ -21,7 +21,7 @@ Logger.log 'Assigning deck to second player'
 @player1.set_opponent(@player2)
 @player2.set_opponent(@player1)
 
-number_of_games = 1000
+number_of_games = 10000
 
 number_of_games.times do
   @game_running = true
@@ -62,7 +62,8 @@ number_of_games.times do
   @other_player.add_card(Cards.get('The Coin'))
 
   while @game_running do
-    Logger.log 'Starting turn for current player'
+    Logger.log 'Starting turn for ' + @current_player.name
+    Logger.log @current_player.name + ' has ' + @current_player.health.to_s + ' health.'
     @current_player.draw
     @current_player.add_mana_crystal
     @current_player.start_round
@@ -79,7 +80,7 @@ number_of_games.times do
       @game_running = false
     end
 
-    Logger.log 'Ending turn for current player'
+    Logger.log 'Ending turn'
     temp = @other_player
     @other_player = @current_player
     @current_player = temp

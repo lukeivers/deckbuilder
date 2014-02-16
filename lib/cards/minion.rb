@@ -64,15 +64,8 @@ class Minion < Card
     @attack += amount
   end
 
-  def deal_damage(amount, source=nil)
-    result = super(amount, source)
-    if dead?
-      die
-    end
-    result
-  end
-
   def die
+    super
     Logger.log self.name + ' died.'
     owner.destroy_minion(self)
     owner.add_spell_damage(-(@spell_damage))

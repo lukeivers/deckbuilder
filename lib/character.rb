@@ -11,10 +11,9 @@ module Character
     Logger.log self.name + ' was dealt ' + amount.to_s + ' damage'  + (source.nil? ? '.' : ' from ' + source.name + '.')
     @health -= amount
     if health <= 0
-      -1
-    else
-      amount
+      self.die
     end
+    amount
   end
 
   def freeze
@@ -39,6 +38,7 @@ module Character
   end
 
   def attack_target(target)
+    Logger.log self.name + ' is attacking ' + target.name
     damage = target.deal_damage(@attack, self)
     if target.minion?
       self.deal_damage(target.attack, target)
@@ -59,5 +59,9 @@ module Character
 
   def minion?
     false
+  end
+
+  def die
+
   end
 end
