@@ -5,9 +5,6 @@ class Deck
   attr_accessor :deck_class, :base_cards, :cards, :name
 
   def initialize(opts = {})
-    @deck_class = opts[:class]
-    @name = opts[:name]
-    @base_cards = opts[:cards]
     self.init_cards
   end
 
@@ -29,5 +26,8 @@ class Deck
 
   def add_card(card)
     @cards << card
+  end
+
+  def hero_power(player)
   end
 end

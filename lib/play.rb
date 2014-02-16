@@ -21,7 +21,8 @@ Logger.log 'Assigning deck to second player'
 @player1.set_opponent(@player2)
 @player2.set_opponent(@player1)
 
-number_of_games = 10000
+number_of_games = 20000
+number_of_completed_games = 0
 
 number_of_games.times do
   @game_running = true
@@ -90,6 +91,15 @@ number_of_games.times do
 
   Logger.log @winning_player.name + ' has won the game in ' + @rounds.to_s + ' rounds!'
   @winning_player.wins += 1
+  number_of_completed_games += 1
+  if number_of_completed_games % (number_of_games / 100 + 1) == 0 and number_of_games >= 100000
+    puts @player1.name + ' has ' + (@player1.wins.to_f / number_of_completed_games * 100).to_s + ' game wins and ' +
+             (@player1.coin_wins.to_f / number_of_completed_games * 100).to_s + ' coin toss wins at ' +
+             number_of_completed_games.to_s + '.'
+    puts @player2.name + ' has ' + (@player2.wins.to_f / number_of_completed_games * 100).to_s + ' game wins and ' +
+             (@player2.coin_wins.to_f / number_of_completed_games * 100).to_s + ' coin toss wins at ' +
+             number_of_completed_games.to_s + '.'
+  end
 end
 
 puts @player1.name + ' ended with ' + (@player1.wins.to_f / number_of_games * 100).to_s + ' game wins and ' +
