@@ -7,14 +7,14 @@ class LeeroyJenkins < Minion
     @attack = 6
     @max_health = 2
     @charge = true
-	#legendary = true
+	  @legendary = true
     super
   end
 
   def play(player)
     super
-	#summon 2 1/1 whelps for your opponent
-  end
+    2.times { self.owner.opponent.summon(Cards.get('Dragon Whelp').first) }
+	end
 
 
 end

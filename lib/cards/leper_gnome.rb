@@ -10,9 +10,9 @@ class LeperGnome < Minion
   end
 
   def die
+    self.owner.opponent.deal_damage(2)
     super 
-	#deal 2 damage to enemy hero
-  end
+	end
 
 end
 

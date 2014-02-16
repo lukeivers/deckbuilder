@@ -9,6 +9,6 @@ class WarlockDeck < Deck
     super
     player.remove_mana(2)
     player.draw(1)
-	#hero also takes 2 damage
+	  player.deal_damage(2)
   end
 end

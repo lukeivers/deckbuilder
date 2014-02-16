@@ -8,7 +8,8 @@ class Player
   include Character
 
   attr_accessor :deck, :hand, :max_mana, :mana, :opponent, :minions, :weapon, :wins, :spell_damage
-  attr_accessor :global_attack_bonus, :global_health_bonus, :coin_wins, :fatigue_damage
+  attr_accessor :global_attack_bonus, :global_health_bonus, :coin_wins, :fatigue_damage, :murloc_attack_bonus
+  attr_accessor :murloc_health_bonus, :beast_attack_bonus, :beast_health_bonus
 
   def initialize(opts = {})
     @max_health = 30
@@ -19,6 +20,10 @@ class Player
     @spell_damage = 0
     @global_attack_bonus = 0
     @global_health_bonus = 0
+    @murloc_attack_bonus = 0
+    @murloc_health_bonus = 0
+    @beast_attack_bonus = 0
+    @beast_health_bonus = 0
     @wins = 0
     @coin_wins = 0
     @fatigue_damage = 0
@@ -34,15 +39,47 @@ class Player
     @spell_damage = 0
     @global_attack_bonus = 0
     @global_health_bonus = 0
+    @murloc_attack_bonus = 0
+    @murloc_health_bonus = 0
+    @beast_attack_bonus = 0
+    @beast_health_bonus = 0
     @fatigue_damage = 0
     @deck.init_cards
   end
 
-  def add_global_attack_bonus(bonus)
-    @global_attack_bonus += bonus
+  def add_global_bonus(attack_bonus, health_bonus)
+    @global_attack_bonus += attack_bonus
+    @global_health_bonus += health_bonus
+    self.minions.each do |minion|
+      minion.add_attack attack_bonus
+      minion.add_max_health health_bonus
+    end
   end
-  def add_global_health_bonus(bonus)
-    @global_health_bonus += bonus
+
+  def add_murloc_bonus(attack_bonus, health_bonus)
+    @murloc_attack_bonus += attack_bonus
+    @murloc_health_bonus += health_bonus
+    self.minions.select {|minion| minion.type == 'Murloc'}.each do |minion|
+      minion.add_attack attack_bonus
+      minion.add_max_health health_bonus
+    end
+  end
+
+  def add_beast_health_bonus(attack_bonus, health_bonus)
+    @beast_attack_bonus += attack_bonus
+    @beast_health_bonus += health_bonus
+    self.minions.select {|minion| minion.type == 'Beast'}.each do |minion|
+      minion.add_attack attack_bonus
+      minion.add_max_health health_bonus
+    end
+  end
+
+  def summon(card)
+    card.play(self)
+  end
+
+  def discard(card)
+    self.hand.delete card
   end
 
   def add_spell_damage(amount)
@@ -116,6 +153,12 @@ class Player
       minion.start_round
     end
     super
+  end
+
+  def end_turn
+    @minions.each do |minion|
+      minion.end_turn
+    end
   end
 
   def mulligan

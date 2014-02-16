@@ -18,7 +18,7 @@ class ElvenArcherDeck < MageDeck
         { name: 'Kobold Geomancer', amount: 2},
         { name: 'Archmage', amount: 1},
         { name: 'Stormwind Champion', amount: 1},
-        { name: 'River Crocolisk', amount: 2},
+        { name: 'Murloc Tidecaller', amount: 2},
     ]
     super
   end

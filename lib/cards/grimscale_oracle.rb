@@ -6,8 +6,19 @@ class GrimscaleOracle < Minion
     @cost = 1
     @attack = 1
     @max_health = 1
-	#type = murloc
-	#ALL other Murlocs have +1 attack
+	  @type = 'Murloc'
+	  super
+  end
+
+  def play(player)
+    super
+    self.owner.add_murloc_bonus(1, 0)
+    self.owner.opponent.add_murloc_bonus(1, 0)
+  end
+
+  def die
+    self.owner.add_murloc_bonus(-1, 0)
+    self.owner.opponent.add_murloc_bonus(-1, 0)
     super
   end
 

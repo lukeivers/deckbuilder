@@ -1,8 +1,8 @@
 require './decks/warlock_deck'
 
-class MurlockWarlockDeck < WarlockDeck
+class MurlocWarlockDeck < WarlockDeck
   def initialize
-    @name = 'Murlock Warlock'
+    @name = 'Murloc Warlock'
     @base_cards = [
         { name: 'Soulfire', amount: 2 },
         { name: 'Abusive Sergeant', amount: 1 },

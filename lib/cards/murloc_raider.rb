@@ -5,7 +5,7 @@ class MurlocRaider < Minion
     @cost = 1
     @attack = 2
     @max_health = 1
-	#type = murloc
+	  @type = 'Murloc'
     @name = "Murloc Raider"
     super
   end

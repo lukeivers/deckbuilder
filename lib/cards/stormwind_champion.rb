@@ -9,21 +9,11 @@ class StormwindChampion < Minion
     super
   end
   def play(player)
-    player.add_global_attack_bonus 1
-    player.add_global_health_bonus 1
-    player.minions.each do |minion|
-      minion.add_attack 1
-      minion.add_max_health 1
-    end
+    player.add_global_bonus(1, 1)
     super
   end
   def die
+    self.owner.add_global_bonus(-1, -1)
     super
-    @owner.add_global_attack_bonus -1
-    @owner.add_global_health_bonus -1
-    @owner.minions.each do |minion|
-      minion.add_attack -1
-      minion.add_max_health -1
-    end
   end
 end

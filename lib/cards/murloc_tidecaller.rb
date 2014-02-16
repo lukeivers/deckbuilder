@@ -6,9 +6,15 @@ class MurlocTidecaller < Minion
     @cost = 1
     @attack = 1
     @max_health = 2
-	#type = murloc
-	#Whenever a Murloc is summoned, gain +1 attack
+	  @type = 'Murloc'
+	  super
+  end
+
+  def on_summon(source, friendly=false)
     super
+    if source.type == 'Murloc'
+      self.add_attack(1)
+    end
   end
 
 end

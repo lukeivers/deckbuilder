@@ -1,14 +1,14 @@
-require './card'
+require './cards/spell'
 
-class Innervate < Card
+class Innervate < Spell
   def initialize
     @cost = 0
     @name = 'Innervate'
     super
   end
 
-  def play
+  def play(player)
     super
-    #gain 2 mana crystals this turn only
+    self.owner.add_mana(2)
   end
 end

@@ -62,6 +62,6 @@ module Character
   end
 
   def die
-
+    Logger.log self.name + ' died.'
   end
 end

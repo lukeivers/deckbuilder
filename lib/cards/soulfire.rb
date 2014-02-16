@@ -9,8 +9,9 @@ class Soulfire < Spell
     super
   end
   def play(player)
-    damage = @damage + player.spell_damage
-    player.best_target(damage, true).deal_damage(damage)
+    super
+    self.owner.best_target(self.damage, true).deal_damage(self.damage)
+    self.owner.discard(self.owner.hand.shuffle.first)
     #discard a random card
   end
 end

@@ -5,6 +5,7 @@ class Decks
   @decks = [
       ElvenArcherDeck.new,
       ShieldbearerDeck.new,
+      MurlocWarlockDeck.new,
   ]
 
   def self.get(opts = {})

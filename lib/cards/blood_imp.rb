@@ -7,10 +7,17 @@ class BloodImp < Minion
     @attack = 0
     @max_health = 1
     @stealth = true
-	#type = demon
+	  @type = 'Demon'
     @deck_class = 'Warlock'
     super
   end
-	#At the end of your turn, give another random friendly minion +1 health
+
+  def end_turn
+    target = self.owner.minions.select {|minion| minion != self}.shuffle.first
+    if target
+      target.add_max_health(1)
+    end
+    super
+  end
 
 end

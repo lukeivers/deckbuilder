@@ -27,6 +27,7 @@ class Cards
         MurlocRaider.new,
         BloodfenRaptor.new,
 	Wisp.new,
+  FlameImp.new,
 	LootHoarder.new,
 	GoldshireFootman.new,
 	FrostwolfGrunt.new,
@@ -49,6 +50,8 @@ class Cards
 	MurlocWarleader.new,
 	LeeroyJenkins.new,
 	OldMurkeye.new,
+  DragonWhelp.new,
+  MurlocScout.new,
 =begin
         Card.new(name: 'Angry Chicken',  effect: 'Enrage: +5 Attack', attack: 1, health: 1, cost: 1, type: :minion),
         Card.new(name: 'Bloodsail Corsair',  battlecry: 'Remove 1 Durability from your opponent\'s weapon', attack: 1, health: 2, cost: 1, type: :minion),
@@ -79,6 +82,12 @@ class Cards
 =end
 	]
 
+  @no_mutate_cards = [
+      DragonWhelp.new,
+      TheCoin.new,
+      MurlocScout.new,
+  ]
+
   def self.get(name, amount=1)
     result = Array.new
     card = @cards.find { |card| card.name == name }
@@ -92,7 +101,7 @@ class Cards
     possibles = @cards.select do |card|
       (card.deck_class.nil? or card.deck_class == deck.deck_class) and
           not deck.include? card and
-          card.name != 'The Coin'
+          not @no_mutate_cards.include? card
     end
     possibles[rand(possibles.length)]
   end

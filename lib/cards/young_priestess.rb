@@ -6,8 +6,15 @@ class YoungPriestess < Minion
     @cost = 1
     @attack = 2
     @max_health = 1
-	#At the end of your turn, give another random friendly minion +1 Health
+	  super
+  end
+
+  def end_turn
     super
+    target = self.owner.minions.select {|minion| minion != self}.shuffle.first
+    if target
+      target.add_max_health(1)
+    end
   end
 
 end

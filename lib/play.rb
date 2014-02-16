@@ -66,6 +66,8 @@ def play_games(number_of_games)
         @game_running = false
       end
 
+      @current_player.end_turn
+
       Logger.log 'Ending turn'
       temp = @other_player
       @other_player = @current_player
@@ -104,7 +106,7 @@ Logger.log 'Assigning deck to first player'
 @player1.deck = Decks.get(name: 'Elven Archer')
 
 Logger.log 'Assigning deck to second player'
-@player2.deck = Decks.get(name: 'Shieldbearer')
+@player2.deck = Decks.get(name: 'Murloc Warlock')
 
 @player1.set_opponent(@player2)
 @player2.set_opponent(@player1)

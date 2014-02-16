@@ -7,7 +7,7 @@ class Voidwalker < Minion
     @attack = 1
     @max_health = 3
     @name = "Voidwalker"
-	#type = demon
+	  @type = 'Demon'
     @deck_class = 'Warlock'
     super
   end

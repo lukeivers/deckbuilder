@@ -6,12 +6,12 @@ class MurlocTidehunter < Minion
     @cost = 2
     @attack = 2
     @max_health = 1
-	#type=murloc
+	  @type='Murloc'
     super
   end
 
   def play(player)
     super
-	#Summon a 1/1 Murloc Scout
+    self.owner.summon(Cards.get('Murloc Scout').first)
   end
 end
