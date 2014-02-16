@@ -1,8 +1,8 @@
 require './cards/minion'
 
-class AbusiveSergeant < Minion
+class VoodooDoctor < Minion
   def initialize
-    @name = "Abusive Sergeant"
+    @name = "Voodoo Doctor"
     @cost = 1
     @attack = 2
     @max_health = 1
@@ -11,6 +11,6 @@ class AbusiveSergeant < Minion
 
   def play(player)
     super
-    #Give a minion +2 attack this turn
+	#Restore 2 health
   end
 end
