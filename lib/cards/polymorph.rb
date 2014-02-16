@@ -4,6 +4,7 @@ class Polymorph < Spell
   def initialize
     @cost = 4
     @name = 'Polymorph'
+    @deck_class = 'Mage'
     super
   end
   def play(player)

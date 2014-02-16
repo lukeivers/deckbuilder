@@ -35,25 +35,25 @@ class SimpleBot < Player
 
   def mulligan
     super
-    one_mana = nil
-    two_mana = nil
-    three_mana = nil
-    number_discards = 0
-    @hand.each do |card|
-      if card.cost > 3 or (card.cost == 1 and one_mana) or (card.cost == 2 and two_mana) or (card.cost == 3 and three_mana)
-        @deck.add_card(card)
-        @hand.delete card
-        number_discards += 1
-      end
-      if card.cost == 1
-        one_mana = card
-      elsif card.cost == 2
-        two_mana = card
-      elsif card.cost == 3
-        three_mana = card
-      end
-    end
-    self.draw(number_discards)
+    #one_mana = nil
+    #two_mana = nil
+    #three_mana = nil
+    #number_discards = 0
+    #@hand.each do |card|
+    #  if card.cost > 3 or (card.cost == 1 and one_mana) or (card.cost == 2 and two_mana) or (card.cost == 3 and three_mana)
+    #    @deck.add_card(card)
+    #    @hand.delete card
+    #    number_discards += 1
+    #  end
+    #  if card.cost == 1
+    #    one_mana = card
+    #  elsif card.cost == 2
+    #    two_mana = card
+    #  elsif card.cost == 3
+    #    three_mana = card
+    #  end
+    #end
+    #self.draw(number_discards)
   end
 
   def play

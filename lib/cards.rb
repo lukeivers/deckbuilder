@@ -15,7 +15,7 @@ class Cards
         Fireball.new,
         Polymorph.new,
 	ChillwindYeti.new,
-        GurubashiBerserker.new,
+        #GurubashiBerserker.new,
 	Archmage.new,
         StormwindChampion.new,
         Flamestrike.new,
@@ -78,6 +78,15 @@ class Cards
       result << card.dup
     end
     result
+  end
+
+  def self.get_random(deck)
+    possibles = @cards.select do |card|
+      (card.deck_class.nil? or card.deck_class == deck.deck_class) and
+          not deck.include? card and
+          card.name != 'The Coin'
+    end
+    possibles[rand(possibles.length)]
   end
 
 end

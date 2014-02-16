@@ -5,6 +5,7 @@ class Fireball < Spell
     @cost = 4
     @name = 'Fireball'
     @damage = 6
+    @deck_class = 'Mage'
     super
   end
   def play(player)

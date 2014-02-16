@@ -6,6 +6,7 @@ class WaterElemental < Minion
     @name = 'Water Elemental'
     @attack = 3
     @max_health = 6
+    @deck_class = 'Mage'
     super
   end
   def attack_target(target)

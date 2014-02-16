@@ -11,7 +11,7 @@ class LootHoarder < Minion
 
   def die
     super 
-    player.draw(1)
+    self.owner.draw(1)
   end
 
 end

@@ -5,6 +5,7 @@ class Frostbolt < Spell
     @cost = 2
     @name = 'Frostbolt'
     @damage = 3
+    @deck_class = 'Mage'
     super
   end
   def play(player)

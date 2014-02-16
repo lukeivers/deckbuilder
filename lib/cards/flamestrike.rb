@@ -5,6 +5,7 @@ class Flamestrike < Spell
     @cost = 7
     @name = 'Flamestrike'
     @damage = 4
+    @deck_class = 'Mage'
     super
   end
   def play(player)

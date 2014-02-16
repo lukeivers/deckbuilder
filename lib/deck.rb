@@ -30,4 +30,20 @@ class Deck
 
   def hero_power(player)
   end
+
+  def mutate
+    replacement = Cards.get_random(self)
+    tuple = @base_cards.slice!(rand(@base_cards.size))
+    puts tuple[:name] + '->' + replacement.name
+    @base_cards << { name: replacement.name, amount: tuple[:amount]}
+  end
+
+  def include?(card)
+    found = @base_cards.find {|bcard| bcard[:name] == card.name}
+    if found.nil?
+      false
+    else
+      true
+    end
+  end
 end

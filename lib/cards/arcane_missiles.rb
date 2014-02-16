@@ -5,6 +5,7 @@ class ArcaneMissiles < Spell
     @cost = 1
     @name = 'Arcane Missiles'
     @damage = 1
+    @deck_class = 'Mage'
     super
   end
   def play(player)
