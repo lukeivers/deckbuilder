@@ -1,12 +1,13 @@
 require './cards/minion'
 
-class MurlocRaider < Minion
+class GrimscaleOracle < Minion
   def initialize
+    @name = "Grimscale Oracle"
     @cost = 1
-    @attack = 2
+    @attack = 1
     @max_health = 1
 	#type = murloc
-    @name = "Murloc Raider"
+	#ALL other Murlocs have +1 attack
     super
   end
 

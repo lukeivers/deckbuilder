@@ -7,6 +7,7 @@ class BluegillWarrior < Minion
     @attack = 2
     @max_health = 1
     @charge = true
+	#type = murloc
     super
   end
 
