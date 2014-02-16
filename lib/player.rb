@@ -135,6 +135,7 @@ class Player
       available_targets << @opponent
       available_targets.concat @opponent.minions
     end
+    available_targets.delete_if {|target| target.minion? and target.stealth?}
     available_targets
   end
 
@@ -147,9 +148,9 @@ class Player
   end
 
   def random_target(evades_taunt=false, include_opponent=true)
-    targets = determine_targets(evades_taunt)
-    if not include_opponent
-      targets.delete @opponent
+    targets = @opponent.minions.dup
+    if include_opponent
+      targets << @opponent
     end
     targets.shuffle.first
   end

@@ -3,7 +3,7 @@ require './card'
 
 class Minion < Card
   include Character
-  attr_accessor :owner, :summoning_sickness, :taunt, :spell_damage
+  attr_accessor :owner, :summoning_sickness, :taunt, :spell_damage, :stealth, :charge, :divine_shield
 
   def initialize(opts = {})
     if opts
@@ -13,6 +13,7 @@ class Minion < Card
         @max_health = opts[:max_health]
         @cost = opts[:cost]
         @taunt = opts[:taunt]
+        @stealth = opts[:stealth]
         if opts[:spell_damage]
           @spell_damage = opts[:spell_damage]
         end
@@ -21,7 +22,7 @@ class Minion < Card
     if not @spell_damage
       @spell_damage = 0
     end
-    @summoning_sickness = true
+    @summoning_sickness = false
     super
   end
 
@@ -37,6 +38,7 @@ class Minion < Card
       @max_health += global_health_bonus
       @health += global_health_bonus
     end
+    @summoning_sickness = true unless self.charge?
   end
 
   def start_round
@@ -52,7 +54,16 @@ class Minion < Card
   end
 
   def taunt?
-    taunt
+    self.taunt
+  end
+
+  def stealth?
+    self.stealth
+  end
+
+  def attack_target(target)
+    @stealth = false
+    super
   end
 
   def add_max_health(amount)
@@ -73,6 +84,18 @@ class Minion < Card
 
   def minion?
     true
+  end
+
+  def deal_damage(amount, source = nil)
+    if @divine_shield
+      amount = 0
+      @divine_shield = false
+    end
+    super
+  end
+
+  def charge?
+    @charge
   end
 
 end

@@ -6,11 +6,8 @@ class BluegillWarrior < Minion
     @cost = 2
     @attack = 2
     @max_health = 1
+    @charge = true
     super
   end
 
-  def play(player)
-    super
-	#Charge
-  end
 end

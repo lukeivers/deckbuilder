@@ -6,11 +6,8 @@ class StonetuskBoar < Minion
     @cost = 1
     @attack = 1
     @max_health = 1
+    @charge = true
     super
   end
 
-  def play(player)
-    super
-	#Charge
-  end
 end

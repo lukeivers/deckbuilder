@@ -9,8 +9,9 @@ class SouthseaDeckhand < Minion
     super
   end
 
-  def play(player)
-    super
-	#Has Charge while you have a weapon equipped
+  def charge?
+    if self.owner.weapon
+      true
+    end
   end
 end

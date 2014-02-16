@@ -6,11 +6,8 @@ class ArgentSquire < Minion
     @cost = 1
     @attack = 1
     @max_health = 1
+    @divine_shield = true
     super
   end
 
-  def play(player)
-    super
-	#Divine Shield
-  end
 end
