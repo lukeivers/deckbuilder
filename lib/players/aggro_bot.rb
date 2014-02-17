@@ -77,9 +77,11 @@ class AggroBot < Player
 
     if deck.deck_class == "Warlock" && self.mana >= 2 && self.health >= 15 && self.hand.size < 10
 	self.deck.hero_power(self)
+          Logger.log @name + ' used its hero power.'
     end
     if deck.deck_class != "Warlock" && self.mana >= 2
 	self.deck.hero_power(self)
+          Logger.log @name + ' used its hero power.'
     end
 	
     #if self.mana >= 2
