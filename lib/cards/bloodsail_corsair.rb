@@ -11,6 +11,9 @@ class BloodsailCorsair < Minion
 
   def play(player)
     super
-	#Remove 1 Durability from your opponent's weapon
-  end
+    weapon = self.owner.opponent.weapon
+    if weapon
+      weapon.add_durability(-1)
+    end
+	end
 end

@@ -10,4 +10,9 @@ class Lightwarden < Minion
     super
   end
 
+  def play(player)
+    super
+
+  end
+
 end

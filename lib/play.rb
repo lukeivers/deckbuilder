@@ -97,7 +97,7 @@ end
 Logger.log 'Starting Hearthstone Deckbuilder'
 
 Logger.log 'Creating first player'
-@player1 = Players.get(name: 'Simple Bot')
+@player1 = Players.get(name: 'Aggro Bot')
 
 Logger.log 'Creating second player'
 @player2 = Players.get(name: 'Aggro Bot')
@@ -106,7 +106,7 @@ Logger.log 'Assigning deck to first player'
 @player1.deck = Decks.get(name: 'Murloc Warlock')
 
 Logger.log 'Assigning deck to second player'
-@player2.deck = Decks.get(name: 'Murloc Warlock')
+@player2.deck = Decks.get(name: 'Elven Archer')
 
 @player1.set_opponent(@player2)
 @player2.set_opponent(@player1)

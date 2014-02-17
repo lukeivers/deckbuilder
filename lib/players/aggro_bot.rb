@@ -69,9 +69,9 @@ class AggroBot < Player
       end
     end
 
-    if self.mana >= 2
-      self.deck.hero_power(self)
-    end
+    #if self.mana >= 2
+    #  self.deck.hero_power(self)
+    #end
 
     if @minions.size > 0
 

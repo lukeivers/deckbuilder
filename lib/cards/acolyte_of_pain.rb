@@ -9,4 +9,11 @@ class AcolyteOfPain < Minion
 	#Whenever this minion takes damage, draw a card
     super
   end
+
+  def deal_damage(amount, source=nil)
+    amount = super
+    if amount > 0
+      self.owner.draw(1)
+    end
+  end
 end

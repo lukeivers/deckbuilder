@@ -1,8 +1,9 @@
 module Character
-  attr_accessor :health, :max_health, :attack, :frozen, :thawing, :name
+  attr_accessor :health, :max_health, :attack, :frozen, :thawing, :name, :health_hooks
 
   def initialize(opts = {})
     @health = @max_health
+    @health_hoooks = Array.new
     @frozen = false
     @thawing = false
   end
@@ -14,6 +15,10 @@ module Character
       self.die
     end
     amount
+  end
+
+  def add_health_hook(hooker)
+    @health_hooks << hooker
   end
 
   def freeze
@@ -39,7 +44,7 @@ module Character
 
   def attack_target(target)
     Logger.log self.name + ' is attacking ' + target.name
-    damage = target.deal_damage(@attack, self)
+    damage = target.deal_damage(self.attack, self)
     if target.minion?
       self.deal_damage(target.attack, target)
     end
@@ -51,6 +56,11 @@ module Character
     possible = true
     possible = false if frozen?
     possible
+  end
+
+  def add_health(amount)
+    self.health_hooks.each {|hooker| hooker.on_heal}
+    @health += amount
   end
 
   def dead?

@@ -6,7 +6,14 @@ class AngryChicken < Minion
     @name = 'Angry Chicken'
     @attack = 1
     @max_health = 1
-	#Enrage: +5 attack
     super
+  end
+
+  def attack
+    if @health < @max_health
+      @attack + 5
+    else
+      @attack
+    end
   end
 end
