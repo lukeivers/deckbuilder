@@ -72,6 +72,7 @@ class SimpleBot < Player
 
     if self.mana >= 2
       self.deck.hero_power(self)
+          Logger.log @name + ' used its hero power.'
     end
 
     if @minions.size > 0
