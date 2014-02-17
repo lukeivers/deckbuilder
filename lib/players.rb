@@ -5,7 +5,7 @@ class Players
   @players = [
       SimpleBot.new,
       RandomBot.new,
-#      AggroBot.new,
+      AggroBot.new,
   ]
   def self.get(opts = {})
     player = @players.find {|bot| bot.name == opts[:name]}

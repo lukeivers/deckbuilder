@@ -100,10 +100,10 @@ Logger.log 'Creating first player'
 @player1 = Players.get(name: 'Simple Bot')
 
 Logger.log 'Creating second player'
-@player2 = Players.get(name: 'Random Bot')
+@player2 = Players.get(name: 'Aggro Bot')
 
 Logger.log 'Assigning deck to first player'
-@player1.deck = Decks.get(name: 'Elven Archer')
+@player1.deck = Decks.get(name: 'Murloc Warlock')
 
 Logger.log 'Assigning deck to second player'
 @player2.deck = Decks.get(name: 'Murloc Warlock')
@@ -112,7 +112,7 @@ Logger.log 'Assigning deck to second player'
 @player2.set_opponent(@player1)
 
 number_of_games = 10000
-player1_deck_mutations = 10
+player1_deck_mutations = 0
 
 if player1_deck_mutations > 0
   player1_deck_mutations.times do
