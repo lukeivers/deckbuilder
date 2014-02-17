@@ -6,4 +6,9 @@ class TheCoin < Card
     @name = 'The Coin'
     super
   end
+
+  def play(player)
+    super
+    player.add_mana(1)
+  end
 end

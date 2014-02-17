@@ -59,7 +59,11 @@ class SimpleBot < Player
   def play
     @hand.sort { |a, b| a.cost <=> b.cost }
     @hand.reverse.each do |card|
-      if @mana > card.cost
+      if card.name == 'The Coin'
+        if self.hand.find { |card| card.cost == self.mana + 1 }
+          card.play(self)
+        end
+      elsif @mana > card.cost
         card.play(self)
         Logger.log @name + ' played ' + card.name + '.'
         @hand.delete(card)

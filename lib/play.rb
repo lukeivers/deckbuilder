@@ -100,7 +100,7 @@ Logger.log 'Creating first player'
 @player1 = Players.get(name: 'Aggro Bot')
 
 Logger.log 'Creating second player'
-@player2 = Players.get(name: 'Aggro Bot')
+@player2 = Players.get(name: 'Simple Bot')
 
 Logger.log 'Assigning deck to first player'
 @player1.deck = Decks.get(name: 'Murloc Warlock')

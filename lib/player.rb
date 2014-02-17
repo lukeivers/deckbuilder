@@ -135,6 +135,10 @@ class Player
     end
   end
 
+  def add_mana(amount = 1)
+    @mana += 1
+  end
+
   def add_mana_crystal(amount = 1)
     @max_mana += amount
   end
