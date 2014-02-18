@@ -72,21 +72,32 @@ class Cards
 	IronbeakOwl.new,
 	MadBomber.new,
 	ManaAddict.new,
-=begin
-        Card.new(name: 'Mana Wraith',  effect: 'ALL minions cost (1) more', attack: 2, health: 2, cost: 2, type: :minion),
-        Card.new(name: 'Millhouse Manastorm',  battlecry: 'Enemy spells cost (0) next turn', attack: 4, health: 4, cost: 2, type: :minion),
-        Card.new(name: 'Nat Pagle',  effect: 'At the end of your turn, you have a 50% change to draw a card', attack: 0, health: 4, cost: 2, type: :minion),
-        Card.new(name: 'Pint-Sized Summoner',  effect: 'The first minion you play each turn costs (1) less', attack: 2, health: 2, cost: 2, type: :minion),
-	      Card.new(name: 'Sunfury Protector',  battlecry: 'Give adjacent minions Taunt', attack: 2, health: 3, cost: 2, type: :minion),
-        Card.new(name: 'Wild Pyromancer',  effect: 'After you cast a spell, deal 1 damage to ALL minions', attack: 3, health: 2, cost: 2, type: :minion),
-        Card.new(name: 'Youthful Brewmaster',  battlecry: 'Return a friendly minion from the battlefield to your hand', attack: 3, health: 2, cost: 2, type: :minion),
-=end
+	Backstab.new,
+	DeadlyPoison.new,
+	Eviscerate.new,
+	DefiasRingleader.new,
+	FanOfKnives.new,
+	HarvestGolem.new,
+	SI7Agent.new,
+	DarkIronDwarf.new,
+	DefenderOfArgus.new,
+	AzureDrake.new,
+	ArgentCommander.new,
+	ManaWraith.new,
+	MillhouseManastorm.new,
+	NatPagle.new,
+	PintSizedSummoner.new,
+	SunfuryProtector.new,
+	WildPyromancer.new,
+	YouthfulBrewmaster.new,
 	]
 
   @no_mutate_cards = [
       DragonWhelp.new,
       TheCoin.new,
       MurlocScout.new,
+      DefiasBandit.new,
+      DamagedGolem.new,
   ]
 
   def self.get(name, amount=1)
