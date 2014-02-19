@@ -98,6 +98,16 @@ class Cards
 	KorkronElite.new,
 	ArcaniteReaper.new,
 	Nightblade.new,
+	ArcaneShot.new,
+	TimberWolf.new,
+	ExplosiveTrap.new,
+	Misdirection.new,
+	UnleashTheHounds.new,
+	StarvingBuzzard.new,
+	EaglehornBow.new,
+	KillCommand.new,
+	ArcaneGolem.new,
+	Wolfrider.new,
 	]
 
   @no_mutate_cards = [
@@ -106,6 +116,7 @@ class Cards
       MurlocScout.new,
       DefiasBandit.new,
       DamagedGolem.new,
+      Hound.new,
   ]
 
   def self.get(name, amount=1)

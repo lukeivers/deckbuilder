@@ -1,12 +1,13 @@
 require './cards/minion'
 
-class MurlocScout < Minion
+class Hound < Minion
   def initialize
-    @name = 'Murloc Scout'
+    @name = 'Hound'
     @attack = 1
     @max_health = 1
     @cost = 0
-          @type = 'Murloc'
+	@charge = true
+          @type = 'Beast'
     super
   end
 end
