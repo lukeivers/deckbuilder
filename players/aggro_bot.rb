@@ -6,6 +6,11 @@ class AggroBot < Player
     super
   end
 
+  def choose_best_card(cards)
+    #TODO: implement aggro_bot choose_best_card
+    super
+  end
+
   def choose_bonus_minion(attack_bonus, health_bonus)
     bonus_minion = @minions.sort {|a, b| a.health <=> b.health}.last
     if health_bonus > 0

@@ -8,6 +8,6 @@ class RogueDeck < Deck
   def hero_power(player)
     super
     player.remove_mana(2)
-	#gain 1/2 dagger
+    player.set_weapon(Weapon.new(attack: 1, durability: 2))
   end
 end

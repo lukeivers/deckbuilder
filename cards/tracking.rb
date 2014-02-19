@@ -9,6 +9,8 @@ class Tracking < Spell
   end
   def play(player)
     super
-	#Look at the top 3 cards of your deck.  Draw one and discard the others.
+    cards = self.owner.deck.draw(3)
+    best_card = self.owner.choose_best_card(cards)
+    self.owner.add_card(best_card)
   end
 end

@@ -9,7 +9,7 @@ class Player
 
   attr_accessor :deck, :hand, :max_mana, :mana, :opponent, :minions, :weapon, :wins, :spell_damage
   attr_accessor :global_attack_bonus, :global_health_bonus, :coin_wins, :fatigue_damage, :murloc_attack_bonus
-  attr_accessor :murloc_health_bonus, :beast_attack_bonus, :beast_health_bonus, :cards_played
+  attr_accessor :murloc_health_bonus, :beast_attack_bonus, :beast_health_bonus, :cards_played, :armour
 
   def initialize(opts = {})
     @max_health = 30
@@ -44,7 +44,12 @@ class Player
     @beast_attack_bonus = 0
     @beast_health_bonus = 0
     @fatigue_damage = 0
+    @armour = 0
     @deck.init_cards
+  end
+
+  def add_armour(amount)
+    @armour += amount
   end
 
   def add_global_bonus(attack_bonus, health_bonus)
@@ -120,11 +125,27 @@ class Player
       (amount - result.size).times { self.fatigue_damage }
     end
     hand.concat deck.draw(amount)
+    result
   end
 
   def fatigue_damage
     @fatigue_damage += 1
     self.deal_damage(@fatigue_damage)
+  end
+
+  def deal_damage(amount, source=nil)
+    if self.armour > 0
+      overage = amount - self.armour
+      if overage > 0
+        super(overage, source)
+      end
+      self.armour -= amount
+      if self.armour < 0
+        self.armour = 0
+      end
+    else
+      super
+    end
   end
 
   def add_card(card)
@@ -133,6 +154,10 @@ class Player
     else
       hand << card
     end
+  end
+
+  def choose_best_card(cards)
+    cards.shuffle.first
   end
 
   def add_mana(amount = 1)

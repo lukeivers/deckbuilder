@@ -8,6 +8,6 @@ class HunterDeck < Deck
   def hero_power(player)
     super
     player.remove_mana(2)
-	#Deal 2 damage to the enemy hero
+    player.opponent.deal_damage(2)
   end
 end

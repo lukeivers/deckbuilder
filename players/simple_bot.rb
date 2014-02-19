@@ -6,6 +6,11 @@ class SimpleBot < Player
     super
   end
 
+  def choose_best_card(cards)
+    #TODO: implement simple_bot best card chooser
+    super
+  end
+
   def choose_bonus_minion(attack_bonus, health_bonus)
     bonus_minion = @minions.sort {|a, b| a.health <=> b.health}.last
     if health_bonus > 0
@@ -75,8 +80,8 @@ class SimpleBot < Player
           Logger.log @name + ' used its hero power.'
     end
 
+    #TODO: implement simple_bot and aggro_bot and random_bot player attack if they have a weapon
     if @minions.size > 0
-
       @minions.each do |minion|
         if minion.can_attack?
           targets = determine_targets

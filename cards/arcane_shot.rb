@@ -9,7 +9,6 @@ class ArcaneShot < Spell
     super
   end
   def play(player)
-    damage = @damage + player.spell_damage
-    player.best_target(damage, true).deal_damage(damage)
+    player.best_target(self.damage, true).deal_damage(self.damage)
   end
 end

@@ -8,6 +8,6 @@ class WarriorDeck < Deck
   def hero_power(player)
     super
     player.remove_mana(2)
-	#gain 2 armor
+	  player.add_armour(2)
   end
 end
