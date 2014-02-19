@@ -90,6 +90,14 @@ class Cards
 	SunfuryProtector.new,
 	WildPyromancer.new,
 	YouthfulBrewmaster.new,
+	FieryWarAxe.new,
+	HeroicStrike.new,
+	FrothingBerserker.new,
+	MortalStrike.new,
+	ArathiWeaponsmith.new,
+	KorkronElite.new,
+	ArcaniteReaper.new,
+	Nightblade.new,
 	]
 
   @no_mutate_cards = [
