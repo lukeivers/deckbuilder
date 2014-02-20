@@ -127,6 +127,18 @@ class Cards
 	FlesheatingGhoul.new,
 	ImpMaster.new,
 	KingMukla.new,
+	MagmaRager.new,
+	MindControlTech.new,
+	QuestingAdventurer.new,
+	RagingWorgen.new,
+	RaidLeader.new,
+	RazorfenHunter.new,
+	ScarletCrusader.new,
+	SilverbackPatriarch.new,
+	SouthseaCaptain.new,
+	TaurenWarrior.new,
+	ThrallmarFarseer.new,
+	TinkmasterOverspark.new,
 	]
 
   @no_mutate_cards = [
@@ -138,6 +150,9 @@ class Cards
       Hound.new,
 	Imp.new,
 	Bananas.new,
+	Boar.new,
+	Devilsaur.new,
+	Squirrel.new,
   ]
 
   def self.get(name, amount=1)
