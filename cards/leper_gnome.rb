@@ -10,8 +10,8 @@ class LeperGnome < Minion
   end
 
   def die
+    super
     self.owner.opponent.deal_damage(2)
-    super 
 	end
 
 end

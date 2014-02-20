@@ -10,13 +10,14 @@ class Player
   attr_accessor :deck, :hand, :max_mana, :mana, :opponent, :minions, :weapon, :wins, :spell_damage
   attr_accessor :global_attack_bonus, :global_health_bonus, :coin_wins, :fatigue_damage, :murloc_attack_bonus
   attr_accessor :murloc_health_bonus, :beast_attack_bonus, :beast_health_bonus, :cards_played, :armour
+  attr_accessor :on_attack_hooks, :on_summon_hooks, :game, :on_death_hooks, :on_minion_damage_hooks
 
   def initialize(opts = {})
     @max_health = 30
     @hand = Array.new
     @minions = Array.new
+    @attack = 0
     @max_mana = 0
-    @weapon = nil
     @spell_damage = 0
     @global_attack_bonus = 0
     @global_health_bonus = 0
@@ -27,7 +28,48 @@ class Player
     @wins = 0
     @coin_wins = 0
     @fatigue_damage = 0
+    @on_attack_hooks = Array.new
+    @on_summon_hooks = Array.new
+    @on_death_hooks = Array.new
+    @on_minion_damage_hooks = Array.new
+    @armour = 0
     super
+  end
+
+  def add_attack_hook(spell)
+    on_attack_hooks << spell
+  end
+
+  def add_summon_hook(spell)
+    on_summon_hooks << spell
+  end
+
+  def add_death_hook(spell)
+    on_death_hooks << spell
+  end
+
+  def add_minion_damage_hook(spell)
+    on_minion_damage_hooks << spell
+  end
+
+  def cause_death_hook(source)
+    on_death_hooks.each do |hooker|
+      hooker.on_death(self, source)
+    end
+  end
+
+  def cause_minion_damage_hook(minion, amount, source)
+    on_minion_damage_hooks.each do |hooker|
+      hooker.on_minion_damage(self, minion, amount, source)
+    end
+  end
+
+  def remove_minion_damage_hook(spell)
+    on_minion_damage_hooks.delete spell
+  end
+
+  def remove_death_hook(spell)
+    on_death_hooks.delete spell
   end
 
   def reset
@@ -45,6 +87,10 @@ class Player
     @beast_health_bonus = 0
     @fatigue_damage = 0
     @armour = 0
+    @on_attack_hooks = Array.new
+    @on_summon_hooks = Array.new
+    @on_death_hooks = Array.new
+    @game = nil
     @deck.init_cards
   end
 
@@ -113,6 +159,9 @@ class Player
 
   def add_minion(minion)
     @minions << minion
+    on_summon_hooks.each do |hooker|
+      hooker.on_summon(self, minion)
+    end
   end
 
   def destroy_minion(minion)
@@ -133,7 +182,43 @@ class Player
     self.deal_damage(@fatigue_damage)
   end
 
+  def remove_attack_hook(spell)
+    self.on_attack_hooks.delete spell
+  end
+
+  def remove_summon_hook(spell)
+    self.on_summon_hooks.delete spell
+  end
+
+  def silenced_minion_hook(minion)
+    on_summon_hooks.each do |hooker|
+      if hooker == minion
+        on_summon_hooks.delete hooker
+      end
+    end
+    on_attack_hooks.each do |hooker|
+      if hooker == minion
+        on_summon_hooks.delete hooker
+      end
+    end
+  end
+
+  def best_silence_target
+    self.opponent.minions.shuffle.first
+  end
+
   def deal_damage(amount, source=nil)
+    if self.on_attack_hooks.size > 0
+      self.on_attack_hooks.each do |hooker|
+        amount -= hooker.on_attack(self, amount, source)
+      end
+    end
+    if amount.nil?
+      amount = 0
+    end
+    if amount <= 0
+      return 0
+    end
     if self.armour > 0
       overage = amount - self.armour
       if overage > 0
@@ -186,8 +271,17 @@ class Player
   end
 
   def end_turn
+    super
     @minions.each do |minion|
       minion.end_turn
+    end
+  end
+
+  def attack
+    if weapon
+      @attack + weapon.attack
+    else
+      @attack
     end
   end
 

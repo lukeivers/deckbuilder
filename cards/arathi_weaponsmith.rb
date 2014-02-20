@@ -11,8 +11,9 @@ class ArathiWeaponsmith < Minion
   end
 
   def play(player)
-	super
-	#Equip a 2/2 weapon
+	  super
+    owner.set_weapon(Weapon.new(attack: 2, durability: 2))
+	  #Equip a 2/2 weapon
   end
 
 end

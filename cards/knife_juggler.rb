@@ -10,9 +10,13 @@ class KnifeJuggler < Minion
     super
   end
 
-  def on_summon(source, friendly=false)
+  def play(player)
     super
-    if source != self and friendly and self.owner.opponent.minions.size > 0
+    owner.add_summon_hook(self)
+  end
+
+  def on_summon(player, minion)
+    if minion != self and self.owner.opponent.minions.size > 0
       target = self.owner.opponent.minions.shuffle.first
       Logger.log 'Knife Juggler\'s special dealt 1 damage to ' + target.name
       target.deal_damage(1)

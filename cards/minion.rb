@@ -1,11 +1,10 @@
 require './character'
 require './card'
-require 'pp'
 
 class Minion < Card
   include Character
   attr_accessor :owner, :summoning_sickness, :taunt, :spell_damage, :stealth, :charge, :divine_shield, :type
-  attr_accessor :legendary, :temporary_attack, :dying
+  attr_accessor :legendary, :dying, :silenced
 
   def initialize(opts = {})
     @spell_damage ||= 0
@@ -15,7 +14,7 @@ class Minion < Card
     @stealth ||= false
     @taunt ||= false
     @summoning_sickness = false
-    @temporary_attack = 0
+    @silenced = false
     super
   end
 
@@ -34,8 +33,6 @@ class Minion < Card
       self.add_max_health(self.owner.beast_health_bonus)
     end
     @summoning_sickness = true unless self.charge?
-    self.owner.minions.each {|minion| minion.on_summon(self, true)}
-    self.owner.opponent.minions.each {|minion| minion.on_summon(self)}
   end
 
   def start_round
@@ -44,11 +41,11 @@ class Minion < Card
     end
   end
 
-  def end_turn
-    if @temporary_attack > 0
-      @attack -= @temporary_attack
-      @temporary_attack = 0
-    end
+  def silence
+    self.taunt = false
+    self.silenced = true
+    owner.silenced_minion_hook(self)
+    #TODO: update all deathrattles, hooks, etc to respect silencing
   end
 
   def can_attack?
@@ -79,20 +76,14 @@ class Minion < Card
     end
   end
 
-  def add_attack(amount)
-    @attack += amount
-  end
-
-  def add_temporary_attack(amount)
-    @attack += amount
-    @temporary_attack += amount
-  end
-
   def die
     @dying = true
+    self.owner.remove_summon_hook(self)
+    self.owner.remove_attack_hook(self)
+    self.owner.remove_death_hook(self)
+    self.owner.remove_minion_damage_hook(self)
+    self.owner.cause_death_hook(self)
     self.owner.destroy_minion(self)
-    self.owner.minions.each {|minion| minion.on_death(self, true)}
-    self.owner.opponent.minions.each {|minion| minion.on_death(self)}
     self.owner.add_spell_damage(-(@spell_damage))
     super
   end
@@ -106,18 +97,15 @@ class Minion < Card
       amount = 0
       @divine_shield = false
     end
-    super
+    damage = super(amount, source)
+    if damage > 0
+      owner.cause_minion_damage_hook(self, amount, source)
+    end
+    damage
   end
 
   def charge?
     @charge
   end
 
-  def on_summon(source, friendly=false)
-
-  end
-
-  def on_death(source, friendly=false)
-
-  end
 end

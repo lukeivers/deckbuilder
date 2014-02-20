@@ -6,7 +6,9 @@ class Decks
       ElvenArcherDeck.new,
       ShieldbearerDeck.new,
       MurlocWarlockDeck.new,
-      KithrosRogueDeck.new
+      KithrosRogueDeck.new,
+      EricHunterDeck.new,
+      ReynadWarriorDeck.new,
   ]
 
   def self.get(opts = {})

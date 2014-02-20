@@ -11,6 +11,10 @@ class IronbeakOwl < Minion
 
   def play(player)
     super
+    target = self.owner.best_silence_target
+    if target
+      target.silence
+    end
     #Silence a minion
   end
 end

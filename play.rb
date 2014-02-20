@@ -3,6 +3,7 @@ require './cards'
 require './players'
 require './deck'
 require './decks'
+require './game'
 require 'pp'
 
 def play_games(number_of_games)
@@ -10,12 +11,16 @@ def play_games(number_of_games)
   @player2.wins = 0
   number_of_completed_games = 0
   number_of_games.times do
+    game = Game.new
     @game_running = true
     @winning_player = nil
     @rounds = 0
 
     @player1.reset
     @player2.reset
+
+    @player1.game = game
+    @player2.game = game
 
     Logger.log 'Flipping coin'
     @current_player = nil
@@ -106,7 +111,7 @@ Logger.log 'Assigning deck to first player'
 @player1.deck = Decks.get(name: 'Murloc Warlock')
 
 Logger.log 'Assigning deck to second player'
-@player2.deck = Decks.get(name: 'Kithros Rogue')
+@player2.deck = Decks.get(name: 'Reynad Warrior')
 
 @player1.set_opponent(@player2)
 @player2.set_opponent(@player1)

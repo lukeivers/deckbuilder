@@ -6,7 +6,7 @@ class FaerieDragon < Minion
     @attack = 3
     @max_health = 2
     @name = "Faerie Dragon"
-	#Can't be targeted by Spells or Hero Powers
+	  #TODO: Can't be targeted by Spells or Hero Powers
     super
   end
 

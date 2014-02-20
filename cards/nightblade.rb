@@ -11,6 +11,6 @@ class Nightblade < Minion
 
   def play(player)
     super
-	#Deal 3 damage to the enemy Hero
-  end
+    owner.opponent.deal_damage(3)
+	end
 end

@@ -10,9 +10,14 @@ class MurlocTidecaller < Minion
 	  super
   end
 
-  def on_summon(source, friendly=false)
+  def play(player)
     super
-    if source.type == 'Murloc'
+    owner.add_summon_hook(self)
+    owner.opponent.add_summon_hook(self)
+  end
+
+  def on_summon(player, minion)
+    if minion.type == 'Murloc'
       self.add_attack(1)
     end
   end

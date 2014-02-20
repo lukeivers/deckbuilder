@@ -11,6 +11,11 @@ class SimpleBot < Player
     super
   end
 
+  def best_silence_target
+    #TODO: implement simple_bot best silence target
+    super
+  end
+
   def choose_bonus_minion(attack_bonus, health_bonus)
     bonus_minion = @minions.sort {|a, b| a.health <=> b.health}.last
     if health_bonus > 0

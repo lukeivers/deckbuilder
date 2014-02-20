@@ -10,6 +10,9 @@ class ArcaneGolem < Minion
     super
   end
 
-	#Battlecry: Give your opponent a Mana crystal
+  def play(player)
+    super
+    owner.opponent.add_mana_crystal(1)
+  end
 
 end

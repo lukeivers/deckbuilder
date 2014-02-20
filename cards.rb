@@ -111,6 +111,7 @@ class Cards
   DamagedGolem.new,
   DefiasBandit.new,
   Hound.new,
+  Tracking.new,
 	]
 
   @no_mutate_cards = [

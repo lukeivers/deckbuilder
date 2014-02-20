@@ -5,13 +5,16 @@ class BloodsailRaider < Minion
     @cost = 2
     @attack = 2
     @max_health = 3
-    @name = "BloodSail Raider"
+    @name = "Bloodsail Raider"
     super
   end
 
-  def play
-	#gain attack equal to the attack of your weapon
-    super
+  def play(player)
+	  super
+    weapon = owner.weapon
+    if weapon
+      self.attack += owner.weapon.attack
+    end
   end
 
 end

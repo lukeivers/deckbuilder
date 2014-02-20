@@ -1,9 +1,10 @@
 module Character
-  attr_accessor :health, :max_health, :attack, :frozen, :thawing, :name, :health_hooks
+  attr_accessor :health, :max_health, :attack, :frozen, :thawing, :name, :temporary_attack
 
   def initialize(opts = {})
     @health = @max_health
     @health_hoooks = Array.new
+    @temporary_attack = 0
     @frozen = false
     @thawing = false
   end
@@ -17,8 +18,11 @@ module Character
     amount
   end
 
-  def add_health_hook(hooker)
-    @health_hooks << hooker
+  def end_turn
+    if @temporary_attack > 0
+      @attack -= @temporary_attack
+      @temporary_attack = 0
+    end
   end
 
   def freeze
@@ -50,6 +54,15 @@ module Character
     end
     Logger.log @owner.name + '\'s ' + self.name + ' attacked ' + target.name + ' for ' + damage.to_s + '.'
     damage
+  end
+
+  def add_attack(amount)
+    @attack += amount
+  end
+
+  def add_temporary_attack(amount)
+    @attack += amount
+    @temporary_attack += amount
   end
 
   def can_attack?

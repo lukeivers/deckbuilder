@@ -1,7 +1,7 @@
 require './card'
 
 class Spell < Card
-  attr_accessor :damage, :owner
+  attr_accessor :damage, :owner, :secret
 
   def play(player)
     @owner = player

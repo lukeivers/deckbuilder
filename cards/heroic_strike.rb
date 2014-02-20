@@ -9,6 +9,6 @@ class HeroicStrike < Spell
   end
   def play(player)
     super
-	#Give your hero +4 Attack this turn
-    end
-  end
+    owner.add_temporary_attack(4)
+	end
+end
