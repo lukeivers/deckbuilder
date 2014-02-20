@@ -112,6 +112,21 @@ class Cards
   DefiasBandit.new,
   Hound.new,
   Tracking.new,
+	AlarmOBot.new,
+	BigGameHunter.new,
+	BloodKnight.new,
+	ColdlightOracle.new,
+	DalaranMage.new,
+	Demolisher.new,
+	InjuredBlademaster.new,
+	IronforgeRifleman.new,
+	IronfurGrizzly.new,
+	JunglePanther.new,
+	EarthenRingFarseer.new,
+	EmperorCobra.new,
+	FlesheatingGhoul.new,
+	ImpMaster.new,
+	KingMukla.new,
 	]
 
   @no_mutate_cards = [
@@ -121,6 +136,8 @@ class Cards
       DefiasBandit.new,
       DamagedGolem.new,
       Hound.new,
+	Imp.new,
+	Bananas.new,
   ]
 
   def self.get(name, amount=1)
