@@ -2,11 +2,11 @@ require './cards/minion'
 
 class DamagedGolem < Minion
   def initialize
-    @name = "Damaged Golem"
-    @cost = 0
-    @attack = 2
-    @max_health = 1
     super
+    self.name = "Damaged Golem"
+    self.cost = 0
+    self.attack = 2
+    self.max_health = 1
   end
 
 end

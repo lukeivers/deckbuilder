@@ -6,6 +6,26 @@ class RandomBot < Player
     super
   end
 
+  def choose_best_card(cards)
+    cards.shuffle.first
+  end
+
+  def choose_bonus_minion(opts = {})
+    @minions.first
+  end
+
+  def best_silence_target
+    self.opponent.minions.shuffle.first
+  end
+
+  def best_target(damage, evades_taunt=false)
+    random_target(evades_taunt)
+  end
+
+  def best_smurfing_target
+    random_target(true, false)
+  end
+
   def play
     @hand.shuffle.each do |card|
       if @mana > card.cost

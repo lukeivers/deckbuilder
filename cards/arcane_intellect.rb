@@ -2,13 +2,13 @@ require './cards/spell'
 
 class ArcaneIntellect < Spell
   def initialize
-    @cost = 3
-    @name = 'Arcane Intellect'
-    @deck_class = 'Mage'
     super
+    self.cost = 3
+    self.name = 'Arcane Intellect'
+    self.deck_class = 'Mage'
   end
-  def play(player)
-    super
-    player.draw(2)
+
+  def battlecry
+    owner.draw 2
   end
 end

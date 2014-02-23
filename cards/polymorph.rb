@@ -2,12 +2,12 @@ require './cards/spell'
 
 class Polymorph < Spell
   def initialize
-    @cost = 4
-    @name = 'Polymorph'
-    @deck_class = 'Mage'
+    self.cost = 4
+    self.name = 'Polymorph'
+    self.deck_class = 'Mage'
     super
   end
-  def play(player)
+  def battlecry
     target = player.best_smurfing_target
     return if target == nil
     super

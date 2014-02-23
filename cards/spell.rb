@@ -3,12 +3,15 @@ require './card'
 class Spell < Card
   attr_accessor :damage, :owner, :secret
 
-  def play(player)
-    @owner = player
-    super
+  def damage
+    self.damage + owner.spell_damage
   end
 
-  def damage
-    @damage + self.owner.spell_damage
+  def play(player)
+    super
+    battlecry
+  end
+
+  def battlecry
   end
 end

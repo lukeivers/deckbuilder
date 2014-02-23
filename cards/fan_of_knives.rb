@@ -2,13 +2,13 @@ require './cards/spell'
 
 class FanOfKnives < Spell
   def initialize
-    @cost = 3
-    @name = 'Fan of Knives'
-    @damage = 1
-    @deck_class = 'Rogue'
+    self.cost = 3
+    self.name = 'Fan of Knives'
+    self.damage = 1
+    self.deck_class = 'Rogue'
     super
   end
-  def play(player)
+  def battlecry
     super
     self.owner.opponent.minions.each do |minion|
       minion.deal_damage(self.damage)

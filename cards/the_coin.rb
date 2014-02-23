@@ -1,14 +1,14 @@
-require './card'
+require './cards/spell'
 
-class TheCoin < Card
+class TheCoin < Spell
   def initialize
-    @cost = 0
-    @name = 'The Coin'
     super
+    self.cost = 0
+    self.name = 'The Coin'
   end
 
-  def play(player)
+  def battlecry
     super
-    player.add_mana(1)
+    owner.mana += 1
   end
 end

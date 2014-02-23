@@ -2,10 +2,10 @@ require './cards/minion'
 
 class LeperGnome < Minion
   def initialize
-    @name = "Leper Gnome"
-    @cost = 1
-    @attack = 2
-    @max_health = 1
+    self.name = "Leper Gnome"
+    self.cost = 1
+    self.attack = 2
+    self.max_health = 1
     super
   end
 

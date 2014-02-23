@@ -2,16 +2,16 @@ require './cards/spell'
 
 class KillCommand < Spell
   def initialize
-    @cost = 3
-    @name = 'Kill Command'
-    @damage = 3
-    @deck_class = 'Hunter'
+    self.cost = 3
+    self.name = 'Kill Command'
+    self.damage = 3
+    self.deck_class = 'Hunter'
     super
   end
-  def play(player)
+  def battlecry
     super
     if owner.minions.find {|minion| minion.type == 'Beast'}
-      @damage += 2
+      self.damage += 2
     end
     owner.best_target(damage, true).deal_damage(damage)
   end

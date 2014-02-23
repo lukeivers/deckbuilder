@@ -2,10 +2,10 @@ require './cards/minion'
 
 class YoungDragonhawk < Minion
   def initialize
-    @cost = 1
-    @attack = 1
-    @max_health = 1
-    @name = "Young Dragonhawk"
+    self.cost = 1
+    self.attack = 1
+    self.max_health = 1
+    self.name = "Young Dragonhawk"
 	#windfury = true
     super
   end

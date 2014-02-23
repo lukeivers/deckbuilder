@@ -2,16 +2,16 @@ require './cards/weapon'
 
 class EaglehornBow < Weapon
   def initialize
-    @cost = 3
-    @name = 'Eaglehorn Bow'
-    @attack = 3
-    @durability = 2
-    @deck_class = 'Hunter'
+    self.cost = 3
+    self.name = 'Eaglehorn Bow'
+    self.attack = 3
+    self.durability = 2
+    self.deck_class = 'Hunter'
 	#Whenever a Secret is played, gain +1 durability
     super
   end
 
-  def play(player)
+  def battlecry
     super
     owner.game.add_hook(:secret, self)
   end

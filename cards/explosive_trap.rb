@@ -2,15 +2,15 @@ require './cards/secret'
 
 class ExplosiveTrap < Secret
   def initialize
-    @cost = 2
-    @name = 'Explosive Trap'
-    @deck_class = 'Hunter'
-	  @secret = true
+    self.cost = 2
+    self.name = 'Explosive Trap'
+    self.deck_class = 'Hunter'
+	  self.secret = true
 	  #When your hero is attacked, deal 2 damage to all enemies
     super
   end
 
-  def play(player)
+  def battlecry
     super
     self.owner.add_attack_hook(self)
   end

@@ -2,13 +2,13 @@ require './cards/spell'
 
 class UnleashTheHounds < Spell
   def initialize
-    @cost = 2
-    @name = 'Unleash the Hounds'
-    @deck_class = 'Hunter'
+    self.cost = 2
+    self.name = 'Unleash the Hounds'
+    self.deck_class = 'Hunter'
     super
   end
 
-  def play(player)
+  def battlecry
     super
     amount = owner.opponent.minions.size
     amount.times do

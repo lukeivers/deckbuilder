@@ -2,11 +2,11 @@ require './cards/minion'
 
 class Squirrel < Minion
   def initialize
-    @name = 'Squirrel'
-    @attack = 1
-    @max_health = 1
-    @cost = 1
-          @type = 'Beast'
+    self.name = 'Squirrel'
+    self.attack = 1
+    self.max_health = 1
+    self.cost = 1
+          self.type = 'Beast'
     super
   end
 end

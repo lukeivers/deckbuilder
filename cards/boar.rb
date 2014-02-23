@@ -2,11 +2,11 @@ require './cards/minion'
 
 class Boar < Minion
   def initialize
-    @name = 'Boar'
-    @attack = 1
-    @max_health = 1
-    @cost = 0
-          @type = 'Beast'
     super
+    self.name = 'Boar'
+    self.attack = 1
+    self.max_health = 1
+    self.cost = 0
+    self.type = 'Beast'
   end
 end

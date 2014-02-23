@@ -2,18 +2,21 @@ require './cards/spell'
 
 class Tracking < Spell
   def initialize
-    @cost = 1
-    @name = 'Tracking'
-    @deck_class = 'Hunter'
     super
+    self.cost = 1
+    self.name = 'Tracking'
+    self.deck_class = 'Hunter'
   end
-  def play(player)
+
+  def battlecry
     super
-    cards = self.owner.deck.draw(3)
-    #TODO: sometimes cards is nil.  make sure it's only when there actually aren't any cards to draw.
-    best_card = self.owner.choose_best_card(cards)
-    if best_card
-      self.owner.add_card(best_card)
+    cards = owner.draw(3)
+    if cards.size > 1
+      best_card = owner.choose_best_card(cards)
+      cards.delete best_card
+      cards.each do |card|
+        owner.remove_card(card)
+      end
     end
   end
 end

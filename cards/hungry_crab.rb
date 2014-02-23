@@ -2,14 +2,14 @@ require './cards/minion'
 
 class HungryCrab < Minion
   def initialize
-    @cost = 1
-    @attack = 1
-    @max_health = 2
-    @name = "Hungry Crab"
+    self.cost = 1
+    self.attack = 1
+    self.max_health = 2
+    self.name = "Hungry Crab"
     super
   end
 
-  def play(player)
+  def battlecry
     super
     target = self.owner.opponent.minions.select {|minion| minion.type == 'Murloc'}.first
     if target

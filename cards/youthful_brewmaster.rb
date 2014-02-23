@@ -2,13 +2,13 @@ require './cards/minion'
 
 class YouthfulBrewmaster < Minion
   def initialize
-    @cost = 2
-    @name = 'Youthful Brewmaster'
-    @attack = 3
-    @max_health = 2
+    self.cost = 2
+    self.name = 'Youthful Brewmaster'
+    self.attack = 3
+    self.max_health = 2
     super
   end
-  def play(player)
+  def battlecry
     super
 	#Return a friendly minion from the battlefield to your hand
   end

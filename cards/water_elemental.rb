@@ -2,11 +2,11 @@ require './cards/minion'
 
 class WaterElemental < Minion
   def initialize
-    @cost = 4
-    @name = 'Water Elemental'
-    @attack = 3
-    @max_health = 6
-    @deck_class = 'Mage'
+    self.cost = 4
+    self.name = 'Water Elemental'
+    self.attack = 3
+    self.max_health = 6
+    self.deck_class = 'Mage'
     super
   end
   def attack_target(target)

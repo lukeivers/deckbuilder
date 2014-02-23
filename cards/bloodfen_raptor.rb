@@ -2,11 +2,11 @@ require './cards/minion'
 
 class BloodfenRaptor < Minion
   def initialize
-    @cost = 2
-    @attack = 3
-    @max_health = 2
-    @name = "Bloodfen Raptor"
     super
+    self.cost = 2
+    self.attack = 3
+    self.max_health = 2
+    self.name = "Bloodfen Raptor"
   end
 
 end

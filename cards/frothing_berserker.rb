@@ -2,14 +2,14 @@ require './cards/minion'
 
 class FrothingBerserker < Minion
   def initialize
-    @cost = 3
-    @attack = 2
-    @max_health = 4
-    @name = "Frothing Berserker"
+    self.cost = 3
+    self.attack = 2
+    self.max_health = 4
+    self.name = "Frothing Berserker"
     super
   end
 
-  def play(player)
+  def battlecry
     super
     owner.add_minion_damage_hook(self)
   end

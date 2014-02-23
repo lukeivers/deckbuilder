@@ -2,15 +2,15 @@ require './cards/minion'
 
 class StarvingBuzzard < Minion
   def initialize
-    @name = 'Starving Buzzard'
-    @attack = 2
-    @max_health = 1
-    @cost = 2
-    @type = 'Beast'
+    self.name = 'Starving Buzzard'
+    self.attack = 2
+    self.max_health = 1
+    self.cost = 2
+    self.type = 'Beast'
     super
   end
 
-  def play(player)
+  def battlecry
     super
     owner.add_summon_hook(self)
   end

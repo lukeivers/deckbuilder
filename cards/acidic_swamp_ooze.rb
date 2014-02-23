@@ -2,15 +2,15 @@ require './cards/minion'
 
 class AcidicSwampOoze < Minion
   def initialize
-    @cost = 2
-    @attack = 3
-    @max_health = 2
-    @name = "Acidic Swamp Ooze"
     super
+    self.cost = 2
+    self.attack = 3
+    self.max_health = 2
+    self.name = "Acidic Swamp Ooze"
   end
 
-  def play(player)
+  def battlecry
     super
-    player.opponent.set_weapon(nil)
+    owner.opponent.weapon = nil
   end
 end

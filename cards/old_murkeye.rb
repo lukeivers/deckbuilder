@@ -2,17 +2,17 @@ require './cards/minion'
 
 class OldMurkeye < Minion
   def initialize
-    @name = "Old Murk-Eye"
-    @cost = 4
-    @attack = 2
-    @max_health = 4
-    @charge = true
-	  @type = 'Murloc'
-	  @legendary = true
+    self.name = "Old Murk-Eye"
+    self.cost = 4
+    self.attack = 2
+    self.max_health = 4
+    self.charge = true
+	  self.type = 'Murloc'
+	  self.legendary = true
     super
   end
 
-  def play(player)
+  def battlecry
     super
     owner.add_summon_hook(self)
     owner.add_death_hook(self)

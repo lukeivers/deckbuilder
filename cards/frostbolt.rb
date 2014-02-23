@@ -2,15 +2,15 @@ require './cards/spell'
 
 class Frostbolt < Spell
   def initialize
-    @cost = 2
-    @name = 'Frostbolt'
-    @damage = 3
-    @deck_class = 'Mage'
+    self.cost = 2
+    self.name = 'Frostbolt'
+    self.damage = 3
+    self.deck_class = 'Mage'
     super
   end
-  def play(player)
+  def battlecry
     super
-    damage = @damage + player.spell_damage
+    damage = self.damage + player.spell_damage
     target = player.best_target(damage, true)
     target.deal_damage(damage)
     target.freeze

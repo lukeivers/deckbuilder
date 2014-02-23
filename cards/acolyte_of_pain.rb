@@ -2,18 +2,16 @@ require './cards/minion'
 
 class AcolyteOfPain < Minion
   def initialize
-    @cost = 3
-    @name = 'Acolyte of Pain'
-    @attack = 1
-    @max_health = 3
-	#Whenever this minion takes damage, draw a card
     super
+    self.cost = 3
+    self.name = 'Acolyte of Pain'
+    self.attack = 1
+    self.max_health = 3
   end
 
-  def deal_damage(amount, source=nil)
-    amount = super
-    if amount > 0
-      self.owner.draw(1)
+  def deal_damage(opts = {})
+    if super(opts) > 0
+      owner.draw 1
     end
   end
 end

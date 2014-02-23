@@ -2,11 +2,11 @@ require './cards/minion'
 
 class MillhouseManastorm < Minion
   def initialize
-    @cost = 2
-    @name = 'Millhouse Manastorm'
-    @attack = 4
-    @max_health = 4
-    @legendary = true
+    self.cost = 2
+    self.name = 'Millhouse Manastorm'
+    self.attack = 4
+    self.max_health = 4
+    self.legendary = true
     super
   end
 

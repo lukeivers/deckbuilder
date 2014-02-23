@@ -2,18 +2,16 @@ require './cards/minion'
 
 class AzureDrake < Minion
   def initialize
-    @cost = 5
-    @name = 'Azure Drake'
-    @attack = 4
-    @max_health = 4
-    @spell_damage = 1
     super
+    self.cost = 5
+    self.name = 'Azure Drake'
+    self.attack = 4
+    self.max_health = 4
+    self.spell_damage = 1
   end
 
-  def die
+  def deathrattle
     super
-    self.owner.draw(1)
+    owner.draw 1
   end
-
-
 end

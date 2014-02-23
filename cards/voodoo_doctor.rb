@@ -2,14 +2,14 @@ require './cards/minion'
 
 class VoodooDoctor < Minion
   def initialize
-    @name = "Voodoo Doctor"
-    @cost = 1
-    @attack = 2
-    @max_health = 1
+    self.name = "Voodoo Doctor"
+    self.cost = 1
+    self.attack = 2
+    self.max_health = 1
     super
   end
 
-  def play(player)
+  def battlecry
     super
 	#Restore 2 health
   end

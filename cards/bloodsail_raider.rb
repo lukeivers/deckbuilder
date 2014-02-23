@@ -2,18 +2,18 @@ require './cards/minion'
 
 class BloodsailRaider < Minion
   def initialize
-    @cost = 2
-    @attack = 2
-    @max_health = 3
-    @name = "Bloodsail Raider"
     super
+    self.cost = 2
+    self.attack = 2
+    self.max_health = 3
+    self.name = "Bloodsail Raider"
   end
 
-  def play(player)
+  def battlecry
 	  super
     weapon = owner.weapon
     if weapon
-      self.attack += owner.weapon.attack
+      attack += weapon.attack
     end
   end
 

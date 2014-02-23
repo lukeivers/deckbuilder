@@ -2,15 +2,18 @@ require './cards/minion'
 
 class BigGameHunter < Minion
   def initialize
-    @cost = 3
-    @attack = 4
-    @max_health = 2
-    @name = "Big Game Hunter"
     super
+    self.cost = 3
+    self.attack = 4
+    self.max_health = 2
+    self.name = "Big Game Hunter"
   end
 
-  def play(player)
+  def battlecry
     super
-	#Destroy a minion with an Attack of 7 or more.
+    target = owner.opponent.minions.select {|a| a.attack >= 7}.sort {|a, b| a.attack <=> b.attack}.reverse.first
+    if target
+      target.owner.destroy_minion(target)
+    end
   end
 end

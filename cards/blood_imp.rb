@@ -2,22 +2,22 @@ require './cards/minion'
 
 class BloodImp < Minion
   def initialize
-    @name = "Blood Imp"
-    @cost = 1
-    @attack = 0
-    @max_health = 1
-    @stealth = true
-	  @type = 'Demon'
-    @deck_class = 'Warlock'
     super
+    self.name = "Blood Imp"
+    self.cost = 1
+    self.attack = 0
+    self.max_health = 1
+    self.stealth = true
+	  self.type = 'Demon'
+    self.deck_class = 'Warlock'
   end
 
   def end_turn
-    target = self.owner.minions.select {|minion| minion != self}.shuffle.first
+    super
+    target = owner.minions.select {|minion| minion != self}.shuffle.first
     if target
       target.add_max_health(1)
     end
-    super
   end
 
 end

@@ -2,11 +2,11 @@ require './cards/weapon'
 
 class FieryWarAxe < Weapon
   def initialize
-    @cost = 2
-    @name = 'Fiery War Axe'
-    @attack = 3
-    @durability = 2
-    @deck_class = 'Warrior'
+    self.cost = 2
+    self.name = 'Fiery War Axe'
+    self.attack = 3
+    self.durability = 2
+    self.deck_class = 'Warrior'
     super
   end
 end

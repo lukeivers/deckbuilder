@@ -2,11 +2,11 @@ require './cards/minion'
 
 class Devilsaur < Minion
   def initialize
-    @name = 'Devilsaur'
-    @attack = 5
-    @max_health = 5
-    @cost = 5
-          @type = 'Beast'
     super
+    self.name = 'Devilsaur'
+    self.attack = 5
+    self.max_health = 5
+    self.cost = 5
+    self.type = 'Beast'
   end
 end

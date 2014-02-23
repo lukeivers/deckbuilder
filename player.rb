@@ -1,127 +1,160 @@
-require './deck'
-require './cards'
-require './card'
 require './character'
-require './weapon'
+require './decks'
+require './minion_group'
 
 class Player
   include Character
 
   attr_accessor :deck, :hand, :max_mana, :mana, :opponent, :minions, :weapon, :wins, :spell_damage
-  attr_accessor :global_attack_bonus, :global_health_bonus, :coin_wins, :fatigue_damage, :murloc_attack_bonus
-  attr_accessor :murloc_health_bonus, :beast_attack_bonus, :beast_health_bonus, :cards_played, :armour
-  attr_accessor :on_attack_hooks, :on_summon_hooks, :game, :on_death_hooks, :on_minion_damage_hooks
+  attr_accessor :fatigue_damage, :cards_played, :armour, :game
 
-  def initialize(opts = {})
-    @max_health = 30
-    @hand = Array.new
-    @minions = Array.new
-    @attack = 0
-    @max_mana = 0
-    @spell_damage = 0
-    @global_attack_bonus = 0
-    @global_health_bonus = 0
-    @murloc_attack_bonus = 0
-    @murloc_health_bonus = 0
-    @beast_attack_bonus = 0
-    @beast_health_bonus = 0
-    @wins = 0
-    @coin_wins = 0
-    @fatigue_damage = 0
-    @on_attack_hooks = Array.new
-    @on_summon_hooks = Array.new
-    @on_death_hooks = Array.new
-    @on_minion_damage_hooks = Array.new
-    @armour = 0
-    super
-  end
-
-  def add_attack_hook(spell)
-    on_attack_hooks << spell
-  end
-
-  def add_summon_hook(spell)
-    on_summon_hooks << spell
-  end
-
-  def add_death_hook(spell)
-    on_death_hooks << spell
-  end
-
-  def add_minion_damage_hook(spell)
-    on_minion_damage_hooks << spell
-  end
-
-  def cause_death_hook(source)
-    on_death_hooks.each do |hooker|
-      hooker.on_death(self, source)
-    end
-  end
-
-  def cause_minion_damage_hook(minion, amount, source)
-    on_minion_damage_hooks.each do |hooker|
-      hooker.on_minion_damage(self, minion, amount, source)
-    end
-  end
-
-  def remove_minion_damage_hook(spell)
-    on_minion_damage_hooks.delete spell
-  end
-
-  def remove_death_hook(spell)
-    on_death_hooks.delete spell
+  def start_game(game)
+    self.game = game
+    hook_parent = game
+    reset
   end
 
   def reset
-    @hand = Array.new
-    @minions = Array.new
-    @max_mana = 0
-    @health = 30
-    @weapon = nil
-    @spell_damage = 0
-    @global_attack_bonus = 0
-    @global_health_bonus = 0
-    @murloc_attack_bonus = 0
-    @murloc_health_bonus = 0
-    @beast_attack_bonus = 0
-    @beast_health_bonus = 0
-    @fatigue_damage = 0
-    @armour = 0
-    @on_attack_hooks = Array.new
-    @on_summon_hooks = Array.new
-    @on_death_hooks = Array.new
+    self.hand = Array.new
+    self.minions = MinionGroup.new
+    self.max_mana = 0
+    self.health = 30
+    self.weapon = nil
+    self.spell_damage = 0
+    self.fatigue_damage = 0
+    self.armour = 0
     @game = nil
     @deck.init_cards
   end
 
-  def add_armour(amount)
-    @armour += amount
+  def initialize(opts = {})
+    super
+    @deck = Decks.get(name: opts[:deck])
+    if opts[:opponent]
+      @opponent = opts[:opponent]
+      @opponent.opponent = self
+    end
+    @max_health = 30
+    @wins = 0
+    self.reset
   end
 
-  def add_global_bonus(attack_bonus, health_bonus)
-    @global_attack_bonus += attack_bonus
-    @global_health_bonus += health_bonus
+  def start_turn
+    super
+    self.max_mana += 1
+    self.mana = self.max_mana
     self.minions.each do |minion|
-      minion.add_attack attack_bonus
-      minion.add_max_health health_bonus
+      minion.start_turn
+    end
+    self.cards_played = 0
+  end
+
+  def end_turn
+    super
+    @minions.each do |minion|
+      minion.end_turn
     end
   end
 
-  def add_murloc_bonus(attack_bonus, health_bonus)
-    @murloc_attack_bonus += attack_bonus
-    @murloc_health_bonus += health_bonus
-    self.minions.select {|minion| minion.type == 'Murloc'}.each do |minion|
-      minion.add_attack attack_bonus
-      minion.add_max_health health_bonus
+  ##############################
+  # target selection / bonuses #
+  ##############################
+  def add_temporary_attack_to_minion(amount)
+    target = choose_bonus_minion attacK: amount, health: 0
+    if target
+      target.temporary_attack += amount
     end
   end
 
-  def add_beast_health_bonus(attack_bonus, health_bonus)
-    @beast_attack_bonus += attack_bonus
-    @beast_health_bonus += health_bonus
-    self.minions.select {|minion| minion.type == 'Beast'}.each do |minion|
-      minion.add_attack attack_bonus
-      minion.add_max_health health_bonus
+  def random_target(opts = {})
+    targets = opponent.minions.targetable(opts)
+    if opts[:include_friendly]
+      targets.concat minions.targetable(opts)
+    elsif opts[:include_opponent]
+      targets << opponent
+    elsif opts[:include_self]
+      tagets << self
+    end
+    targets.shuffle.first
+  end
+
+  def cast_damage_spell(opts = {})
+    best_target(opts).deal_damage(opts[:damage])
+  end
+
+  def swap_minion_stats
+    target = choose_best_stat_swap_minion
+    if target
+      temp = target.attack
+      target.attack = target.max_health
+      target.max_health = temp
+    end
+  end
+
+  def grant_minion_bonus(opts = {})
+    target = choose_bonus_minion(opts)
+    if target
+      target.attack += opts[:attack] if opts[:attack]
+      target.max_health += opts[:health] if opts[:health]
+    end
+  end
+
+  def grant_adjacent_bonus(opts = {})
+    targets = choose_adjacent_targets(opts)
+    if targets and targets.size > 0
+      targets.each do
+        target.attack += opts[:attack] if opts[:attack]
+        target.max_health += opts[:health] if opts[:health]
+        target.taunt = opts[:taunt] if opts[:taunt]
+      end
+    end
+  end
+
+  def targets
+    Array.new.concat(minions) << self
+  end
+
+  ######################################
+  # player specific stat functionality #
+  ######################################
+
+  def armour=(amount)
+    amount = 0 if amount < 0
+    @armour = amount
+  end
+
+  def attack
+    result = super
+    if weapon
+      result += weapon.attack
+    end
+  end
+
+  def deal_damage(opts = {})
+    result = fire_hook(:attack, { source: self }.merge(opts))
+    opts[:damage] -= result
+    opts[:damage] -= armour
+    opts[:damage] = 0 if opts[:damage] < 0
+    self.armour -= opts[:damage]
+    super
+  end
+
+  ###################
+  # card management #
+  ###################
+
+  def add_card(card)
+    if Card === card
+      hand << card
+    else
+      hand.concat card
+    end
+  end
+
+  def play_card(card)
+    if hande.include? card
+      card.play self
+      hand.delete card
     end
   end
 
@@ -133,47 +166,12 @@ class Player
     self.hand.delete card
   end
 
-  def add_spell_damage(amount)
-    @spell_damage += amount
-  end
-
-  def choose_bonus_minion(attack_bonus = nil, health_bonus = nil)
-    @minions.first
-  end
-
-  def grant_minion_bonus(attack_bonus = '0', health_bonus = '0')
-    health_int = health_bonus.to_i
-    attack_int = attack_bonus.to_i
-    bonus_minion = self.choose_bonus_minion(attack_int, health_int)
-    bonus_minion.add_max_health(health_int)
-    bonus_minion.add_attack(attack_int)
-  end
-
-  def set_opponent(opponent)
-    @opponent = opponent
-  end
-
-  def set_weapon(weapon)
-    @weapon = weapon
-  end
-
-  def add_minion(minion)
-    @minions << minion
-    on_summon_hooks.each do |hooker|
-      hooker.on_summon(self, minion)
-    end
-  end
-
-  def destroy_minion(minion)
-    @minions.delete(minion)
-  end
-
   def draw(amount = 1)
     result = deck.draw(amount)
     if result.size < amount
       (amount - result.size).times { self.fatigue_damage }
     end
-    hand.concat deck.draw(amount)
+    hand.concat result
     result
   end
 
@@ -182,146 +180,24 @@ class Player
     self.deal_damage(@fatigue_damage)
   end
 
-  def remove_attack_hook(spell)
-    self.on_attack_hooks.delete spell
+  #####################
+  # minion management #
+  #####################
+
+  def add_minion(minion)
+    minions << minion
+    minion.minion_group = minions
+    spell_damage += minion.spell_damage
+    $game.fire_hook :summon, source: self, minion: minion
   end
 
-  def remove_summon_hook(spell)
-    self.on_summon_hooks.delete spell
+  def return_minion_to_hand(minion)
+    add_card Cards.get(name: minion.name)
+    minions.delete minion
   end
 
-  def silenced_minion_hook(minion)
-    on_summon_hooks.each do |hooker|
-      if hooker == minion
-        on_summon_hooks.delete hooker
-      end
-    end
-    on_attack_hooks.each do |hooker|
-      if hooker == minion
-        on_summon_hooks.delete hooker
-      end
-    end
-  end
-
-  def best_silence_target
-    self.opponent.minions.shuffle.first
-  end
-
-  def deal_damage(amount, source=nil)
-    if self.on_attack_hooks.size > 0
-      self.on_attack_hooks.each do |hooker|
-        amount -= hooker.on_attack(self, amount, source)
-      end
-    end
-    if amount.nil?
-      amount = 0
-    end
-    if amount <= 0
-      return 0
-    end
-    if self.armour > 0
-      overage = amount - self.armour
-      if overage > 0
-        super(overage, source)
-      end
-      self.armour -= amount
-      if self.armour < 0
-        self.armour = 0
-      end
-    else
-      super
-    end
-  end
-
-  def add_card(card)
-    if Array === card
-      hand.concat card
-    else
-      hand << card
-    end
-  end
-
-  def choose_best_card(cards)
-    cards.shuffle.first
-  end
-
-  def add_mana(amount = 1)
-    @mana += 1
-  end
-
-  def add_mana_crystal(amount = 1)
-    @max_mana += amount
-  end
-
-  def dead?
-    @health <= 0
-  end
-
-  def remove_mana(amount)
-    @mana -= amount
-  end
-
-  def start_round
-    @mana = @max_mana
-    @minions.each do |minion|
-      minion.start_round
-    end
-    @cards_played = 0
-    super
-  end
-
-  def end_turn
-    super
-    @minions.each do |minion|
-      minion.end_turn
-    end
-  end
-
-  def attack
-    if weapon
-      @attack + weapon.attack
-    else
-      @attack
-    end
-  end
-
-  def mulligan
-
-  end
-
-  def determine_targets(evades_taunt=false)
-    available_targets = Array.new
-    if not evades_taunt
-      @opponent.minions.each do |minion|
-        if minion.taunt?
-          available_targets << minion
-        end
-      end
-    end
-    if available_targets.length == 0
-      available_targets << @opponent
-      available_targets.concat @opponent.minions
-    end
-    available_targets.delete_if {|target| target.minion? and target.stealth?}
-    available_targets
-  end
-
-  def best_target(damage, evades_taunt=false)
-    random_target(evades_taunt)
-  end
-
-  def best_smurfing_target
-    random_target(true, false)
-  end
-
-  def random_target(evades_taunt=false, include_opponent=true)
-    targets = @opponent.minions.dup
-    if include_opponent
-      targets << @opponent
-    end
-    targets.shuffle.first
-  end
-
-  def play
+  def destroy_minion(minion)
+    spell_damage -= minion.spell_damage
+    minions.delete minion
   end
 end

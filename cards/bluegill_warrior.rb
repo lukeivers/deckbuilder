@@ -2,13 +2,13 @@ require './cards/minion'
 
 class BluegillWarrior < Minion
   def initialize
-    @name = "Bluegill Warrior"
-    @cost = 2
-    @attack = 2
-    @max_health = 1
-    @charge = true
-    @type = 'Murloc'
     super
+    self.name = "Bluegill Warrior"
+    self.cost = 2
+    self.attack = 2
+    self.max_health = 1
+    self.charge = true
+    self.type = 'Murloc'
   end
 
 end

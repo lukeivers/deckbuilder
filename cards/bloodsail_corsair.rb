@@ -2,18 +2,18 @@ require './cards/minion'
 
 class BloodsailCorsair < Minion
   def initialize
-    @cost = 1
-    @attack = 1
-    @max_health = 2
-    @name = "Bloodsail Corsair"
     super
+    self.cost = 1
+    self.attack = 1
+    self.max_health = 2
+    self.name = "Bloodsail Corsair"
   end
 
-  def play(player)
+  def battlecry
     super
-    weapon = self.owner.opponent.weapon
+    weapon = owner.opponent.weapon
     if weapon
-      weapon.add_durability(-1)
+      weapon.durability -= 1
     end
 	end
 end

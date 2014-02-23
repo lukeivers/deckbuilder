@@ -2,17 +2,17 @@ require './cards/minion'
 
 class ArcaneGolem < Minion
   def initialize
-    @name = "Arcane Golem"
-    @cost = 3
-    @attack = 4
-    @max_health = 2
-    @charge = true
     super
+    self.name = "Arcane Golem"
+    self.cost = 3
+    self.attack = 4
+    self.max_health = 2
+    self.charge = true
   end
 
-  def play(player)
+  def battlecry
     super
-    owner.opponent.add_mana_crystal(1)
+    owner.opponent.max_mana += 1
   end
 
 end

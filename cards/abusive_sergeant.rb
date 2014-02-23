@@ -2,20 +2,16 @@ require './cards/minion'
 
 class AbusiveSergeant < Minion
   def initialize
-    @name = "Abusive Sergeant"
-    @cost = 1
-    @attack = 2
-    @max_health = 1
     super
+    self.name = 'Abusive Sergeant'
+    self.description = 'Give a minion +2 attack this turn'
+    self.cost = 1
+    self.attack = 2
+    self.max_health = 1
   end
 
-  def play(player)
+  def battlecry
     super
-    target = self.owner.choose_bonus_minion(2, 0)
-    if target
-      target.add_temporary_attack(2)
-    end
-
-    #Give a minion +2 attack this turn
+    owner.add_temporary_attack_to_minion 2
   end
 end

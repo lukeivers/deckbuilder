@@ -2,14 +2,14 @@ require './cards/spell'
 
 class Fireball < Spell
   def initialize
-    @cost = 4
-    @name = 'Fireball'
-    @damage = 6
-    @deck_class = 'Mage'
+    self.cost = 4
+    self.name = 'Fireball'
+    self.damage = 6
+    self.deck_class = 'Mage'
     super
   end
-  def play(player)
-    damage = @damage + player.spell_damage
+  def battlecry
+    damage = self.damage + player.spell_damage
     player.best_target(damage, true).deal_damage(damage)
   end
 end

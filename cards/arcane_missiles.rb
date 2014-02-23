@@ -2,16 +2,16 @@ require './cards/spell'
 
 class ArcaneMissiles < Spell
   def initialize
-    @cost = 1
-    @name = 'Arcane Missiles'
-    @damage = 1
-    @deck_class = 'Mage'
     super
+    self.cost = 1
+    self.name = 'Arcane Missiles'
+    self.damage = 1
+    self.deck_class = 'Mage'
   end
-  def play(player)
-    super
+
+  def battlecry
     3.times do
-      player.random_target(true).deal_damage(@damage + player.spell_damage)
+      owner.random_target(evades_taunt: true).deal_damage damage
     end
   end
 end

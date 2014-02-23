@@ -2,15 +2,21 @@ require './cards/minion'
 
 class BloodKnight < Minion
   def initialize
-    @cost = 3
-    @attack = 3
-    @max_health = 3
-    @name = "Blood Knight"
     super
+    self.cost = 3
+    self.attack = 3
+    self.max_health = 3
+    self.name = "Blood Knight"
   end
 
-  def play(player)
+  def battlecry
     super
-	#All minions lose Divine Shield.  Gain +3/+3 for each Shield lost
-  end
+    targets = Array.new.concat(owner.minions).concat(owner.opponent.minions)
+    targets.select {|target| target.divine_shield}
+    targets.each do |target|
+      target.divine_shield = false
+      attack += 3
+      max_health += 3
+    end
+	end
 end

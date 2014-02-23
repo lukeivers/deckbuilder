@@ -1,15 +1,11 @@
 require './cards/spell'
 
-class Backstab < Spell
+class Backstab < DamageSpell
   def initialize
-    @cost = 0
-    @name = 'Backstab'
-    @damage = 2
-    @deck_class = 'Rogue'
+    self.cost = 0
+    self.name = 'Backstab'
+    self.damage = 2
+    self.deck_class = 'Rogue'
     super
   end
-  def play(player)
-    super
-    self.owner.best_target(self.damage, true).deal_damage(self.damage)
-	end
-  end
+end

@@ -2,10 +2,10 @@ require './cards/minion'
 
 class HarvestGolem < Minion
   def initialize
-    @cost = 3
-    @name = 'Harvest Golem'
-    @attack = 2
-    @max_health = 3
+    self.cost = 3
+    self.name = 'Harvest Golem'
+    self.attack = 2
+    self.max_health = 3
     super
   end
 

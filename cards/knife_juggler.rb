@@ -2,15 +2,15 @@ require './cards/minion'
 
 class KnifeJuggler < Minion
   def initialize
-    @name = "Knife Juggler"
-    @cost = 2
-    @attack = 3
-    @max_health = 2
+    self.name = "Knife Juggler"
+    self.cost = 2
+    self.attack = 3
+    self.max_health = 2
 	  #After you summon a minion, deal 1 damage to a random enemy
     super
   end
 
-  def play(player)
+  def battlecry
     super
     owner.add_summon_hook(self)
   end

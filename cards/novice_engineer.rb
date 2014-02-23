@@ -2,13 +2,13 @@ require './cards/minion'
 
 class NoviceEngineer < Minion
   def initialize
-    @cost = 2
-    @attack = 1
-    @max_health = 1
-    @name = "Novice Engineer"
+    self.cost = 2
+    self.attack = 1
+    self.max_health = 1
+    self.name = "Novice Engineer"
     super
   end
-  def play(player)
+  def battlecry
     super
     player.draw(1)
   end

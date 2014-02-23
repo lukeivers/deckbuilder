@@ -1,90 +1,106 @@
+require './hookable'
+
 module Character
   attr_accessor :health, :max_health, :attack, :frozen, :thawing, :name, :temporary_attack
 
   def initialize(opts = {})
-    @health = @max_health
-    @health_hoooks = Array.new
-    @temporary_attack = 0
-    @frozen = false
-    @thawing = false
+    self.attack = 0
+    self.temporary_attack = 0
+    self.max_health = 0
+    self.frozen = false
+    self.thawing = false
   end
 
-  def deal_damage(amount, source = nil)
-    Logger.log self.name + ' was dealt ' + amount.to_s + ' damage'  + (source.nil? ? '.' : ' from ' + source.name + '.')
-    @health -= amount
-    if health <= 0
-      self.die
+  def start_turn
+    if frozen and not thawing
+      thawing = true
+    elsif thawing
+      thaw
     end
-    amount
   end
 
   def end_turn
-    if @temporary_attack > 0
-      @attack -= @temporary_attack
-      @temporary_attack = 0
+    if temporary_attack > 0
+      attack -= temporary_attack
+      temporary_attack = 0
     end
   end
 
-  def freeze
-    @frozen = true
-  end
+  ##############################
+  # custom setters and getters #
+  ##############################
 
-  def frozen?
-    @frozen
-  end
-
-  def thaw
-    @frozen = false
-    @thawing = false
-  end
-
-  def start_round
-    if @frozen and not @thawing
-      @thawing = true
-    elsif @thawing
-      self.thaw
+  def health=(amount)
+    if amount <= 0
+      die
     end
+    @health = amount
   end
 
-  def attack_target(target)
-    Logger.log self.name + ' is attacking ' + target.name
-    damage = target.deal_damage(self.attack, self)
-    if target.minion?
-      self.deal_damage(target.attack, target)
+  def max_health=(amount)
+    differential = max_health - amount
+    @max_health = amount
+    health -= differential
+  end
+
+  def attack
+    @attack + @temporary_attack
+  end
+
+  ##########
+  # combat #
+  ##########
+
+  def attacked(opts = {})
+    Logger.log self.name + ' was attacked by ' + (opts[:source].nil? ? '.' : opts[:source].name + '.')
+    deal_damage damage: opts[:damage], source: opts[:source]
+    if opts[:response].nil?
+      attack_target target: opts[:source], response: true
     end
-    Logger.log @owner.name + '\'s ' + self.name + ' attacked ' + target.name + ' for ' + damage.to_s + '.'
-    damage
-  end
-
-  def add_attack(amount)
-    @attack += amount
-  end
-
-  def add_temporary_attack(amount)
-    @attack += amount
-    @temporary_attack += amount
   end
 
   def can_attack?
-    possible = true
-    possible = false if frozen?
-    possible
+    not frozen?
   end
 
-  def add_health(amount)
-    self.health_hooks.each {|hooker| hooker.on_heal}
-    @health += amount
+  def attack_target(opts = {})
+    Logger.log self.name + ' is attacking ' + opts[:target].name
+    opts[:target].attacked(damage: attack, source: self, response: opts[:response])
   end
 
-  def dead?
-    @health <= 0
+  def deal_damage(opts = {})
+    Logger.log self.name + ' was dealt ' + opts[:damage].to_s + ' damage'  + (opts[:source].nil? ? '.' : opts[:source].name + '.')
+    self.health -= opts[:damage]
+    opts[:damage]
   end
+
+  def die
+    Logger.log self.name + ' died.'
+    $game.fire_hook :death, source: self
+  end
+
+  ############
+  # freezing #
+  ############
+
+  def freeze
+    frozen = true
+  end
+
+  def thaw
+    frozen = false
+    thawing = false
+  end
+
+  #################
+  # miscellaneous #
+  #################
 
   def minion?
     false
   end
 
-  def die
-    Logger.log self.name + ' died.'
+  def dead?
+    health <= 0
   end
 end

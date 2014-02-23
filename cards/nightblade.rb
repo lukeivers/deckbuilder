@@ -2,14 +2,14 @@ require './cards/minion'
 
 class Nightblade < Minion
   def initialize
-    @name = "Nightblade"
-    @cost = 5
-    @attack = 4
-    @max_health = 4
+    self.name = "Nightblade"
+    self.cost = 5
+    self.attack = 4
+    self.max_health = 4
     super
   end
 
-  def play(player)
+  def battlecry
     super
     owner.opponent.deal_damage(3)
 	end

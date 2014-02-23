@@ -2,12 +2,20 @@ require './cards/minion'
 
 class AlarmOBot < Minion
   def initialize
-    @cost = 3
-    @name = 'Alarm-o-Bot'
-    @attack = 0
-    @max_health = 3
-	#At the start of your turn, swap this minion with a random one in your hand.
     super
+    self.cost = 3
+    self.name = 'Alarm-o-Bot'
+    self.attack = 0
+    self.max_health = 3
+	end
+
+  def start_turn
+    super
+    replacement = owner.hand.shuffle.find {|card| card.minion?}
+    if replacement
+      owner.play_card(replacement)
+      owner.return_minion_to_hand(self)
+    end
   end
 
 end

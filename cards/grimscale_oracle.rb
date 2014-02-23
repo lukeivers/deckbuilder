@@ -2,15 +2,15 @@ require './cards/minion'
 
 class GrimscaleOracle < Minion
   def initialize
-    @name = "Grimscale Oracle"
-    @cost = 1
-    @attack = 1
-    @max_health = 1
-	  @type = 'Murloc'
+    self.name = "Grimscale Oracle"
+    self.cost = 1
+    self.attack = 1
+    self.max_health = 1
+	  self.type = 'Murloc'
 	  super
   end
 
-  def play(player)
+  def battlecry
     super
     self.owner.add_murloc_bonus(1, 0)
     self.owner.opponent.add_murloc_bonus(1, 0)

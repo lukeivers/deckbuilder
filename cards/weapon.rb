@@ -1,20 +1,21 @@
 require './card'
 
 class Weapon < Card
-  attr_accessor :attack, :owner, :durability
+  attr_accessor :attack, :durability
 
   def play(player)
-    @owner = player
-    @owner.set_weapon(self)
     super
+    owner.weapon = self
   end
 
   def destruct
-    owner.set_weapon(nil)
+    owner.weapon = nil
   end
 
-  def add_attack(amount)
-    @attack += amount
+  def durability=(amount)
+    if amount <= 0
+      destruct
+    end
+    self.durability = amount
   end
-
 end

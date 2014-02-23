@@ -2,12 +2,12 @@ require './cards/minion'
 
 class DefiasBandit < Minion
   def initialize
-    @name = "Defias Bandit"
-    @cost = 0
-    @attack = 2
-    @max_health = 1
-    @deck_class = 'Rogue'
     super
+    self.name = "Defias Bandit"
+    self.cost = 0
+    self.attack = 2
+    self.max_health = 1
+    self.deck_class = 'Rogue'
   end
 
 end

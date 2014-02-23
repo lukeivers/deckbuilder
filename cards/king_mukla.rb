@@ -2,16 +2,16 @@ require './cards/minion'
 
 class KingMukla < Minion
   def initialize
-    @name = "King Mukla"
-    @cost = 3
-    @attack = 5
-    @max_health = 5
-	  @legendary = true
-	@type = 'Beast'
+    self.name = "King Mukla"
+    self.cost = 3
+    self.attack = 5
+    self.max_health = 5
+	  self.legendary = true
+	self.type = 'Beast'
     super
   end
 
-  def play(player)
+  def battlecry
     super
 	#Give your opponent 2 Bananas.
 	end

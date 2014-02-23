@@ -2,16 +2,17 @@ require './cards/spell'
 
 class DeadlyPoison < Spell
   def initialize
-    @cost = 1
-    @name = 'Deadly Poison'
-    @deck_class = 'Rogue'
     super
+    self.cost = 1
+    self.name = 'Deadly Poison'
+    self.deck_class = 'Rogue'
   end
-  def play(player)
+
+  def battlecry
     super
-    weapon = self.owner.weapon
+    weapon = owner.weapon
     if weapon
-      weapon.add_attack(2)
+      weapon.attack += 2
     end
 	end
-  end
+end

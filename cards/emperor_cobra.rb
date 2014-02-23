@@ -2,11 +2,11 @@ require './cards/minion'
 
 class EmperorCobra < Minion
   def initialize
-    @cost = 3
-    @name = 'Emperor Cobra'
-    @attack = 2
-    @max_health = 3
-	@type = 'Beast'
+    self.cost = 3
+    self.name = 'Emperor Cobra'
+    self.attack = 2
+    self.max_health = 3
+	self.type = 'Beast'
     super
   end
   def attack_target(target)

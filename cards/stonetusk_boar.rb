@@ -2,11 +2,11 @@ require './cards/minion'
 
 class StonetuskBoar < Minion
   def initialize
-    @name = "Stonetusk Boar"
-    @cost = 1
-    @attack = 1
-    @max_health = 1
-    @charge = true
+    self.name = "Stonetusk Boar"
+    self.cost = 1
+    self.attack = 1
+    self.max_health = 1
+    self.charge = true
     super
   end
 

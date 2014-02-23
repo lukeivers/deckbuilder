@@ -2,11 +2,11 @@ require './cards/minion'
 
 class Imp < Minion
   def initialize
-    @cost = 1
-    @attack = 1
-    @max_health = 1
-    @name = "Imp"
-	  @type = 'Demon'
+    self.cost = 1
+    self.attack = 1
+    self.max_health = 1
+    self.name = "Imp"
+	  self.type = 'Demon'
     super
   end
 

@@ -2,11 +2,11 @@ require './cards/minion'
 
 class ArgentSquire < Minion
   def initialize
-    @name = "Argent Squire"
-    @cost = 1
-    @attack = 1
-    @max_health = 1
-    @divine_shield = true
+    self.name = "Argent Squire"
+    self.cost = 1
+    self.attack = 1
+    self.max_health = 1
+    self.divine_shield = true
     super
   end
 

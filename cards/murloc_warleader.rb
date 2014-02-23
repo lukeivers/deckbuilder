@@ -2,15 +2,15 @@ require './cards/minion'
 
 class MurlocWarleader < Minion
   def initialize
-    @name = "Murloc Warleader"
-    @cost = 3
-    @attack = 3
-    @max_health = 3
-	  @type = 'Murloc'
+    self.name = "Murloc Warleader"
+    self.cost = 3
+    self.attack = 3
+    self.max_health = 3
+	  self.type = 'Murloc'
     super
   end
 
-  def play(player)
+  def battlecry
     super
     self.owner.add_murloc_bonus(2, 1)
     self.owner.opponent.add_murloc_bonus(2, 1)

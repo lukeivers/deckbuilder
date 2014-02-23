@@ -1,7 +1,7 @@
 require './player'
 
 class AggroBot < Player
-  def initialize
+  def initialize(opts = {})
     @name = 'Aggro Bot'
     super
   end
@@ -16,9 +16,9 @@ class AggroBot < Player
     super
   end
 
-  def choose_bonus_minion(attack_bonus, health_bonus)
+  def choose_bonus_minion(opts = {})
     bonus_minion = @minions.sort {|a, b| a.health <=> b.health}.last
-    if health_bonus > 0
+    if opts[:health] > 0
       bonus_minion = @minions.sort {|a, b| a.health <=> b.health}.first
     end
     bonus_minion
@@ -47,7 +47,6 @@ class AggroBot < Player
   end
 
   def mulligan
-    super
     #one_mana = nil
     #two_mana = nil
     #three_mana = nil

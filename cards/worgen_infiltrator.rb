@@ -2,11 +2,11 @@ require './cards/minion'
 
 class WorgenInfiltrator < Minion
   def initialize
-    @name = "Worgen Infiltrator"
-    @cost = 1
-    @attack = 2
-    @max_health = 1
-    @stealth = true
+    self.name = "Worgen Infiltrator"
+    self.cost = 1
+    self.attack = 2
+    self.max_health = 1
+    self.stealth = true
     super
   end
 

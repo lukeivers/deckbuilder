@@ -2,10 +2,10 @@ require './cards/minion'
 
 class Wisp < Minion
   def initialize
-    @cost = 0
-    @attack = 1
-    @max_health = 1
-    @name = "Wisp"
+    self.cost = 0
+    self.attack = 1
+    self.max_health = 1
+    self.name = "Wisp"
     super
   end
 

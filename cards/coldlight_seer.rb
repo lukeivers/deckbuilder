@@ -2,19 +2,18 @@ require './cards/minion'
 
 class ColdlightSeer < Minion
   def initialize
-    @name = "Coldlight Seer"
-    @cost = 3
-    @attack = 2
-    @max_health = 3
-	  @type = 'Murloc'
     super
+    self.name = "Coldlight Seer"
+    self.cost = 3
+    self.attack = 2
+    self.max_health = 3
+	  self.type = 'Murloc'
   end
 
-  def play(player)
+  def battlecry
     super
-    self.owner.minions.select {|minion| minion != self}.concat(self.owner.opponent.minions).
-        select {|minion| minion.type == 'Murloc'}.each {|minion| minion.add_max_health(2)}
-	  #Give ALL other Murlocs +2 health
+    owner.minions.select {|minion| minion != self}.concat(self.owner.opponent.minions).
+        select {|minion| minion.type == 'Murloc'}.each {|minion| minion.max_health += 2}
   end
 
 end

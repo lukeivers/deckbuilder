@@ -2,13 +2,13 @@ require './cards/minion'
 
 class GnomishInventor < Minion
   def initialize
-    @cost = 4
-    @name = 'Gnomish Inventor'
-    @attack = 2
-    @max_health = 4
+    self.cost = 4
+    self.name = 'Gnomish Inventor'
+    self.attack = 2
+    self.max_health = 4
     super
   end
-  def play(player)
+  def battlecry
     super
     player.draw(1)
   end

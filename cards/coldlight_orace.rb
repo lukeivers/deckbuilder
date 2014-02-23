@@ -2,17 +2,18 @@ require './cards/minion'
 
 class ColdlightOracle < Minion
   def initialize
-    @name = "Coldlight Oracle"
-    @cost = 3
-    @attack = 2
-    @max_health = 2
-	  @type = 'Murloc'
     super
+    self.name = "Coldlight Oracle"
+    self.cost = 3
+    self.attack = 2
+    self.max_health = 2
+	  self.type = 'Murloc'
   end
 
-  def play(player)
+  def battlecry
     super
-	#Each player draws 2 cards.
+    owner.draw 2
+    owner.opponent.draw 2
   end
 
 end

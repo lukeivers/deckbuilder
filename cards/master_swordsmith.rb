@@ -2,10 +2,10 @@ require './cards/minion'
 
 class MasterSwordsmith < Minion
   def initialize
-    @name = "Master Swordsmith"
-    @cost = 2
-    @attack = 1
-    @max_health = 3
+    self.name = "Master Swordsmith"
+    self.cost = 2
+    self.attack = 1
+    self.max_health = 3
 	  super
   end
 

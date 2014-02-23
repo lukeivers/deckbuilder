@@ -2,18 +2,17 @@ require './cards/minion'
 
 class ArathiWeaponsmith < Minion
   def initialize
-    @cost = 4
-    @attack = 3
-    @max_health = 3
-    @name = "Arathi Weaponsmith"
-    @deck_class = 'Warrior'
     super
+    self.cost = 4
+    self.attack = 3
+    self.max_health = 3
+    self.name = "Arathi Weaponsmith"
+    self.deck_class = 'Warrior'
   end
 
-  def play(player)
-	  super
-    owner.set_weapon(Weapon.new(attack: 2, durability: 2))
-	  #Equip a 2/2 weapon
+  def battlecry
+    super
+	  owner.weapon = Weapon.new(attack: 2, durability: 2, owner: owner)
   end
 
 end

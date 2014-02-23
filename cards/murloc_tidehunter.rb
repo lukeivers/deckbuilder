@@ -2,15 +2,15 @@ require './cards/minion'
 
 class MurlocTidehunter < Minion
   def initialize
-    @name = "Murloc Tidehunter"
-    @cost = 2
-    @attack = 2
-    @max_health = 1
-	  @type='Murloc'
+    self.name = "Murloc Tidehunter"
+    self.cost = 2
+    self.attack = 2
+    self.max_health = 1
+	  self.type='Murloc'
     super
   end
 
-  def play(player)
+  def battlecry
     super
     self.owner.summon(Cards.get('Murloc Scout').first)
   end

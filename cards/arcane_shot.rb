@@ -1,15 +1,11 @@
-require './cards/spell'
+require './cards/damage_spell'
 
-class ArcaneShot < Spell
+class ArcaneShot < DamageSpell
   def initialize
-    @cost = 1
-    @name = 'Arcane Shot'
-    @damage = 2
-    @deck_class = 'Hunter'
     super
-  end
-  def play(player)
-    super
-    player.best_target(self.damage, true).deal_damage(self.damage)
+    self.cost = 1
+    self.name = 'Arcane Shot'
+    self.damage = 2
+    self.deck_class = 'Hunter'
   end
 end

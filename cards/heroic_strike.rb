@@ -2,12 +2,12 @@ require './cards/spell'
 
 class HeroicStrike < Spell
   def initialize
-    @cost = 2
-    @name = 'Heroic Strike'
-    @deck_class = 'Warrior'
+    self.cost = 2
+    self.name = 'Heroic Strike'
+    self.deck_class = 'Warrior'
     super
   end
-  def play(player)
+  def battlecry
     super
     owner.add_temporary_attack(4)
 	end

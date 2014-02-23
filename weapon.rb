@@ -1,12 +1,20 @@
 class Weapon
-  attr_accessor :attack, :durability
+  attr_accessor :attack, :durability, :owner
 
   def initialize(opts = {})
-    @attack = opts[:attack]
-    @durability = opts[:durability]
+    self.attack = opts[:attack]
+    self.durability = opts[:durability]
+    self.owner = opts[:owner]
   end
 
-  def add_attack(amount)
-    @attack += amount
+  def destruct
+    owner.weapon = nil
+  end
+
+  def durability=(amount)
+    if amount <= 0
+      destruct
+    end
+    @durability = amount
   end
 end

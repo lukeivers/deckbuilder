@@ -1,7 +1,7 @@
 require './player'
 
 class SimpleBot < Player
-  def initialize
+  def initialize(opts = {})
     @name = 'Simple Bot'
     super
   end
@@ -16,24 +16,51 @@ class SimpleBot < Player
     super
   end
 
-  def choose_bonus_minion(attack_bonus, health_bonus)
+  def choose_bonus_minion(opts = {})
     bonus_minion = @minions.sort {|a, b| a.health <=> b.health}.last
-    if health_bonus > 0
+    if opts[:health] > 0
       bonus_minion = @minions.sort {|a, b| a.health <=> b.health}.first
     end
     bonus_minion
   end
 
-  def best_target(damage, evades_taunt=false)
-    targets = determine_targets(evades_taunt)
-    targets.sort {|a, b| a.health <=> b.health}
-    target = targets[0]
-    targets.each do |potential_target|
-      if potential_target.health <= damage
-        target = potential_target
+  def choose_adjacent_targets(opts = {})
+    index = minions.find_index(self)
+    m1 = nil
+    m2 = nil
+    if index == 0
+      if minions.size > 1
+        m1 = minions[1]
+        if minions.size > 2
+          m2 = self.owner.minions[-1]
+        end
+      end
+    else
+      m1 = minions[index - 1]
+      if minions.size > 2
+        if index == minions.size - 1
+          m2 = minions[0]
+        else
+          m2 = minions[index + 1]
+        end
       end
     end
-    target
+    if m1
+      m1.taunt = true
+      m1.add_attack 1
+      m1.add_max_health 1
+    end
+    if m2
+      m2.taunt = true
+      m2.add_attack 1
+      m2.add_max_health 1
+    end
+  end
+
+  def best_target(opts = {})
+    targets = determine_targets(opts)
+    target = targets.sort {|a, b| a.health <=> b.health}.find {|a| a.health <= opts[:damage]}
+    target || targets.sort {|a, b| a.attack <=> b.attack}.reverse.first
   end
 
   def best_smurfing_target
@@ -44,7 +71,6 @@ class SimpleBot < Player
   end
 
   def mulligan
-    super
     #one_mana = nil
     #two_mana = nil
     #three_mana = nil

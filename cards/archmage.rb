@@ -2,11 +2,11 @@ require './cards/minion'
 
 class Archmage < Minion
   def initialize
-    @cost = 6
-    @name = 'Archmage'
-    @attack = 4
-    @max_health = 7
-    @spell_damage = 1
     super
+    self.cost = 6
+    self.name = 'Archmage'
+    self.attack = 4
+    self.max_health = 7
+    self.spell_damage = 1
   end
 end

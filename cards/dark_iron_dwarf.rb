@@ -2,14 +2,14 @@ require './cards/minion'
 
 class DarkIronDwarf < Minion
   def initialize
-    @cost = 4
-    @name = 'Dark Iron Dwarf'
-    @attack = 4
-    @max_health = 4
     super
+    self.cost = 4
+    self.name = 'Dark Iron Dwarf'
+    self.attack = 4
+    self.max_health = 4
   end
-  def play(player)
+  def battlecry
     super
-    self.owner.grant_minion_bonus(2, 0)
+    owner.grant_minion_bonus attack: 2
   end
 end

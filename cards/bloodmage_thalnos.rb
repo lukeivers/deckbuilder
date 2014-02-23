@@ -2,19 +2,17 @@ require './cards/minion'
 
 class BloodmageThalnos < Minion
   def initialize
-    @cost = 2
-    @name = 'Bloodmage Thalnos'
-    @attack = 1
-    @max_health = 1
-    @spell_damage = 1
-    @legendary = true
     super
+    self.cost = 2
+    self.name = 'Bloodmage Thalnos'
+    self.attack = 1
+    self.max_health = 1
+    self.spell_damage = 1
+    self.legendary = true
   end
 
-  def die
-    self.owner.draw(1)
+  def deathrattle
     super
+    self.owner.draw 1
   end
-
-
 end

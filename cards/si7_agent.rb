@@ -2,15 +2,15 @@ require './cards/minion'
 
 class SI7Agent < Minion
   def initialize
-    @name = "SI:7 Agent"
-    @cost = 3
-    @attack = 3
-    @max_health = 3
-    @deck_class = 'Rogue'
+    self.name = "SI:7 Agent"
+    self.cost = 3
+    self.attack = 3
+    self.max_health = 3
+    self.deck_class = 'Rogue'
     super
   end
 
-  def play(player)
+  def battlecry
     super
     if self.owner.cards_played > 0
       damage = 2 + self.owner.spell_damage

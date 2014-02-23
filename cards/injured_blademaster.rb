@@ -2,14 +2,14 @@ require './cards/minion'
 
 class InjuredBlademaster < Minion
   def initialize
-    @name = "Injured Blademaster"
-    @cost = 3
-    @attack = 4
-    @max_health = 7
+    self.name = "Injured Blademaster"
+    self.cost = 3
+    self.attack = 4
+    self.max_health = 7
     super
   end
 
-  def play(player)
+  def battlecry
     super
 	#Deal 3 damage to HIMSELF.
   end

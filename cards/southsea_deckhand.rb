@@ -2,10 +2,10 @@ require './cards/minion'
 
 class SouthseaDeckhand < Minion
   def initialize
-    @name = "Southsea Deckhand"
-    @cost = 1
-    @attack = 2
-    @max_health = 1
+    self.name = "Southsea Deckhand"
+    self.cost = 1
+    self.attack = 2
+    self.max_health = 1
     super
   end
 

@@ -2,12 +2,12 @@ require './cards/minion'
 
 class DalaranMage < Minion
   def initialize
-    @cost = 3
-    @name = 'Dalaran Mage'
-    @attack = 1
-    @max_health = 4
-    @spell_damage = 1
     super
+    self.cost = 3
+    self.name = 'Dalaran Mage'
+    self.attack = 1
+    self.max_health = 4
+    self.spell_damage = 1
   end
 
 end

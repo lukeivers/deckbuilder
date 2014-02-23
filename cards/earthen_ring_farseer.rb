@@ -2,14 +2,14 @@ require './cards/minion'
 
 class EarthenRingFarseer < Minion
   def initialize
-    @name = "Earthen Ring Farseer"
-    @cost = 3
-    @attack = 3
-    @max_health = 3
+    self.name = "Earthen Ring Farseer"
+    self.cost = 3
+    self.attack = 3
+    self.max_health = 3
     super
   end
 
-  def play(player)
+  def battlecry
     super
 	#Restore 3 Health.
   end

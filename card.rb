@@ -1,10 +1,12 @@
 require './logger'
 
 class Card
-  attr_accessor :name, :cost, :deck_class
+  attr_accessor :owner, :name, :cost, :deck_class, :description
 
   def play(player)
-    player.remove_mana(self.cost)
+    owner = player
+    owner.mana -= self.cost
+    owner.cards_played += 1
   end
 
 end

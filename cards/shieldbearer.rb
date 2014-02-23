@@ -2,11 +2,11 @@ require './cards/minion'
 
 class Shieldbearer < Minion
   def initialize
-    @taunt = true
-    @cost = 1
-    @attack = 0
-    @max_health = 4
-    @name = "Shieldbearer"
+    self.taunt = true
+    self.cost = 1
+    self.attack = 0
+    self.max_health = 4
+    self.name = "Shieldbearer"
     super
   end
 

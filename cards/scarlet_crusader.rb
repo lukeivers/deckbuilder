@@ -2,11 +2,11 @@ require './cards/minion'
 
 class ScarletCrusader < Minion
   def initialize
-    @name = "Scarlet Crusader"
-    @cost = 3
-    @attack = 3
-    @max_health = 1
-    @divine_shield = true
+    self.name = "Scarlet Crusader"
+    self.cost = 3
+    self.attack = 3
+    self.max_health = 1
+    self.divine_shield = true
     super
   end
 

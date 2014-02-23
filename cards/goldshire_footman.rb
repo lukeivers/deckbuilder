@@ -2,11 +2,11 @@ require './cards/minion'
 
 class GoldshireFootman < Minion
   def initialize
-    @taunt = true
-    @cost = 1
-    @attack = 1
-    @max_health = 2
-    @name = "Goldshire Footman"
+    self.taunt = true
+    self.cost = 1
+    self.attack = 1
+    self.max_health = 2
+    self.name = "Goldshire Footman"
     super
   end
 

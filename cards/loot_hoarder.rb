@@ -2,10 +2,10 @@ require './cards/minion'
 
 class LootHoarder < Minion
   def initialize
-    @name = "Loot Hoarder"
-    @cost = 2
-    @attack = 2
-    @max_health = 1
+    self.name = "Loot Hoarder"
+    self.cost = 2
+    self.attack = 2
+    self.max_health = 1
     super
   end
 

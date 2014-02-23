@@ -2,14 +2,14 @@ require './cards/minion'
 
 class RazorfenHunter < Minion
   def initialize
-    @name = "Razorfen Hunter"
-    @cost = 3
-    @attack = 2
-    @max_health = 3
+    self.name = "Razorfen Hunter"
+    self.cost = 3
+    self.attack = 2
+    self.max_health = 3
     super
   end
 
-  def play(player)
+  def battlecry
     super
     self.owner.summon(Cards.get('Boar').first)
   end

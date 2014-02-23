@@ -2,13 +2,13 @@ require './cards/minion'
 
 class ShatteredSunCleric < Minion
   def initialize
-    @cost = 3
-    @name = 'Shattered Sun Cleric'
-    @attack = 3
-    @max_health = 2
+    self.cost = 3
+    self.name = 'Shattered Sun Cleric'
+    self.attack = 3
+    self.max_health = 2
     super
   end
-  def play(player)
+  def battlecry
     super
     player.grant_minion_bonus(1, 1)
   end

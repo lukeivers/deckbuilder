@@ -2,14 +2,14 @@ require './cards/minion'
 
 class ElvenArcher < Minion
   def initialize
-    @name = "Elven Archer"
-    @cost = 1
-    @attack = 1
-    @max_health = 1
+    self.name = "Elven Archer"
+    self.cost = 1
+    self.attack = 1
+    self.max_health = 1
     super
   end
 
-  def play(player)
+  def battlecry
     super
     target = player.best_target(1, true)
     target.deal_damage(1, self)

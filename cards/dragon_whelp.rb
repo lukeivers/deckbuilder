@@ -2,10 +2,10 @@ require './cards/minion'
 
 class DragonWhelp < Minion
   def initialize
-    @name = 'Dragon Whelp'
-    @attack = 1
-    @max_health = 1
-    @cost = 0
+    self.name = 'Dragon Whelp'
+    self.attack = 1
+    self.max_health = 1
+    self.cost = 0
     super
   end
 end

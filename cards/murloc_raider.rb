@@ -2,11 +2,11 @@ require './cards/minion'
 
 class MurlocRaider < Minion
   def initialize
-    @cost = 1
-    @attack = 2
-    @max_health = 1
-	  @type = 'Murloc'
-    @name = "Murloc Raider"
+    self.cost = 1
+    self.attack = 2
+    self.max_health = 1
+	  self.type = 'Murloc'
+    self.name = "Murloc Raider"
     super
   end
 
