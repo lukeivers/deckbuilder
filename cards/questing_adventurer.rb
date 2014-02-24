@@ -22,8 +22,8 @@ class QuestingAdventurer < Minion
 
   def on_card_played(opts = {})
     if opts[:source].owner == owner
-      attack += 1
-      max_health += 1
+      self.attack += 1
+      self.max_health += 1
     end
   end
 

@@ -16,7 +16,7 @@ class Misdirection < Secret
 
   def on_attack(opts = {})
     if opts[:target] == owner
-      owner.add_armour opts[:damage]
+      owner.armour += opts[:damage]
       owner.random_target(include_friendly: true, include_opponent: true).deal_damage(opts)
       $game.remove_hook :attacked, self
     end

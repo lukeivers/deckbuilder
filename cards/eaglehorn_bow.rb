@@ -16,7 +16,7 @@ class EaglehornBow < Weapon
   end
 
   def on_secret(opts = {})
-    durability += 1
+    self.durability += 1
   end
 
   def destruct

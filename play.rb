@@ -9,4 +9,4 @@ Logger.log 'Starting Hearthstone Deckbuilder'
 player1 = SimpleBot.new deck: 'Elven Archer'
 player2 = AggroBot.new deck: 'Murloc Warlock', opponent: player1
 
-Game.play number_of_games: 10000, game_opts: { player1: player1, player2: player2 }
+Game.play number_of_games: 1000, game_opts: { player1: player1, player2: player2 }

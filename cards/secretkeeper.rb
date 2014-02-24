@@ -20,8 +20,8 @@ class Secretkeeper < Minion
   end
 
   def on_secret_played(opts = {})
-    attack += 1
-    max_health += 1
+    self.attack += 1
+    self.max_health += 1
   end
 
 end

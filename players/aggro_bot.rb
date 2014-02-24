@@ -97,8 +97,8 @@ class AggroBot < Player
 
       @minions.each do |minion|
         if minion.can_attack?
-          target = best_target(minion.attack)
-          minion.attack_target(target)
+          target = best_target(damage: minion.attack, include_opponent: true)
+          minion.attack_target(target: target)
           if target.dead?
             if target == opponent
               break

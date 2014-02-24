@@ -2,12 +2,12 @@ require './cards/minion'
 
 class GrimscaleOracle < Minion
   def initialize
+    super
     self.name = "Grimscale Oracle"
     self.cost = 1
     self.attack = 1
     self.max_health = 1
 	  self.type = 'Murloc'
-	  super
   end
 
   def play(player)

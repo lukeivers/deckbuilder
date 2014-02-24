@@ -2,11 +2,11 @@ require './cards/minion'
 
 class ShatteredSunCleric < Minion
   def initialize
+    super
     self.cost = 3
     self.name = 'Shattered Sun Cleric'
     self.attack = 3
     self.max_health = 2
-    super
   end
 
   def battlecry

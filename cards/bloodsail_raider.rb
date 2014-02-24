@@ -13,7 +13,7 @@ class BloodsailRaider < Minion
 	  super
     weapon = owner.weapon
     if weapon
-      attack += weapon.attack
+      self.attack += weapon.attack
     end
   end
 

@@ -16,8 +16,8 @@ class KnifeJuggler < Minion
   end
 
   def on_summon(opts = {})
-    if opts[:minion] != self and owner.opponent.minions.size > 0
-      target = owner.opponent.random_target
+    if opts[:minion] != self and opts[:minion].owner == self.owner and owner.opponent.minions.size > 0
+      target = owner.random_target(include_opponent: true)
       Logger.log 'Knife Juggler\'s special dealt 1 damage to ' + target.name
       target.deal_damage damage: 1
     end

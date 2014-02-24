@@ -12,21 +12,27 @@ class OldMurkeye < Minion
 	  self.legendary = true
   end
 
-  def battlecry
+  def play(player)
     super
     $game.add_hook :summon, self
     $game.add_hook :death, self
   end
 
+  def die
+    super
+    $game.remove_hook :summon, self
+    $game.remove_hook :death, self
+  end
+
   def on_summon(opts = {})
     if opts[:minion].type == 'Murloc'
-      attack += 1
+      self.attack += 1
     end
   end
 
   def on_death(opts = {})
     if Minion === opts[:source] and opts[:source].type == 'Murloc'
-      attack -= 1
+      self.attack -= 1
     end
   end
 

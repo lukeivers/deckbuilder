@@ -10,10 +10,11 @@ class AngryChicken < Minion
   end
 
   def attack
+    result = super
     if health < max_health
-      attack + 5
+      result + 5
     else
-      attack
+      result
     end
   end
 end

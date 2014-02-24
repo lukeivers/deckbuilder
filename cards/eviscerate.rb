@@ -11,7 +11,7 @@ class Eviscerate < DamageSpell
 
   def battlecry
     if owner.cards_played > 0
-      damage = 4
+      self.damage = 4
     end
     super
   end

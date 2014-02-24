@@ -15,7 +15,7 @@ class FrothingBerserker < Minion
   end
 
   def on_minion_damage(opts = {})
-    attack += 1
+    self.attack += 1
   end
 
 end

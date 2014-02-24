@@ -12,7 +12,7 @@ class RagingWorgen < Minion
   def attack
     result = super
     if self.health < self.max_health
-      result += 1
+      result + 1
     else
       result
     end

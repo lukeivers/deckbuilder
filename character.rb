@@ -11,7 +11,7 @@ module Character
 
   def start_turn
     if frozen and not thawing
-      thawing = true
+      self.thawing = true
     elsif thawing
       thaw
     end
@@ -19,8 +19,8 @@ module Character
 
   def end_turn
     if temporary_attack > 0
-      attack -= temporary_attack
-      temporary_attack = 0
+      self.attack -= temporary_attack
+      self.temporary_attack = 0
     end
   end
 
@@ -29,11 +29,11 @@ module Character
   ##############################
 
   def health=(amount)
-    if health
+    if self.health
       if amount <= 0
         die
       end
-      if amount > health
+      if amount > self.health and $game
         $game.fire_hook :heal, target: self
       end
     end
@@ -41,9 +41,12 @@ module Character
   end
 
   def max_health=(amount)
-    if max_health and health
-      differential = max_health - amount
-      health -= differential
+    if self.max_health and self.health
+      differential = self.max_health - amount
+      self.health -= differential
+    end
+    if not health
+      @health = amount
     end
     @max_health = amount
   end
@@ -59,15 +62,14 @@ module Character
   def attacked(opts = {})
     $game.fire_hook :attacked, opts.merge({target: self})
     Logger.log self.name + ' was attacked by ' + (opts[:source].nil? ? '.' : opts[:source].name + '.')
-    result = deal_damage damage: opts[:damage], source: opts[:source]
     if opts[:response].nil?
       attack_target target: opts[:source], response: true
     end
-    result
+    deal_damage damage: opts[:damage], source: opts[:source]
   end
 
   def can_attack?
-    not frozen?
+    not frozen
   end
 
   def attack_target(opts = {})
@@ -91,12 +93,12 @@ module Character
   ############
 
   def freeze
-    frozen = true
+    self.frozen = true
   end
 
   def thaw
-    frozen = false
-    thawing = false
+    self.frozen = false
+    self.thawing = false
   end
 
   #################

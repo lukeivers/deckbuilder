@@ -14,8 +14,8 @@ class Game
     opts[:number_of_games].times do
       self.new.play(opts[:game_opts])
     end
-    puts player1.name + ' won ' + (player1.wins.to_f / number_of_games * 100).to_s + '% of the games.'
-    puts player2.name + ' won ' + (player2.wins.to_f / number_of_games * 100).to_s + '% of the games.'
+    puts opts[:game_opts][:player1].name + ' won ' + (opts[:game_opts][:player1].wins.to_f / opts[:number_of_games] * 100).to_s + '% of the games.'
+    puts opts[:game_opts][:player2].name + ' won ' + (opts[:game_opts][:player2].wins.to_f / opts[:number_of_games] * 100).to_s + '% of the games.'
   end
 
   def play(opts)
@@ -59,7 +59,6 @@ class Game
 
     Logger.log 'Adding coin card to coin toss loser'
     other_player.add_card Cards.get(name: 'The Coin')
-    puts other_player.name
 
     while game_running do
       Logger.log 'Starting turn for ' + current_player.name

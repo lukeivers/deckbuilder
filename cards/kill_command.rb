@@ -12,7 +12,7 @@ class KillCommand < Spell
   def battlecry
     super
     if owner.minions.by_type('Beast').size > 0
-      damage += 2
+      self.damage += 2
     end
     owner.cast_damage_spell damage: damage, evades_taunt: true
   end

@@ -2,12 +2,12 @@ require './cards/minion'
 
 class MurlocWarleader < Minion
   def initialize
+    super
     self.name = "Murloc Warleader"
     self.cost = 3
     self.attack = 3
     self.max_health = 3
 	  self.type = 'Murloc'
-    super
   end
 
   def play(player)

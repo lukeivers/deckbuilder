@@ -125,10 +125,10 @@ class SimpleBot < Player
     if @minions.size > 0
       @minions.each do |minion|
         if minion.can_attack?
-          targets = determine_targets
+          targets = determine_targets(damage: minion.attack, include_opponent: true)
           target = targets.find {|targ| targ.health <= minion.attack}
           target = targets.first if target == nil
-          minion.attack_target(target)
+          minion.attack_target(target: target)
           if target.dead?
             if target == opponent
               break

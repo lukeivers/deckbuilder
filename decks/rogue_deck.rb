@@ -8,7 +8,7 @@ class RogueDeck < Deck
 
   def hero_power(player)
     super
-    player.remove_mana 2
+    player.mana -= 2
     player.weapon = Weapon.new(attack: 1, durability: 2, owner: player)
   end
 end

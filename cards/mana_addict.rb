@@ -15,7 +15,7 @@ class ManaAddict < Minion
   end
 
   def on_spell_cast(opts = {})
-    temporary_attack += 2
+    self.temporary_attack += 2
   end
 
 end

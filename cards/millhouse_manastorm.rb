@@ -14,7 +14,7 @@ class MillhouseManastorm < Minion
 
   def battlecry
     super
-    old_spell_cost = owner.opponent.spell_cost
+    self.old_spell_cost = owner.opponent.spell_cost
     owner.opponent.spell_cost = -1
   end
 

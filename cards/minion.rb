@@ -23,7 +23,7 @@ class Minion < Card
 
   def start_turn
     super
-    summoning_sickness = false
+    self.summoning_sickness = false
   end
 
   ##############################
@@ -31,28 +31,40 @@ class Minion < Card
   ##############################
 
   def charge=(value)
-    summoning_sickness = false if value
+    self.summoning_sickness = false if value
     @charge = value
   end
 
   def max_health
     if minion_group
-      super + minion_group.health_bonus[:all] + minion_group.health_bonus[type] + minion_group.adjacent_health_bonus(self)
+      result = super
+      result += minion_group.health_bonus[:all]
+      if type
+        result += minion_group.health_bonus[type]
+      end
+      result += minion_group.adjacent_health_bonus(self)
     else
-      super
+      result = super
     end
+    result
   end
 
   def attack
     if minion_group
-      super + minion_group.attack_bonus[:all] + minion_group.attack_bonus[type] + minion_group.adjacent_attack_bonus(self)
+      result = super
+      result += minion_group.attack_bonus[:all]
+      if type
+        result += minion_group.attack_bonus[type]
+      end
+      result += minion_group.adjacent_attack_bonus(self)
     else
-      super
+      result = super
     end
+    result
   end
 
   def health=(amount)
-    if amount < health
+    if amount < health and $game
       $game.fire_hook :minion_damage, source: self
     end
     super
@@ -87,27 +99,27 @@ class Minion < Card
       false
     else
       if first_attack
-        second_attack = true
+        self.second_attack = true
       else
-        first_attack = true
+        self.first_attack = true
       end
       true
     end
   end
 
-  def attack_target(target)
-    super
-    stealth = false
+  def attack_target(opts = {})
+    super(opts)
+    self.stealth = false
   end
 
   def deal_damage(opts = {})
     if divine_shield
       opts[:amount] = 0
-      divine_shield = false
+      self.divine_shield = false
     end
     damage = super(opts)
     if damage > 0
-      $game.fire_hook :minion_damage, source: self, amount: amount, damage_source: source
+      $game.fire_hook :minion_damage, source: self, amount: opts[:damage], damage_source: opts[:source]
     end
     damage
   end
@@ -123,8 +135,8 @@ class Minion < Card
   ###################
 
   def silence
-    taunt = false
-    silenced = true
+    self.taunt = false
+    self.silenced = true
     $game.remove_hooks_for source: self
   end
 

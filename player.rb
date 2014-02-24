@@ -154,14 +154,19 @@ class Player
     if weapon
       result += weapon.attack
     end
+    result
   end
 
   def deal_damage(opts = {})
-    result = $game.fire_hook(:attacked, { source: self }.merge(opts))
-    opts[:damage] -= result
-    opts[:damage] -= armour
-    opts[:damage] = 0 if opts[:damage] < 0
-    self.armour -= opts[:damage]
+    if armour > 0
+      if opts[:damage] >= armour
+        opts[:damage] -= armour
+        self.armour = 0
+      else
+        self.armour -= opts[:damage]
+        opts[:damage] = 0
+      end
+    end
     super
   end
 
@@ -223,7 +228,7 @@ class Player
   end
 
   def destroy_minion(minion)
-    spell_damage -= minion.spell_damage
+    self.spell_damage -= minion.spell_damage
     minions.delete minion
   end
 end

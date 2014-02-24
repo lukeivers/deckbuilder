@@ -13,6 +13,6 @@ class FlameImp < Minion
 
   def battlecry
     super
-	  owner.deal_damage 3
+	  owner.deal_damage damage: 3
   end
 end

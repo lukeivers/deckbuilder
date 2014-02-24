@@ -16,7 +16,7 @@ class BloodImp < Minion
     super
     target = owner.minions.select {|minion| minion != self}.shuffle.first
     if target
-      target.add_max_health(1)
+      target.max_health += 1
     end
   end
 

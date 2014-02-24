@@ -16,7 +16,7 @@ class FlesheatingGhoul < Minion
 
   def on_death(opts = {})
     if opts[:source].minion?
-      attack += 1
+      self.attack += 1
     end
   end
 end

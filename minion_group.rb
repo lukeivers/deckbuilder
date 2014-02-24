@@ -82,12 +82,12 @@ class MinionGroup < Array
         end
       end
     else
-      m1 = self[index - 1]
+      m1 = self[minion_index - 1]
       if size > 2
         if minion_index == size - 1
           m2 = self[0]
         else
-          m2 = self[index + 1]
+          m2 = self[minion_index + 1]
         end
       end
     end
