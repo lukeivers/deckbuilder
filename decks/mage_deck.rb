@@ -8,6 +8,6 @@ class MageDeck < Deck
   def hero_power(player)
     super
     player.mana -= 2
-    player.cast_damage_spell(damage: 1, evades_taunt: true)
+    player.cast_damage_spell(damage: 1, evades_taunt: true, include_opponent: true)
   end
 end

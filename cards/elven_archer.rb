@@ -11,6 +11,6 @@ class ElvenArcher < Minion
 
   def battlecry
     super
-    owner.cast_damage_spell damage: 1, evades_taunt: true
+    owner.cast_damage_spell damage: 1, evades_taunt: true, include_opponent: true
   end
 end

@@ -24,15 +24,15 @@ class AggroBot < Player
     bonus_minion
   end
 
-  def best_target(damage, evades_taunt=false)
-    targets = determine_targets(evades_taunt)
-    if targets.include? @opponent
-      return @opponent
+  def best_target(opts = {})
+    targets = determine_targets(opts)
+    if targets.include? opponent
+      return opponent
     end
     targets.sort {|a, b| a.health <=> b.health}
-    target = targets[0]
+    target = targets.first
     targets.each do |potential_target|
-      if potential_target.health <= damage
+      if potential_target.health <= opts[:damage]
         target = potential_target
       end
     end

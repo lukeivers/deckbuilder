@@ -10,7 +10,6 @@ class Player
 
   def start_game(game)
     self.game = game
-    hook_parent = game
     reset
   end
 
@@ -31,13 +30,13 @@ class Player
 
   def initialize(opts = {})
     super
-    @deck = Decks.get(name: opts[:deck])
+    self.deck = Decks.get(name: opts[:deck])
     if opts[:opponent]
-      @opponent = opts[:opponent]
-      @opponent.opponent = self
+      self.opponent = opts[:opponent]
+      self.opponent.opponent = self
     end
-    @max_health = 30
-    @wins = 0
+    self.max_health = 30
+    self.wins = 0
     self.reset
   end
 
@@ -117,7 +116,11 @@ class Player
   end
 
   def determine_targets(opts = {})
-    minions.targetable opts
+    result = Array.new.concat(minions.targetable(opts))
+    if opts[:include_opponent]
+      result << opponent
+    end
+    result
   end
 
   def silence_minion(opts = {})
@@ -154,7 +157,7 @@ class Player
   end
 
   def deal_damage(opts = {})
-    result = fire_hook(:attack, { source: self }.merge(opts))
+    result = $game.fire_hook(:attacked, { source: self }.merge(opts))
     opts[:damage] -= result
     opts[:damage] -= armour
     opts[:damage] = 0 if opts[:damage] < 0
@@ -210,7 +213,7 @@ class Player
   def add_minion(minion)
     minions << minion
     minion.minion_group = minions
-    spell_damage += minion.spell_damage
+    self.spell_damage += minion.spell_damage
     $game.fire_hook :summon, source: self, minion: minion
   end
 

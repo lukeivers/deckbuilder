@@ -37,7 +37,7 @@ class Minion < Card
 
   def max_health
     if minion_group
-      super + minion_group.health_bonus[:all] + minion_group.health_bonus[type] + minion_group.adjact_health_bonus(self)
+      super + minion_group.health_bonus[:all] + minion_group.health_bonus[type] + minion_group.adjacent_health_bonus(self)
     else
       super
     end
@@ -45,7 +45,7 @@ class Minion < Card
 
   def attack
     if minion_group
-      super + minion_group.attack_bonus[:all] + minion_group.attack_bonus[type] + minion_group.adjact_attack_bonus(self)
+      super + minion_group.attack_bonus[:all] + minion_group.attack_bonus[type] + minion_group.adjacent_attack_bonus(self)
     else
       super
     end

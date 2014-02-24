@@ -11,7 +11,7 @@ class ArcaneMissiles < Spell
 
   def battlecry
     3.times do
-      owner.random_target(evades_taunt: true).deal_damage damage
+      owner.random_target(evades_taunt: true, include_opponent: true).deal_damage damage: damage
     end
   end
 end

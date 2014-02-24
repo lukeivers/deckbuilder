@@ -83,7 +83,7 @@ class Game
 
       Logger.log 'Ending turn'
       temp = other_player
-      other_player = @current_player
+      other_player = current_player
       current_player = temp
 
       rounds += 1
