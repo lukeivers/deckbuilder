@@ -1,6 +1,6 @@
 require './cards/spell'
 
-class Soulfire < Spell
+class Soulfire < DamageSpell
   def initialize
     self.cost = 0
     self.name = 'Soulfire'
@@ -8,10 +8,9 @@ class Soulfire < Spell
     self.deck_class = 'Warlock'
     super
   end
+
   def battlecry
     super
-    self.owner.best_target(self.damage, true).deal_damage(self.damage)
-    self.owner.discard(self.owner.hand.shuffle.first)
-    #discard a random card
+    owner.discard(owner.hand.shuffle.first)
   end
 end

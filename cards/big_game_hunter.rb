@@ -13,7 +13,7 @@ class BigGameHunter < Minion
     super
     target = owner.opponent.minions.select {|a| a.attack >= 7}.sort {|a, b| a.attack <=> b.attack}.reverse.first
     if target
-      target.owner.destroy_minion(target)
+      target.die
     end
   end
 end

@@ -8,10 +8,7 @@ class Bananas < Spell
   end
 
   def battlecry
-    target = Array.new.concat(owner.minions).concat(owner.opponent.minions).shuffle.first
-    if target
-      target.attack += 1
-      target.max_health += 1
-    end
+    super
+    owner.grant_minion_bonus attack: 1, health: 1
   end
 end

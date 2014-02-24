@@ -24,6 +24,16 @@ class SimpleBot < Player
     bonus_minion
   end
 
+  def choose_best_heal_target(opts = {})
+    self
+    #TODO: make choose_best_heal_target realistic
+  end
+
+  def choose_minion_to_return
+    minions.first
+    #TODO: make choose_minion_to_return realistic
+  end
+
   def choose_adjacent_targets(opts = {})
     index = minions.find_index(self)
     m1 = nil
@@ -64,7 +74,7 @@ class SimpleBot < Player
   end
 
   def best_smurfing_target
-    targets = determine_targets(true)
+    targets = determine_targets(evades_taunt: true)
     targets.delete @opponent
     targets.sort {|a, b| a.attack <=> b.attack}
     targets.last

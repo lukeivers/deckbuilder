@@ -8,8 +8,9 @@ class ShatteredSunCleric < Minion
     self.max_health = 2
     super
   end
+
   def battlecry
     super
-    player.grant_minion_bonus(1, 1)
+    owner.grant_minion_bonus attack: 1, health: 1
   end
 end

@@ -2,27 +2,27 @@ require './cards/minion'
 
 class StarvingBuzzard < Minion
   def initialize
+    super
     self.name = 'Starving Buzzard'
     self.attack = 2
     self.max_health = 1
     self.cost = 2
     self.type = 'Beast'
-    super
   end
 
-  def battlecry
+  def play(player)
     super
-    owner.add_summon_hook(self)
+    $game.add_hook :summon, self
   end
 
   def die
-    owner.remove_summon_hook(self)
     super
+    $game.remove_hook :summon, self
   end
 
-  def on_summon(player, minion)
-    if minion.type == 'Beast'
-      player.draw(1)
+  def on_summon(opts = {})
+    if opts[:minion].type == 'Beast'
+      owner.draw 1
     end
   end
 end

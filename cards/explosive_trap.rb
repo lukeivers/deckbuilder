@@ -6,24 +6,24 @@ class ExplosiveTrap < Secret
     self.name = 'Explosive Trap'
     self.deck_class = 'Hunter'
 	  self.secret = true
+    self.damage = 2
 	  #When your hero is attacked, deal 2 damage to all enemies
     super
   end
 
   def battlecry
     super
-    self.owner.add_attack_hook(self)
+    $game.add_hook :attacked, self
   end
 
-  def on_attack(player, amount, source)
-    player.remove_attack_hook(self)
-    targets = Array.new
-    targets.concat player.opponent.minions
-    targets << player.opponent
-    targets.each do |target|
-      #TODO: are secrets subject to spell damage increases?
-      target.deal_damage(2)
+  def on_attacked(opts)
+    if opts[:target] == owner
+      $game.fire_hook :secret_revealed, source: self
+      $game.remove_hook :attacked, self
+      targets = Array.new.concat(owner.opponent.minions) << owner.opponent
+      targets.each do |target|
+        target.deal_damage damage
+      end
     end
-    0
   end
 end

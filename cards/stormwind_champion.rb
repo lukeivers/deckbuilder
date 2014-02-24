@@ -2,18 +2,23 @@ require './cards/minion'
 
 class StormwindChampion < Minion
   def initialize
+    super
     self.cost = 7
     self.name = 'Stormwind Champion'
     self.attack = 6
     self.max_health = 6
-    super
   end
-  def battlecry
-    player.add_global_bonus(1, 1)
+
+  def play(player)
     super
+    owner.minions.attack_bonus[:all] += 1
+    owner.minions.health_bonus[:all] += 1
   end
+
   def die
-    self.owner.add_global_bonus(-1, -1)
     super
+    owner.minions.attack_bonus[:all] -= 1
+    owner.minions.health_bonus[:all] -= 1
   end
+
 end

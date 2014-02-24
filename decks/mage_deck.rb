@@ -7,7 +7,7 @@ class MageDeck < Deck
   end
   def hero_power(player)
     super
-    player.remove_mana(2)
-    player.best_target(1, true).deal_damage(1)
+    player.mana -= 2
+    player.cast_damage_spell(damage: 1, evades_taunt: true)
   end
 end

@@ -6,13 +6,15 @@ class Lightwarden < Minion
     self.cost = 1
     self.attack = 1
     self.max_health = 2
-	#Whenever a character is healed, gain +2 attack
     super
   end
 
   def battlecry
     super
-
+    $game.add_hook :heal, self
   end
 
+  def on_heal(opts = {})
+    attack += 2
+  end
 end

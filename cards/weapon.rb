@@ -6,6 +6,7 @@ class Weapon < Card
   def play(player)
     super
     owner.weapon = self
+    battlecry
   end
 
   def destruct
@@ -16,6 +17,6 @@ class Weapon < Card
     if amount <= 0
       destruct
     end
-    self.durability = amount
+    @durability = amount
   end
 end

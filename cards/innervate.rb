@@ -2,13 +2,13 @@ require './cards/spell'
 
 class Innervate < Spell
   def initialize
+    super
     self.cost = 0
     self.name = 'Innervate'
-    super
   end
 
   def battlecry
     super
-    self.owner.add_mana(2)
+    owner.mana += 2
   end
 end

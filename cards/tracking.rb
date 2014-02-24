@@ -10,12 +10,12 @@ class Tracking < Spell
 
   def battlecry
     super
-    cards = owner.draw(3)
+    cards = owner.draw 3
     if cards.size > 1
-      best_card = owner.choose_best_card(cards)
+      best_card = owner.choose_best_card cards
       cards.delete best_card
       cards.each do |card|
-        owner.remove_card(card)
+        owner.remove_card card
       end
     end
   end

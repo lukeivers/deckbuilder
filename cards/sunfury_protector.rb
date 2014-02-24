@@ -2,14 +2,15 @@ require './cards/minion'
 
 class SunfuryProtector < Minion
   def initialize
+    super
     self.cost = 2
     self.name = 'Sunfury Protector'
     self.attack = 2
     self.max_health = 3
-    super
   end
+
   def battlecry
     super
-	#Give adjacent minions Taunt
+    owner.grant_adjacent_bonus taunt: true
   end
 end

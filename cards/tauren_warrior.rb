@@ -2,19 +2,19 @@ require './cards/minion'
 
 class TaurenWarrior < Minion
   def initialize
+    super
     self.cost = 3
     self.name = 'Tauren Warrior'
     self.attack = 2
     self.max_health = 3
-	self.taunt = true
-    super
+  	self.taunt = true
   end
 
   def attack
-    if self.health < self.max_health
-      self.attack + 3
+    if health < max_health
+      @attack + 3
     else
-      self.attack
+      @attack
     end
   end
 end

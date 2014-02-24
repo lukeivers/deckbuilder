@@ -1,8 +1,7 @@
 module Hookable
   attr_accessor :hooks, :hook_parent
 
-  def initialize(opts = {})
-    super
+  def initialize
     @hooks = Hash.new
   end
 

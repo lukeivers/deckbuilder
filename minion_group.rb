@@ -1,15 +1,17 @@
-require './hookable'
-
 class MinionGroup < Array
   attr_accessor :owner, :attack_bonus, :health_bonus
 
   def initialize
-    self.attack_bonus = { :all => 0, :beast => 0, :murloc => 0, :demon => 0 }
-    self.health_bonus = { :all => 0, :beast => 0, :murloc => 0, :demon => 0 }
+    self.attack_bonus = { :all => 0, 'Beast' => 0, 'Murloc' => 0, 'Demon' => 0, 'Pirate' => 0 }
+    self.health_bonus = { :all => 0, 'Beast' => 0, 'Murloc' => 0, 'Demon' => 0, 'Pirate' => 0 }
   end
 
   def owner=(player)
     @owner = player
+  end
+
+  def by_type(type)
+    select {|minion| minion.type == type}
   end
 
   def has_taunt?
@@ -27,6 +29,12 @@ class MinionGroup < Array
       self.select do |minion|
         not minion.stealth
       end
+    end
+  end
+
+  def destroy_all
+    self.each do |minion|
+      owner.destroy_minion(minion)
     end
   end
 

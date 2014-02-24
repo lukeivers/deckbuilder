@@ -2,19 +2,27 @@ require './cards/minion'
 
 class RagingWorgen < Minion
   def initialize
+    super
     self.cost = 3
     self.name = 'Raging Worgen'
     self.attack = 3
     self.max_health = 3
-    super
   end
 
   def attack
+    result = super
     if self.health < self.max_health
-      self.attack + 1
-	#windfury = true
+      result += 1
     else
-      self.attack
+      result
+    end
+  end
+
+  def windfury
+    if health < max_health
+      true
+    else
+      false
     end
   end
 end

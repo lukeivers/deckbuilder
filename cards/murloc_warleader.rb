@@ -10,16 +10,20 @@ class MurlocWarleader < Minion
     super
   end
 
-  def battlecry
+  def play(player)
     super
-    self.owner.add_murloc_bonus(2, 1)
-    self.owner.opponent.add_murloc_bonus(2, 1)
+    owner.minions.attack_bonus[type] += 2
+    owner.opponent.minions.attack_bonus[type] += 2
+    owner.minions.health_bonus[type] += 1
+    owner.opponent.minions.health_bonus[type] += 1
   end
 
   def die
-    self.owner.add_murloc_bonus(-2, -1)
-    self.owner.opponent.add_murloc_bonus(-2, -1)
     super
+    owner.minions.attack_bonus[type] -= 2
+    owner.opponent.minions.attack_bonus[type] -= 2
+    owner.minions.health_bonus[type] -= 1
+    owner.opponent.minions.health_bonus[type] -= 1
   end
 
 end

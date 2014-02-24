@@ -155,11 +155,15 @@ class Cards
 	Squirrel.new,
   ]
 
-  def self.get(name, amount=1)
+  def self.get(opts = {})
     result = Array.new
-    card = @cards.find { |card| card.name == name }
-    amount.times do
-      result << card.dup
+    card = @cards.find { |card| card.name == opts[:name] }
+    if opts[:amount]
+      opts[:amount].times do
+        result << card.dup
+      end
+    else
+      result = card
     end
     result
   end

@@ -2,6 +2,7 @@ require './cards/minion'
 
 class OldMurkeye < Minion
   def initialize
+    super
     self.name = "Old Murk-Eye"
     self.cost = 4
     self.attack = 2
@@ -9,24 +10,23 @@ class OldMurkeye < Minion
     self.charge = true
 	  self.type = 'Murloc'
 	  self.legendary = true
-    super
   end
 
   def battlecry
     super
-    owner.add_summon_hook(self)
-    owner.add_death_hook(self)
+    $game.add_hook :summon, self
+    $game.add_hook :death, self
   end
 
-  def on_summon(player, minion)
-    if minion.type == 'Murloc'
-      self.add_attack(1)
+  def on_summon(opts = {})
+    if opts[:minion].type == 'Murloc'
+      attack += 1
     end
   end
 
-  def on_death(player, minion)
-    if minion.type == 'Murloc'
-      self.add_attack(-1)
+  def on_death(opts = {})
+    if Minion === opts[:source] and opts[:source].type == 'Murloc'
+      attack -= 1
     end
   end
 

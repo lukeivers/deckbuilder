@@ -11,7 +11,7 @@ class Deck
   def init_cards
     @cards = Array.new
     @base_cards.each do |card_ref|
-      @cards.concat Cards.get(card_ref[:name], card_ref[:amount])
+      @cards.concat Cards.get(card_ref)
     end
     self.shuffle
   end

@@ -2,6 +2,7 @@ require './cards/minion'
 
 class Voidwalker < Minion
   def initialize
+    super
     self.taunt = true
     self.cost = 1
     self.attack = 1
@@ -9,7 +10,6 @@ class Voidwalker < Minion
     self.name = "Voidwalker"
 	  self.type = 'Demon'
     self.deck_class = 'Warlock'
-    super
   end
 
 end

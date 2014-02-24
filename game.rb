@@ -3,6 +3,12 @@ require './logger'
 
 class Game
   include Hookable
+  attr_accessor :minion_cost
+
+  def initialize
+    super
+    self.minion_cost = 0
+  end
 
   def self.play(opts = {})
     opts[:number_of_games].times do
@@ -52,7 +58,7 @@ class Game
     other_player.mulligan
 
     Logger.log 'Adding coin card to coin toss loser'
-    other_player.add_card(Cards.get('The Coin'))
+    other_player.add_card Cards.get(name: 'The Coin')
     puts other_player.name
 
     while game_running do

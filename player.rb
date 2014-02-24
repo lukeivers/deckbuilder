@@ -6,7 +6,7 @@ class Player
   include Character
 
   attr_accessor :deck, :hand, :max_mana, :mana, :opponent, :minions, :weapon, :wins, :spell_damage
-  attr_accessor :fatigue_damage, :cards_played, :armour, :game
+  attr_accessor :fatigue_damage, :cards_played, :armour, :game, :spell_cost, :minion_cost
 
   def start_game(game)
     self.game = game
@@ -23,6 +23,8 @@ class Player
     self.spell_damage = 0
     self.fatigue_damage = 0
     self.armour = 0
+    self.spell_cost = 0
+    self.minion_cost = 0
     @game = nil
     @deck.init_cards
   end
@@ -79,7 +81,7 @@ class Player
   end
 
   def cast_damage_spell(opts = {})
-    best_target(opts).deal_damage(opts[:damage])
+    best_target(opts).deal_damage(opts)
   end
 
   def swap_minion_stats
@@ -112,6 +114,27 @@ class Player
 
   def targets
     Array.new.concat(minions) << self
+  end
+
+  def determine_targets(opts = {})
+    minions.targetable opts
+  end
+
+  def silence_minion(opts = {})
+    target = best_silence_target
+    if target
+      target.silence
+    end
+  end
+
+  def heal_target(opts = {})
+    choose_best_heal_target(opts).health += opts[:amount]
+  end
+
+  def return_minion
+    target = choose_minion_to_return
+    add_card Cards.get(name: target.name)
+    destroy_minion(target)
   end
 
   ######################################

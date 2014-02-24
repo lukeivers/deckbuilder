@@ -10,16 +10,16 @@ class GrimscaleOracle < Minion
 	  super
   end
 
-  def battlecry
+  def play(player)
     super
-    self.owner.add_murloc_bonus(1, 0)
-    self.owner.opponent.add_murloc_bonus(1, 0)
+    owner.minions.attack_bonus[type] += 1
+    owner.opponent.minions.attack_bonus[type] += 1
   end
 
   def die
-    self.owner.add_murloc_bonus(-1, 0)
-    self.owner.opponent.add_murloc_bonus(-1, 0)
     super
+    owner.minions.attack_bonus[type] -= 1
+    owner.opponent.minions.attack_bonus[type] -= 1
   end
 
 end

@@ -4,12 +4,15 @@ require './card'
 class Minion < Card
   include Character
   attr_accessor :summoning_sickness, :taunt, :spell_damage, :stealth, :charge, :divine_shield, :type
-  attr_accessor :legendary, :silenced, :minion_group
+  attr_accessor :legendary, :silenced, :minion_group, :targetable, :windfury, :first_attack, :second_attack
 
   def initialize
     super
     self.spell_damage = 0
     self.summoning_sickness = true
+    self.targetable = true
+    self.first_attack = false
+    self.second_attack = false
   end
 
   def play(player)
@@ -29,15 +32,46 @@ class Minion < Card
 
   def charge=(value)
     summoning_sickness = false if value
-    self.charge = value
+    @charge = value
   end
 
   def max_health
-    super + minion_group.health_bonus[:all] + minion_group.health_bonus[type] + minion_group.adjact_health_bonus(self)
+    if minion_group
+      super + minion_group.health_bonus[:all] + minion_group.health_bonus[type] + minion_group.adjact_health_bonus(self)
+    else
+      super
+    end
   end
 
   def attack
-    super + minion_group.attack_bonus[:all] + minion_group.attack_bonus[type] + minion_group.adjact_attack_bonus(self)
+    if minion_group
+      super + minion_group.attack_bonus[:all] + minion_group.attack_bonus[type] + minion_group.adjact_attack_bonus(self)
+    else
+      super
+    end
+  end
+
+  def health=(amount)
+    if amount < health
+      $game.fire_hook :minion_damage, source: self
+    end
+    super
+  end
+
+  def cost
+    if owner
+      super + $game.minion_cost + owner.minion_cost
+    else
+      super
+    end
+  end
+
+  def set_health(amount)
+    @health = amount
+  end
+
+  def set_max_health(amount)
+    @max_health = amount
   end
 
   ##########
@@ -45,7 +79,20 @@ class Minion < Card
   ##########
 
   def can_attack?
-    summoning_sickness ? false : super
+    if summoning_sickness
+      false
+    elsif second_attack
+      false
+    elsif first_attack and not windfury
+      false
+    else
+      if first_attack
+        second_attack = true
+      else
+        first_attack = true
+      end
+      true
+    end
   end
 
   def attack_target(target)

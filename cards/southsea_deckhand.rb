@@ -2,16 +2,18 @@ require './cards/minion'
 
 class SouthseaDeckhand < Minion
   def initialize
+    super
     self.name = "Southsea Deckhand"
     self.cost = 1
     self.attack = 2
     self.max_health = 1
-    super
   end
 
-  def charge?
-    if self.owner.weapon
+  def charge
+    if owner.weapon
       true
+    else
+      false
     end
   end
 end

@@ -1,5 +1,3 @@
-require './hookable'
-
 module Character
   attr_accessor :health, :max_health, :attack, :frozen, :thawing, :name, :temporary_attack
 
@@ -31,16 +29,23 @@ module Character
   ##############################
 
   def health=(amount)
-    if amount <= 0
-      die
+    if health
+      if amount <= 0
+        die
+      end
+      if amount > health
+        $game.fire_hook :heal, target: self
+      end
     end
     @health = amount
   end
 
   def max_health=(amount)
-    differential = max_health - amount
+    if max_health and health
+      differential = max_health - amount
+      health -= differential
+    end
     @max_health = amount
-    health -= differential
   end
 
   def attack
@@ -52,11 +57,13 @@ module Character
   ##########
 
   def attacked(opts = {})
+    $game.fire_hook :attacked, opts.merge({target: self})
     Logger.log self.name + ' was attacked by ' + (opts[:source].nil? ? '.' : opts[:source].name + '.')
-    deal_damage damage: opts[:damage], source: opts[:source]
+    result = deal_damage damage: opts[:damage], source: opts[:source]
     if opts[:response].nil?
       attack_target target: opts[:source], response: true
     end
+    result
   end
 
   def can_attack?

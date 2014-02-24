@@ -12,12 +12,12 @@ class MurlocTidecaller < Minion
 
   def battlecry
     super
-    owner.game.add_hook(:summon, self)
+    $game.add_hook :summon, self
   end
 
-  def receive_hook(type, opts = {})
+  def on_summon(opts = {})
     if opts[:minion].type == 'Murloc'
-      self.add_attack(1)
+      attack += 1
     end
   end
 

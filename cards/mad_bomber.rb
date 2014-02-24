@@ -2,15 +2,16 @@ require './cards/minion'
 
 class MadBomber < Minion
   def initialize
+    super
     self.name = "Mad Bomber"
     self.cost = 2
     self.attack = 3
     self.max_health = 2
-    super
   end
 
   def battlecry
     super
-	#Deal 3 damage randomly split between all other characters
+    3.times { owner.random_target(include_friendly: true, include_opponent: true, include_self: true).
+              select {|a| a != self}.deal_damage(damage: 1) }
   end
 end

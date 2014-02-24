@@ -13,7 +13,7 @@ class DefiasRingleader < Minion
   def battlecry
     super
     if owner.cards_played > 0
-      owner.summon Cards.get('Defias Bandit').first
+      owner.summon Cards.get(name: 'Defias Bandit')
     end
   end
 end
