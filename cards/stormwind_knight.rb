@@ -1,4 +1,4 @@
-require './cards/minion'
+require './minion'
 
 class StormwindKnight < Minion
   def initialize

@@ -1,4 +1,4 @@
-require './cards/minion'
+require './minion'
 
 class EarthenRingFarseer < Minion
   def initialize

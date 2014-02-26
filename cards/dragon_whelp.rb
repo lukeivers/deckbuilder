@@ -1,4 +1,4 @@
-require './cards/minion'
+require './minion'
 
 class DragonWhelp < Minion
   def initialize

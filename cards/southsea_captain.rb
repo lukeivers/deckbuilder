@@ -1,4 +1,4 @@
-require './cards/minion'
+require './minion'
 
 class SouthseaCaptain < Minion
   def initialize

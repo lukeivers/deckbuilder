@@ -1,4 +1,4 @@
-require './cards/damage_spell'
+require './damage_spell'
 
 class ArcaneShot < DamageSpell
   def initialize

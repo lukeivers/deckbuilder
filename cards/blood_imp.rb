@@ -1,4 +1,4 @@
-require './cards/minion'
+require './minion'
 
 class BloodImp < Minion
   def initialize

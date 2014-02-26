@@ -1,4 +1,4 @@
-require './cards/weapon'
+require './weapon'
 
 class FieryWarAxe < Weapon
   def initialize

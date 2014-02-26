@@ -1,4 +1,4 @@
-require './cards/secret'
+require './secret'
 
 class ExplosiveTrap < Secret
   def initialize

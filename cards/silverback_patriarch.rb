@@ -1,4 +1,4 @@
-require './cards/minion'
+require './minion'
 
 class SilverbackPatriarch < Minion
   def initialize

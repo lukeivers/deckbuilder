@@ -1,4 +1,4 @@
-require './cards/minion'
+require './minion'
 
 class KingMukla < Minion
   def initialize

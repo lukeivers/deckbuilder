@@ -1,4 +1,4 @@
-require './cards/minion'
+require './minion'
 
 class MillhouseManastorm < Minion
   attr_accessor :old_spell_cost

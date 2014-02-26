@@ -1,4 +1,4 @@
-require './cards/spell'
+require './spell'
 
 class KillCommand < Spell
   def initialize

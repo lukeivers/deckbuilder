@@ -1,4 +1,4 @@
-require './cards/minion'
+require './minion'
 
 class ElvenArcher < Minion
   def initialize

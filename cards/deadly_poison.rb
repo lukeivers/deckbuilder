@@ -1,4 +1,4 @@
-require './cards/spell'
+require './spell'
 
 class DeadlyPoison < Spell
   def initialize

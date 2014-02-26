@@ -1,4 +1,4 @@
-require './cards/minion'
+require './minion'
 
 class BloodmageThalnos < Minion
   def initialize

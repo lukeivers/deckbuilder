@@ -1,4 +1,4 @@
-require './cards/minion'
+require './minion'
 
 class GnomishInventor < Minion
   def initialize

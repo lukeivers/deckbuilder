@@ -1,4 +1,4 @@
-require './cards/minion'
+require './minion'
 
 class AncientWatcher < Minion
   def initialize

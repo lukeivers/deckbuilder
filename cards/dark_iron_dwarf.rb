@@ -1,4 +1,4 @@
-require './cards/minion'
+require './minion'
 
 class DarkIronDwarf < Minion
   def initialize

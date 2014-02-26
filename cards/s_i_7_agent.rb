@@ -1,4 +1,4 @@
-require './cards/minion'
+require './minion'
 
 class SI7Agent < Minion
   def initialize

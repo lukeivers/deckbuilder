@@ -1,4 +1,4 @@
-require './cards/spell'
+require './spell'
 
 class MortalStrike < DamageSpell
   def initialize

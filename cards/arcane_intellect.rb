@@ -1,4 +1,4 @@
-require './cards/spell'
+require './spell'
 
 class ArcaneIntellect < Spell
   def initialize

@@ -1,4 +1,4 @@
-require './cards/secret'
+require './secret'
 
 class Misdirection < Secret
   def initialize

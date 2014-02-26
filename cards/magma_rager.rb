@@ -1,4 +1,4 @@
-require './cards/minion'
+require './minion'
 
 class MagmaRager < Minion
   def initialize
