@@ -12,8 +12,7 @@ class BloodKnight < Minion
   def battlecry
     super
     targets = Array.new.concat(owner.minions).concat(owner.opponent.minions)
-    targets.select {|target| target.divine_shield}
-    targets.each do |target|
+    targets.select {|target| target.divine_shield}.each do |target|
       target.divine_shield = false
       self.attack += 3
       self.max_health += 3

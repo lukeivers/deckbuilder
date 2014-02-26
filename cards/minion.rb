@@ -99,6 +99,8 @@ class Minion < Card
       false
     elsif first_attack and not windfury
       false
+    elsif
+      attack < 1
     else
       true
     end
