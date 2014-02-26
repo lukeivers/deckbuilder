@@ -118,6 +118,8 @@ class Player
           target.attack += opts[:attack] if opts[:attack]
           target.max_health += opts[:health] if opts[:health]
           target.taunt = opts[:taunt] if opts[:taunt]
+          target.spell_damage += opts[:spell_damage] if opts[:spell_damage]
+          self.spell_damage += opts[:spell_damage] if opts[:spell_damage]
         end
       end
     end

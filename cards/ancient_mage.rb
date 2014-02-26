@@ -8,9 +8,10 @@ class AncientMage < Minion
     self.attack = 2
     self.max_health = 5
   end
+
   def battlecry
     super
-	#Give adjacent minions Spell Damage +1
+    owner.grant_adjacent_bonus spell_damage: 1
 	end
 
 end
