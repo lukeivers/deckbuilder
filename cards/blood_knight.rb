@@ -15,8 +15,8 @@ class BloodKnight < Minion
     targets.select {|target| target.divine_shield}
     targets.each do |target|
       target.divine_shield = false
-      attack += 3
-      max_health += 3
+      self.attack += 3
+      self.max_health += 3
     end
 	end
 end

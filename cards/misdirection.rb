@@ -14,11 +14,12 @@ class Misdirection < Secret
     $game.add_hook :attacked, self
   end
 
-  def on_attack(opts = {})
+  def on_attacked(opts = {})
     if opts[:target] == owner
-      owner.armour += opts[:damage]
-      owner.random_target(include_friendly: true, include_opponent: true).deal_damage(opts)
+      $game.fire_hook :secret_revealed, source: self
       $game.remove_hook :attacked, self
+      owner.armour += opts[:damage]
+      owner.random_target(evades_taunt: true, include_friendly: true, include_opponent: true).deal_damage(opts)
     end
   end
 

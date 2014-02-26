@@ -9,9 +9,14 @@ class FrothingBerserker < Minion
     self.name = "Frothing Berserker"
   end
 
-  def battlecry
+  def play(player)
     super
     $game.add_hook :minion_damage, self
+  end
+
+  def die
+    super
+    $game.remove_hook :minion_damage, self
   end
 
   def on_minion_damage(opts = {})

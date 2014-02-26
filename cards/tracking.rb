@@ -15,7 +15,7 @@ class Tracking < Spell
       best_card = owner.choose_best_card cards
       cards.delete best_card
       cards.each do |card|
-        owner.remove_card card
+        owner.discard card
       end
     end
   end

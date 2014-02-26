@@ -24,6 +24,8 @@ class Minion < Card
   def start_turn
     super
     self.summoning_sickness = false
+    self.first_attack = false
+    self.second_attack = false
   end
 
   ##############################
@@ -98,11 +100,6 @@ class Minion < Card
     elsif first_attack and not windfury
       false
     else
-      if first_attack
-        self.second_attack = true
-      else
-        self.first_attack = true
-      end
       true
     end
   end
@@ -110,6 +107,11 @@ class Minion < Card
   def attack_target(opts = {})
     super(opts)
     self.stealth = false
+    if not first_attack
+      self.first_attack = true
+    elsif not second_attack
+      self.second_attack = true
+    end
   end
 
   def deal_damage(opts = {})
@@ -152,5 +154,9 @@ class Minion < Card
 
   def adjacent_bonus
     Hash.new
+  end
+
+  def to_s
+    "#{self.name}: #{self.attack}/#{self.health}"
   end
 end

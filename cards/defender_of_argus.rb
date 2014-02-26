@@ -10,7 +10,7 @@ class DefenderOfArgus < Minion
   end
   def battlecry
     super
-    owner.grant_adjacent_bonus attack: 1, health: 1, taunt: true
+    owner.grant_adjacent_bonus attack: 1, health: 1, taunt: true, source: self
 	end
 
 end

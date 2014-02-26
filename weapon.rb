@@ -17,4 +17,8 @@ class Weapon
     end
     @durability = amount
   end
+
+  def to_s
+    "#{self.attack}/#{self.durability}"
+  end
 end

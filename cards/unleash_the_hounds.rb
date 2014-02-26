@@ -12,7 +12,7 @@ class UnleashTheHounds < Spell
     super
     amount = owner.opponent.minions.size
     amount.times do
-      owner.summon Cards.get('Hound')
+      owner.summon Cards.get(name: 'Hound')
     end
   end
 

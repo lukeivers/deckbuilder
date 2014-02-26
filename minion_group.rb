@@ -98,4 +98,15 @@ class MinionGroup < Array
     end
     [m1, m2]
   end
+
+  def to_s
+    result = 'Minions: ['
+    self.each do |minion|
+      result += minion.to_s
+      if minion != self.last
+        result += ", "
+      end
+    end
+    result += "]"
+  end
 end

@@ -35,7 +35,7 @@ class SimpleBot < Player
   end
 
   def choose_adjacent_targets(opts = {})
-    index = minions.find_index(self)
+    index = minions.find_index(opts[:source])
     m1 = nil
     m2 = nil
     if index == 0
@@ -55,16 +55,7 @@ class SimpleBot < Player
         end
       end
     end
-    if m1
-      m1.taunt = true
-      m1.add_attack 1
-      m1.add_max_health 1
-    end
-    if m2
-      m2.taunt = true
-      m2.add_attack 1
-      m2.add_max_health 1
-    end
+    [m1, m2]
   end
 
   def best_target(opts = {})
@@ -108,17 +99,17 @@ class SimpleBot < Player
       if card.name == 'The Coin'
         if self.hand.find { |card| card.cost == self.mana + 1 }
           card.play(self)
+          @hand.delete(card)
         end
       elsif @mana > card.cost
         card.play(self)
-        Logger.log @name + ' played ' + card.name + '.'
         @hand.delete(card)
       end
     end
 
     if self.mana >= 2
+      Logger.log @name + ' used its hero power.'
       self.deck.hero_power(self)
-          Logger.log @name + ' used its hero power.'
     end
 
     #TODO: implement simple_bot and aggro_bot and random_bot player attack if they have a weapon

@@ -14,6 +14,6 @@ class KillCommand < Spell
     if owner.minions.by_type('Beast').size > 0
       self.damage += 2
     end
-    owner.cast_damage_spell damage: damage, evades_taunt: true
+    owner.cast_damage_spell damage: damage, evades_taunt: true, include_opponent: true
   end
 end

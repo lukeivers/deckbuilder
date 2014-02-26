@@ -22,7 +22,7 @@ class ExplosiveTrap < Secret
       $game.remove_hook :attacked, self
       targets = Array.new.concat(owner.opponent.minions) << owner.opponent
       targets.each do |target|
-        target.deal_damage damage
+        target.deal_damage damage: damage
       end
     end
   end

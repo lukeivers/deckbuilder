@@ -1,5 +1,6 @@
 require './character'
 require './decks'
+require './hand'
 require './minion_group'
 
 class Player
@@ -14,7 +15,7 @@ class Player
   end
 
   def reset
-    self.hand = Array.new
+    self.hand = Hand.new
     self.minions = MinionGroup.new
     self.max_mana = 0
     self.health = 30
@@ -24,6 +25,7 @@ class Player
     self.armour = 0
     self.spell_cost = 0
     self.minion_cost = 0
+    self.temporary_attack = 0
     @game = nil
     @deck.init_cards
   end
@@ -35,6 +37,9 @@ class Player
       self.opponent = opts[:opponent]
       self.opponent.opponent = self
     end
+    if opts[:name]
+      self.name = opts[:name]
+    end
     self.max_health = 30
     self.wins = 0
     self.reset
@@ -42,6 +47,8 @@ class Player
 
   def start_turn
     super
+    Logger.log self.to_s
+    Logger.log minions.to_s
     self.max_mana += 1
     self.mana = self.max_mana
     self.minions.each do |minion|
@@ -55,6 +62,7 @@ class Player
     @minions.each do |minion|
       minion.end_turn
     end
+    Logger.log "#{self.name} ended their turn."
   end
 
   ##############################
@@ -71,9 +79,11 @@ class Player
     targets = opponent.minions.targetable(opts)
     if opts[:include_friendly]
       targets.concat minions.targetable(opts)
-    elsif opts[:include_opponent]
+    end
+    if opts[:include_opponent]
       targets << opponent
-    elsif opts[:include_self]
+    end
+    if opts[:include_self]
       tagets << self
     end
     targets.shuffle.first
@@ -103,10 +113,12 @@ class Player
   def grant_adjacent_bonus(opts = {})
     targets = choose_adjacent_targets(opts)
     if targets and targets.size > 0
-      targets.each do
-        target.attack += opts[:attack] if opts[:attack]
-        target.max_health += opts[:health] if opts[:health]
-        target.taunt = opts[:taunt] if opts[:taunt]
+      targets.each do |target|
+        if target
+          target.attack += opts[:attack] if opts[:attack]
+          target.max_health += opts[:health] if opts[:health]
+          target.taunt = opts[:taunt] if opts[:taunt]
+        end
       end
     end
   end
@@ -170,6 +182,17 @@ class Player
     super
   end
 
+  def attack_target(opts = {})
+    super
+    if weapon
+      weapon.durability -= 1
+    end
+  end
+
+  def name
+    "#{@name}/#{self.deck.name}"
+  end
+
   ###################
   # card management #
   ###################
@@ -194,7 +217,7 @@ class Player
   end
 
   def discard(card)
-    self.hand.delete card
+    hand.delete card
   end
 
   def draw(amount = 1)
@@ -230,5 +253,13 @@ class Player
   def destroy_minion(minion)
     self.spell_damage -= minion.spell_damage
     minions.delete minion
+  end
+
+  def to_s
+    "#{self.name} - Health: #{self.health}, Armour: #{self.armour}, Weapon: #{self.weapon}, Hand: #{hand}"
+  end
+
+  def short_string
+    "#{self.name} - #{self.attack}/#{self.health}/#{self.armour}"
   end
 end

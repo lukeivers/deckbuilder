@@ -8,17 +8,17 @@ class AggroBot < Player
 
   def choose_best_card(cards)
     #TODO: implement aggro_bot choose_best_card
-    super
+    #super
   end
 
   def best_silence_target
     #TODO: implement simple_bot best silence target
-    super
+    #super
   end
 
   def choose_bonus_minion(opts = {})
     bonus_minion = @minions.sort {|a, b| a.health <=> b.health}.last
-    if opts[:health] > 0
+    if opts[:health] and opts[:health] > 0
       bonus_minion = @minions.sort {|a, b| a.health <=> b.health}.first
     end
     bonus_minion
@@ -44,6 +44,30 @@ class AggroBot < Player
     targets.delete @opponent
     targets.sort {|a, b| a.attack <=> b.attack}
     targets.last
+  end
+
+  def choose_adjacent_targets(opts = {})
+    index = minions.find_index(opts[:source])
+    m1 = nil
+    m2 = nil
+    if index == 0
+      if minions.size > 1
+        m1 = minions[1]
+        if minions.size > 2
+          m2 = self.owner.minions[-1]
+        end
+      end
+    else
+      m1 = minions[index - 1]
+      if minions.size > 2
+        if index == minions.size - 1
+          m2 = minions[0]
+        else
+          m2 = minions[index + 1]
+        end
+      end
+    end
+    [m1, m2]
   end
 
   def mulligan
@@ -74,23 +98,21 @@ class AggroBot < Player
       if card.name == 'The Coin'
         if self.hand.find { |card| card.cost == self.mana + 1 }
           card.play(self)
-          Logger.log @name + ' played ' + card.name + '.'
           @hand.delete(card)
         end
       elsif @mana > card.cost
         card.play(self)
-        Logger.log @name + ' played ' + card.name + '.'
         @hand.delete(card)
       end
     end
 
     if deck.deck_class == "Warlock" && self.mana >= 2 && self.health >= 15 && self.hand.size < 10
-	self.deck.hero_power(self)
-          Logger.log @name + ' used its hero power.'
+      Logger.log @name + ' used its hero power.'
+    	self.deck.hero_power(self)
     end
     if deck.deck_class != "Warlock" && self.mana >= 2
-	self.deck.hero_power(self)
-          Logger.log @name + ' used its hero power.'
+      Logger.log @name + ' used its hero power.'
+    	self.deck.hero_power(self)
     end
 	
     if @minions.size > 0
@@ -105,6 +127,13 @@ class AggroBot < Player
             end
           end
         end
+      end
+    end
+
+    if self.attack > 0
+      if can_attack?
+        target = best_target(damage: self.attack, include_opponent: true)
+        self.attack_target(target: target)
       end
     end
   end

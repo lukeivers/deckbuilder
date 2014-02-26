@@ -29,8 +29,8 @@ class RandomBot < Player
   def play
     @hand.shuffle.each do |card|
       if @mana > card.cost
-        card.play(self)
         Logger.log @name + ' played ' + card.name + '.'
+        card.play(self)
         @hand.delete(card)
       end
     end

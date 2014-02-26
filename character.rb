@@ -18,10 +18,7 @@ module Character
   end
 
   def end_turn
-    if temporary_attack > 0
-      self.attack -= temporary_attack
-      self.temporary_attack = 0
-    end
+    self.temporary_attack = 0
   end
 
   ##############################
@@ -73,12 +70,16 @@ module Character
   end
 
   def attack_target(opts = {})
-    #Logger.log self.name + ' is attacking ' + opts[:target].name
+    if not opts[:response]
+      Logger.log "#{self} attacked #{opts[:target].minion? ? opts[:target] : opts[:target].short_string}"
+    end
     opts[:target].attacked(damage: attack, source: self, response: opts[:response])
   end
 
   def deal_damage(opts = {})
-    Logger.log self.name + ' was dealt ' + opts[:damage].to_s + ' damage'  + (opts[:source].nil? ? '.' : ' by ' + opts[:source].name + '.')
+    if opts[:damage] > 0
+      Logger.log self.name + ' was dealt ' + opts[:damage].to_s + ' damage'  + (opts[:source].nil? ? '.' : ' by ' + opts[:source].name + '.')
+    end
     self.health -= opts[:damage]
     opts[:damage]
   end

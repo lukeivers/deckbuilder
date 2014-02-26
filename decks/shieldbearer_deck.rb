@@ -1,24 +1,24 @@
 require './decks/mage_deck'
 
-class ShieldbearerDeck < MageDeck
+class ShieldbearerDeck < WarlockDeck
   def initialize
     @name = 'Shieldbearer'
     @base_cards = [
         { name: 'Shieldbearer', amount: 2 },
-        { name: 'Arcane Missiles', amount: 2 },
-        { name: 'Acidic Swamp Ooze', amount: 2},
-        { name: 'Frostwolf Grunt', amount: 2},
-        { name: 'Arcane Intellect', amount: 2},
-        { name: 'Shattered Sun Cleric', amount: 2},
-        { name: 'Water Elemental', amount: 2},
-        { name: 'Gnomish Inventor', amount: 2},
-        { name: 'Fireball', amount: 2},
-        { name: 'Polymorph', amount: 2},
-        { name: 'Chillwind Yeti', amount: 2},
+        { name: 'Frostwolf Grunt', amount: 2 },
         { name: 'Goldshire Footman', amount: 2},
-        { name: 'Archmage', amount: 1},
+        { name: 'Ironfur Grizzly', amount: 2},
+        { name: 'Silverback Patriarch', amount: 2},
+        { name: 'Tauren Warrior', amount: 2},
+        { name: 'Voidwalker', amount: 2},
+        { name: 'Argent Commander', amount: 2},
+        { name: 'Argent Squire', amount: 2},
+        { name: 'Scarlet Crusader', amount: 2},
+        { name: 'Chillwind Yeti', amount: 2},
+        { name: 'Blood Knight', amount: 2},
+        { name: 'Defender of Argus', amount: 1},
         { name: 'Stormwind Champion', amount: 1},
-        { name: 'Flamestrike', amount: 2},
+        { name: 'Frothing Berserker', amount: 2},
     ]
     super
   end
