@@ -1,0 +1,16 @@
+require './cards/minion'
+
+class AncientMage < Minion
+  def initialize
+    super
+    self.cost = 4
+    self.name = 'Ancient Mage'
+    self.attack = 2
+    self.max_health = 5
+  end
+  def battlecry
+    super
+	#Give adjacent minions Spell Damage +1
+	end
+
+end

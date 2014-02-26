@@ -139,6 +139,20 @@ class Cards
 	TaurenWarrior.new,
 	ThrallmarFarseer.new,
 	TinkmasterOverspark.new,
+	AncientBrewmaster.new,
+	AncientMage.new,
+	CultMaster.new,
+	DragonlingMechanic.new,
+	DreadCorsair.new,
+	MogushanWarden.new,
+	OasisSnapjaw.new,
+	OgreMagi.new,
+	SenjinShieldmasta.new,
+	SilvermoonGuardian.new,
+	Spellbreaker.new,
+	StormwindKnight.new,
+	TwilightDrake.new,
+	VioletTeacher.new,
 	]
 
   @no_mutate_cards = [
@@ -153,6 +167,8 @@ class Cards
 	Boar.new,
 	Devilsaur.new,
 	Squirrel.new,
+	MechanicalDragonling.new,
+	VioletApprentice.new,
   ]
 
   def self.get(opts = {})
