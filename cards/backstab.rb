@@ -1,4 +1,4 @@
-require './spell'
+require './damage_spell'
 
 class Backstab < DamageSpell
   def initialize

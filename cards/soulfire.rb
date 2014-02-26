@@ -1,4 +1,4 @@
-require './spell'
+require './damage_spell'
 
 class Soulfire < DamageSpell
   def initialize
