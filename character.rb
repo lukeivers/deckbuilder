@@ -59,7 +59,7 @@ module Character
   def attacked(opts = {})
     $game.fire_hook :attacked, opts.merge({target: self})
     #Logger.log self.name + ' was attacked by ' + (opts[:source].nil? ? '.' : opts[:source].name + '.')
-    if opts[:response].nil?
+    if opts[:response].nil? and self.minion?
       attack_target target: opts[:source], response: true
     end
     deal_damage damage: opts[:damage], source: opts[:source]
