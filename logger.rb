@@ -1,6 +1,9 @@
 class Logger
+  def self.debug=(value)
+    @debug = value
+  end
   def self.debug
-	  false
+	  @debug
   end
   def self.log(text)
     puts text if self.debug

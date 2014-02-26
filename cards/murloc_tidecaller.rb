@@ -21,8 +21,9 @@ class MurlocTidecaller < Minion
   end
 
   def on_summon(opts = {})
-    if opts[:minion].type == 'Murloc'
+    if opts[:minion].type == 'Murloc' and opts[:minion] != self
       self.attack += 1
+      Logger.log 'Murloc Tidecaller summon buff activated.'
     end
   end
 

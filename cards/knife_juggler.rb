@@ -10,9 +10,14 @@ class KnifeJuggler < Minion
 	  #After you summon a minion, deal 1 damage to a random enemy
   end
 
-  def battlecry
+  def play(player)
     super
     $game.add_hook :summon, self
+  end
+
+  def die
+    super
+    $game.remove_hook :summon, self
   end
 
   def on_summon(opts = {})

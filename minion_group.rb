@@ -21,15 +21,20 @@ class MinionGroup < Array
   end
 
   def targetable(opts = {})
+    result = nil
     if has_taunt? and not opts[:evades_taunt]
-      self.select do |minion|
+      result = self.select do |minion|
         minion.taunt and not minion.stealth
       end
     else
-      self.select do |minion|
+      result = self.select do |minion|
         not minion.stealth
       end
     end
+    if opts[:source]
+      result.delete opts[:source]
+    end
+    result
   end
 
   def destroy_all

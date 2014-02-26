@@ -163,7 +163,7 @@ class Cards
         result << card.dup
       end
     else
-      result = card
+      result = card.dup
     end
     result
   end

@@ -21,7 +21,7 @@ class StarvingBuzzard < Minion
   end
 
   def on_summon(opts = {})
-    if opts[:minion].type == 'Beast'
+    if opts[:minion].type == 'Beast' and opts[:minion] != self
       owner.draw 1
     end
   end

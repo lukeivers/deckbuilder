@@ -61,7 +61,7 @@ module Character
 
   def attacked(opts = {})
     $game.fire_hook :attacked, opts.merge({target: self})
-    Logger.log self.name + ' was attacked by ' + (opts[:source].nil? ? '.' : opts[:source].name + '.')
+    #Logger.log self.name + ' was attacked by ' + (opts[:source].nil? ? '.' : opts[:source].name + '.')
     if opts[:response].nil?
       attack_target target: opts[:source], response: true
     end
@@ -73,12 +73,12 @@ module Character
   end
 
   def attack_target(opts = {})
-    Logger.log self.name + ' is attacking ' + opts[:target].name
+    #Logger.log self.name + ' is attacking ' + opts[:target].name
     opts[:target].attacked(damage: attack, source: self, response: opts[:response])
   end
 
   def deal_damage(opts = {})
-    Logger.log self.name + ' was dealt ' + opts[:damage].to_s + ' damage'  + (opts[:source].nil? ? '.' : opts[:source].name + '.')
+    Logger.log self.name + ' was dealt ' + opts[:damage].to_s + ' damage'  + (opts[:source].nil? ? '.' : ' by ' + opts[:source].name + '.')
     self.health -= opts[:damage]
     opts[:damage]
   end

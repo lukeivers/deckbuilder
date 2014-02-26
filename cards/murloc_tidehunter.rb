@@ -12,6 +12,6 @@ class MurlocTidehunter < Minion
 
   def battlecry
     super
-    self.owner.summon Cards.get(name: 'Murloc Scout')
+    owner.summon Cards.get(name: 'Murloc Scout')
   end
 end

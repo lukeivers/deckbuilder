@@ -10,4 +10,7 @@ class Card
     $game.fire_hook :card_played, source: self
   end
 
+  def minion?
+    false
+  end
 end

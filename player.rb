@@ -116,7 +116,7 @@ class Player
   end
 
   def determine_targets(opts = {})
-    result = Array.new.concat(minions.targetable(opts))
+    result = Array.new.concat(opponent.minions.targetable(opts))
     if opts[:include_opponent]
       result << opponent
     end
@@ -183,7 +183,7 @@ class Player
   end
 
   def play_card(card)
-    if hande.include? card
+    if hand.include? card
       card.play self
       hand.delete card
     end
@@ -208,7 +208,7 @@ class Player
 
   def fatigue_damage
     @fatigue_damage += 1
-    self.deal_damage(@fatigue_damage)
+    self.deal_damage(damage: @fatigue_damage)
   end
 
   #####################

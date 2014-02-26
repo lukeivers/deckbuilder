@@ -25,7 +25,7 @@ class OldMurkeye < Minion
   end
 
   def on_summon(opts = {})
-    if opts[:minion].type == 'Murloc'
+    if opts[:minion].type == 'Murloc' and opts[:minion] != self
       self.attack += 1
     end
   end

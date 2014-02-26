@@ -2,6 +2,10 @@ require './logger'
 require './game'
 require 'pp'
 
+if ARGV[0] == 'logger'
+  Logger.debug = true
+end
+
 Dir["./players/*.rb"].each { |file| require file }
 
 Logger.log 'Starting Hearthstone Deckbuilder'
