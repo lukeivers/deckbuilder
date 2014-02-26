@@ -9,9 +9,14 @@ class ManaAddict < Minion
     self.max_health = 3
   end
 
-  def battlecry
+  def play(player)
     super
     $game.add_hook :spell_cast, self
+  end
+
+  def die
+    super
+    $game.remove_hook :spell_cast, self
   end
 
   def on_spell_cast(opts = {})

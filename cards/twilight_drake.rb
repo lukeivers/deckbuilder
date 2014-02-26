@@ -12,6 +12,6 @@ class TwilightDrake < Minion
 
   def battlecry
     super
-	#Gain +1 Health for each card in your hand
+    owner.health += owner.hand.size
   end
 end

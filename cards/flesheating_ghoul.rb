@@ -9,9 +9,14 @@ class FlesheatingGhoul < Minion
     self.max_health = 3
   end
 
-  def battlecry
+  def play(player)
     super
     $game.add_hook :death, self
+  end
+
+  def die
+    super
+    $game.remove_hook :death, self
   end
 
   def on_death(opts = {})
