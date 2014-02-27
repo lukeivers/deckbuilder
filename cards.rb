@@ -21,6 +21,10 @@ class Cards
     Squirrel.new,
     MechanicalDragonling.new,
     VioletApprentice.new,
+    Squire.new,
+    RoguesDoItFromBehind.new,
+    IAmMurloc.new,
+    PowerOfTheHorde.new,
   ]
 
   def self.get(opts = {})
