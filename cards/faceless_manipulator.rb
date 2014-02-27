@@ -1,6 +1,6 @@
 require './minion'
 
-class Faceless Manipulator < Minion
+class FacelessManipulator < Minion
   def initialize
     super
     self.name = "Faceless Manipulator"
