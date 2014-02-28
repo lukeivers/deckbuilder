@@ -9,6 +9,7 @@ class IAmMurloc < Spell
 
   def battlecry
     super
-	#Summon three, four, or five 1/1 Murlocs
+    quantity = rand(3) + 3
+    quantity.times { owner.summon Cards.get name: 'Murloc' }
   end
 end

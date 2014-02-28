@@ -13,6 +13,9 @@ class CaptainGreenskin < Minion
 
   def battlecry
     super
-	#Give your weapon +1/+1
+    if owner.weapon
+      owner.weapon.attack += 1
+      owner.weapon.durability += 1
+    end
 	end
 end

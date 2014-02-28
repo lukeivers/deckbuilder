@@ -9,12 +9,20 @@ class PowerOfTheHorde < Spell
 
   def battlecry
     super
-	#Summon a random Horde Warrior
-	# Frostwolf Grunt
-	# Tauren Warrior
-	# Thrallmar Farseer
-	# Silvermoon Guardian
-	# Sen'jin Shieldmasta
-	# Cairne Bloodhoof
+    temp = rand(6)
+    case temp
+      when 0
+        owner.summon Cards.get name: 'Frostwolf Grunt'
+      when 1
+        owner.summon Cards.get name: 'Tauren Warrior'
+      when 2
+        owner.summon Cards.get name: 'Thrallmar Farseer'
+      when 3
+        owner.summon Cards.get name: 'Silvermoon Guardian'
+      when 4
+        owner.summon Cards.get name: 'Sen\'jin Guardian'
+      when 5
+        owner.summon Cards.get name: 'Cairne Bloodhoof'
+    end
   end
 end

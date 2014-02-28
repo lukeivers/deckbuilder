@@ -1,6 +1,6 @@
 require './minion'
 
-class Faceless Manipulator < Minion
+class FacelessManipulator < Minion
   def initialize
     super
     self.name = "Faceless Manipulator"
@@ -11,6 +11,7 @@ class Faceless Manipulator < Minion
 
   def battlecry
     super
+
 	#Choose a minion and become a copy of it
 	end
 end

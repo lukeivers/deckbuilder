@@ -11,6 +11,6 @@ class DarkscaleHealer < Minion
 
   def battlecry
     super
-	#Restore 2 Health to all friendly characters
+    owner.targets.each {|target| target.health += 2}
   end
 end
