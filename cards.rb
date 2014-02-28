@@ -25,6 +25,15 @@ class Cards
     RoguesDoItFromBehind.new,
     IAmMurloc.new,
     PowerOfTheHorde.new,
+	BaineBloodhoof.new,
+	Emboldener3000.new,
+	HomingChicken.new,
+	Poultryizer.new,
+	Chicken.new,
+	RepairBot.new,
+	Gnoll.new,
+	FlameOfAzzinoth.new,
+	FinkleEinhorn.new,
   ]
 
   def self.get(opts = {})
