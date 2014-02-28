@@ -9,6 +9,9 @@ class HomingChicken < Minion
     self.max_health = 1
   end
 
-	#At the start of your turn, destroy this minion and draw 3 cards
-
+  def start_turn
+    super
+    owner.draw 3
+    owner.destroy_minion(self)
+  end
 end

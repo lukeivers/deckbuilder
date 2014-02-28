@@ -11,7 +11,10 @@ class Emboldener3000 < Minion
 
   def end_turn
     super
-	#At the end of your turn, give a random minion +1/+1
+    target = owner.random_target(include_friendly: true)
+    if target
+      target.attack += 1
+      target.max_health += 1
     end
   end
 

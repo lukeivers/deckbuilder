@@ -1,6 +1,8 @@
 require './minion'
 
 class SpitefulSmith < Minion
+  attr_accessor :enrage_enabled
+
   def initialize
     super
     self.cost = 5
@@ -9,6 +11,6 @@ class SpitefulSmith < Minion
     self.max_health = 6
   end
 
-	#Enrage: Your weapon has +2 attack
+  #TODO: Enrage: Your weapon has +2 attack
 
 end

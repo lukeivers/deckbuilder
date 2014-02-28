@@ -12,6 +12,12 @@ class HarrisonJones < Minion
 
   def battlecry
     super
+    weapon = owner.opponent.weapon
+    if weapon
+      amount = weapon.durability
+      weapon.destruct
+      owner.draw amount
+    end
 	#Destroy your opponent's weapon, and draw cards equal to its Durability
 	end
 end

@@ -12,6 +12,9 @@ class StampedingKodo < Minion
 
   def battlecry
     super
-	#Destroy a random enemy minion with 2 or less Attack
-  end
+    target = owner.opponent.minions.select {|a| a.attack <= 2}.shuffle.first
+    if target
+      target.owner.destroy_minion(target)
+    end
+	end
 end

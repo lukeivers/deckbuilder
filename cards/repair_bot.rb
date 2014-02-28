@@ -11,8 +11,12 @@ class RepairBot < Minion
 
   def end_turn
     super
-	#At the end of your turn, restore 6 Health to a damaged character.
+    targets = Array.new.concat(owner.targets).concat(owner.opponent.targets)
+    target = targets.select {|a| a.health < a.max_health}.shuffle.first
+    if target
+      amount = target.max_health - target.health
+      amount = 6 if amount > 6
+      taret.health += amount
     end
   end
-
 end

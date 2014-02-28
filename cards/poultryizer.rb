@@ -9,6 +9,11 @@ class Poultryizer < Minion
     self.max_health = 3
   end
 
-	#At the start of your turn, transform a random minion into a 1/1 Chicken
-
+  def start_turn
+    target = owner.random_target(include_friendly: true)
+    if target
+      target.owner.summon Cards.get name: 'Chicken'
+      target.owner.destroy_minion(target)
+    end
+  end
 end

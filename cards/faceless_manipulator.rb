@@ -11,7 +11,11 @@ class FacelessManipulator < Minion
 
   def battlecry
     super
-
-	#Choose a minion and become a copy of it
+    target = owner.choose_best_copy_target
+    if target
+      new_card = target.dup
+      owner.summon(new_card)
+      owner.destroy_minion(self)
+    end
 	end
 end

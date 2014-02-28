@@ -5,6 +5,7 @@ class Minion < Card
   include Character
   attr_accessor :summoning_sickness, :taunt, :spell_damage, :stealth, :charge, :divine_shield, :type
   attr_accessor :legendary, :silenced, :minion_group, :targetable, :windfury, :first_attack, :second_attack
+  attr_accessor :auto_hook
 
   def initialize
     super
@@ -18,6 +19,9 @@ class Minion < Card
   def play(player)
     super
     owner.add_minion(self)
+    if auto_hook
+      $game.add_hook auto_hook, self
+    end
     battlecry if not silenced
   end
 
@@ -130,6 +134,9 @@ class Minion < Card
 
   def die
     super
+    if auto_hook
+      $game.remove_hook auto_hook, self
+    end
     owner.destroy_minion self
     deathrattle if not silenced
   end

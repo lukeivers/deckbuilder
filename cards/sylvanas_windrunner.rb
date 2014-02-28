@@ -10,6 +10,13 @@ class SylvanasWindrunner < Minion
 	  self.legendary = true
   end
 
-	#Deathrattle: Take control of a random enemy minion
-
+  def deathrattle
+    super
+    target = owner.opponent.minions.shuffle.first
+    if target
+      owner.add_minion target, false
+      target.destroy_minion target
+      target.owner = owner
+    end
+  end
 end

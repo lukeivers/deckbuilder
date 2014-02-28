@@ -10,6 +10,11 @@ class Hogger < Minion
 	  self.legendary = true
   end
 
+  def end_turn
+    super
+    owner.summon Cards.get name: 'Gnoll'
+  end
+
 	#At the end of your turn, summon a 2/2 Gnoll with Taunt
 
 end

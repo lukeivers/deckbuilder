@@ -16,6 +16,15 @@ class AggroBot < Player
     #super
   end
 
+  def choose_best_freeze_target
+    opponent.targets.sort {|a, b| a.attack <=> b.attack}.reverse.first
+  end
+
+  def choose_best_copy_target
+    targets = Array.new.concat(self.minions).concat(opponent.minions)
+    targets.sort {|a, b| a.attack <=> b.attack}.reverse.first
+  end
+
   def choose_bonus_minion(opts = {})
     bonus_minion = @minions.sort {|a, b| a.health <=> b.health}.last
     if opts[:health] and opts[:health] > 0

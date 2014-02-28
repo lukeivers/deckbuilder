@@ -8,9 +8,11 @@ class LorewalkerCho < Minion
     self.attack = 0
     self.max_health = 4
     self.legendary = true
+    self.auto_hook = :card_played
+  end
 
-	#Whenever a player casts a spell, put a copy into the other player's hand
-
+  def on_card_played(opts = {})
+    opts[:source].owner.opponent.add_card opts[:source].dup
   end
 
 

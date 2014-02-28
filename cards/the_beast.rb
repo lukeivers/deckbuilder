@@ -8,9 +8,11 @@ class TheBeast < Minion
     self.attack = 9
     self.max_health = 7
 	  self.legendary = true
-	self.type = "Beast"
+	  self.type = "Beast"
   end
 
-	#Deathrattle: Summon a 3/3 Finkle Einhorn for your opponent
-
+  def deathrattle
+    super
+    owner.opponent.summon Cards.get name: 'Finkle Einhorn'
+  end
 end

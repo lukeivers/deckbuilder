@@ -26,7 +26,6 @@ class TinkmasterOverspark < Minion
         target.set_max_health = 5
         target.name = 'Devilsaur'
         target.type = 'Beast'
-        #TODO: is a devilsaur a beast?
       end
     end
 	end

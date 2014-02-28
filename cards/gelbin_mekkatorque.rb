@@ -12,10 +12,16 @@ class GelbinMekkatorque < Minion
 
   def battlecry
     super
-	#Summon an AWESOME invention
-	# Emboldener 3000
-	# Homing Chicken
-	# Poultryizer
-	# Repair Bot
+    temp = rand(4)
+    case temp
+      when 0
+        owner.summon Cards.get name: 'Emboldener 3000'
+      when 1
+        owner.summon Cards.get name: 'Homing Chicken'
+      when 2
+        owner.summon Cards.get name: 'Poultryizer'
+      when 3
+        owner.summon Cards.get name: 'Repair Bot'
+    end
 	end
 end

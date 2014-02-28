@@ -7,7 +7,12 @@ class GadgetzanAuctioneer < Minion
     self.attack = 4
     self.max_health = 4
     self.name = "Gadgetzan Auctioneer"
-	#Whenever you cast a spell, draw a card
-  end
+    self.auto_hook = :spell_cast
+	end
 
+  def on_spell_cast(opts = {})
+    if opts[:source].owner == self.owner
+      owner.draw 1
+    end
+  end
 end

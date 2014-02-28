@@ -137,6 +137,11 @@ class Player
     result
   end
 
+  def freeze_character(opts = {})
+    target = choose_best_freeze_target
+    target.freeze if target
+  end
+
   def silence_minion(opts = {})
     target = best_silence_target
     if target
@@ -240,11 +245,13 @@ class Player
   # minion management #
   #####################
 
-  def add_minion(minion)
+  def add_minion(minion, hook = true)
     minions << minion
     minion.minion_group = minions
     self.spell_damage += minion.spell_damage
-    $game.fire_hook :summon, source: self, minion: minion
+    if hook
+      $game.fire_hook :summon, source: self, minion: minion
+    end
   end
 
   def return_minion_to_hand(minion)

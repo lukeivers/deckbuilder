@@ -10,6 +10,15 @@ class TheBlackKnight < Minion
 	  self.legendary = true
   end
 
-	#Battlecry: Destroy an enemy minion with Taunt
-
+  def battlecry
+    super
+    targets = owner.opponent.minions.select {|a| a.taunt}
+    if targets.size > 1
+      targets.sort{|a, b| a.health <=> b.health}.reverse
+    end
+    target = targets.first
+    if target
+      target.owner.destroy_minion(target)
+    end
+  end
 end

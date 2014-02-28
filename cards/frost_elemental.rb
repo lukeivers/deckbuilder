@@ -11,6 +11,6 @@ class FrostElemental < Minion
 
   def battlecry
     super
-	#Freeze a character
+    owner.freeze_character
   end
 end
