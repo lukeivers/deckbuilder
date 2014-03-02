@@ -12,18 +12,18 @@ class TinkmasterOverspark < Minion
 
   def battlecry
     super
-    minion = Array.new.concat(owner.minions).concat(owner.opponent.minions).shuffle.first
-    if minion
+    target = Array.new.concat(owner.minions).concat(owner.opponent.minions).shuffle.first
+    if target
       if rand(2) == 1
         target.attack = 1
         target.set_health 1
-        target.set_max_health = 1
+        target.set_max_health 1
         target.name = 'Squirrel'
         target.type = 'Beast'
       else
         target.attack = 5
         target.set_health 5
-        target.set_max_health = 5
+        target.set_max_health 5
         target.name = 'Devilsaur'
         target.type = 'Beast'
       end

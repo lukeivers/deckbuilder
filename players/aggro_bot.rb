@@ -16,6 +16,21 @@ class AggroBot < Player
     #super
   end
 
+  def choose_best_heal_target(opts = {})
+    self
+    #TODO: make choose_best_heal_target realistic
+  end
+
+  def choose_minion_to_return
+    minions.first
+    #TODO: make choose_minion_to_return realistic
+  end
+
+  def choose_best_stat_swap_minion
+    possibles = Array.new.concat(self.minions).concat(self.opponent.minions)
+    possibles.sort {|a, b| a.attack <=> b.attack}.reverse.first
+  end
+
   def choose_best_freeze_target
     opponent.targets.sort {|a, b| a.attack <=> b.attack}.reverse.first
   end
@@ -112,8 +127,11 @@ class AggroBot < Player
       elsif @mana > card.cost
         card.play(self)
         @hand.delete(card)
+        break if opponent.dead?
       end
     end
+
+    return if opponent.dead?
 
     if deck.deck_class == "Warlock" && self.mana >= 2 && self.health >= 15 && self.hand.size < 10
       Logger.log @name + ' used its hero power.'
@@ -123,21 +141,21 @@ class AggroBot < Player
       Logger.log @name + ' used its hero power.'
     	self.deck.hero_power(self)
     end
-	
+
+    return if opponent.dead?
+
     if @minions.size > 0
 
       @minions.each do |minion|
         if minion.can_attack?
           target = best_target(damage: minion.attack, include_opponent: true)
           minion.attack_target(target: target)
-          if target.dead?
-            if target == opponent
-              break
-            end
-          end
+          break if opponent.dead?
         end
       end
     end
+
+    return if opponent.dead?
 
     if self.attack > 0
       if can_attack?

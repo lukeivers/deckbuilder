@@ -8,16 +8,7 @@ class MurlocTidecaller < Minion
     self.attack = 1
     self.max_health = 2
 	  self.type = 'Murloc'
-  end
-
-  def play(player)
-    super
-    $game.add_hook :summon, self
-  end
-
-  def die
-    super
-    $game.remove_hook :summon, self
+    self.auto_hook = :summon
   end
 
   def on_summon(opts = {})

@@ -22,6 +22,7 @@ class Game
     $game = self
     game_running = true
     winning_player = nil
+    losing_player = nil
     rounds = 0
 
     player1 = opts[:player1]
@@ -59,9 +60,11 @@ class Game
 
       if current_player.dead?
         winning_player = other_player
+        losing_player = current_player
         game_running = false
       elsif other_player.dead?
         winning_player = current_player
+        losing_player = other_player
         game_running = false
       end
 
@@ -74,7 +77,8 @@ class Game
       rounds += 1
     end
 
-    winning_player.wins += 1
+    winning_player.win
+    losing_player.lose
     Logger.log winning_player.name + ' has won the game in ' + rounds.to_s + ' rounds!'
 
   end

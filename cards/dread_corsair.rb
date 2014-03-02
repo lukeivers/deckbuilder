@@ -14,7 +14,7 @@ class DreadCorsair < Minion
 
   def cost
     result = super
-    if owner.weapon
+    if owner and owner.weapon
       result -= owner.weapon.attack
       result = 0 if result < 0
     end

@@ -20,7 +20,13 @@ class Minion < Card
     super
     owner.add_minion(self)
     if auto_hook
-      $game.add_hook auto_hook, self
+      if Array === auto_hook
+        auto_hook.each do |hook|
+          $game.add_hook hook, self
+        end
+      else
+        $game.add_hook auto_hook, self
+      end
     end
     battlecry if not silenced
   end
@@ -111,13 +117,14 @@ class Minion < Card
   end
 
   def attack_target(opts = {})
-    super(opts)
+    result = super(opts)
     self.stealth = false
     if not first_attack
       self.first_attack = true
     elsif not second_attack
       self.second_attack = true
     end
+    result
   end
 
   def deal_damage(opts = {})
@@ -134,11 +141,21 @@ class Minion < Card
 
   def die
     super
-    if auto_hook
-      $game.remove_hook auto_hook, self
-    end
+    destruct
     owner.destroy_minion self
     deathrattle if not silenced
+  end
+
+  def destruct
+    if auto_hook
+      if Array === auto_hook
+        auto_hook.each do |hook|
+          $game.remove_hook hook, self
+        end
+      else
+        $game.remove_hook auto_hook, self
+      end
+    end
   end
 
   ###################

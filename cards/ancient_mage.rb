@@ -11,7 +11,7 @@ class AncientMage < Minion
 
   def battlecry
     super
-    owner.grant_adjacent_bonus spell_damage: 1
+    owner.grant_adjacent_bonus spell_damage: 1, source: self
 	end
 
 end

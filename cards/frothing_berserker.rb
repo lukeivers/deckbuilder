@@ -7,16 +7,7 @@ class FrothingBerserker < Minion
     self.attack = 2
     self.max_health = 4
     self.name = "Frothing Berserker"
-  end
-
-  def play(player)
-    super
-    $game.add_hook :minion_damage, self
-  end
-
-  def die
-    super
-    $game.remove_hook :minion_damage, self
+    self.auto_hook = :minion_damage
   end
 
   def on_minion_damage(opts = {})

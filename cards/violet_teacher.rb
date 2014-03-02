@@ -22,7 +22,7 @@ class VioletTeacher < Minion
 
   def on_spell_cast(opts = {})
     if opts[:source].owner == owner
-      owner.summon Card.get(name: 'Violet Apprentice')
+      owner.summon Cards.get(name: 'Violet Apprentice')
     end
   end
 end

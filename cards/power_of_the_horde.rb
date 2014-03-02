@@ -20,7 +20,7 @@ class PowerOfTheHorde < Spell
       when 3
         owner.summon Cards.get name: 'Silvermoon Guardian'
       when 4
-        owner.summon Cards.get name: 'Sen\'jin Guardian'
+        owner.summon Cards.get name: 'Sen\'jin Shieldmasta'
       when 5
         owner.summon Cards.get name: 'Cairne Bloodhoof'
     end

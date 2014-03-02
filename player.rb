@@ -7,7 +7,8 @@ class Player
   include Character
 
   attr_accessor :deck, :hand, :max_mana, :mana, :opponent, :minions, :weapon, :wins, :spell_damage
-  attr_accessor :fatigue_damage, :cards_played, :armour, :game, :spell_cost, :minion_cost
+  attr_accessor :fatigue_damage, :cards_played, :armour, :game, :spell_cost, :minion_cost, :rounds_per_deck
+  attr_accessor :current_rounds
 
   def start_game(game)
     self.game = game
@@ -17,6 +18,7 @@ class Player
   def reset
     self.hand = Hand.new
     self.minions = MinionGroup.new
+    self.minions.owner = self
     self.max_mana = 0
     self.health = 30
     self.weapon = nil
@@ -27,12 +29,23 @@ class Player
     self.minion_cost = 0
     self.temporary_attack = 0
     @game = nil
+    if rounds_per_deck
+      self.current_rounds += 1
+      if current_rounds > rounds_per_deck
+        self.current_rounds = 0
+        @deck.new_mutation
+      end
+    end
     @deck.init_cards
   end
 
   def initialize(opts = {})
     super
+    self.current_rounds = 0
     self.deck = Decks.get(name: opts[:deck])
+    if opts[:mutate]
+      self.rounds_per_deck = opts[:mutate]
+    end
     if opts[:opponent]
       self.opponent = opts[:opponent]
       self.opponent.opponent = self
@@ -84,7 +97,7 @@ class Player
       targets << opponent
     end
     if opts[:include_self]
-      tagets << self
+      targets << self
     end
     targets.shuffle.first
   end
@@ -156,6 +169,7 @@ class Player
   def return_minion
     target = choose_minion_to_return
     add_card Cards.get(name: target.name)
+    target.destruct
     destroy_minion(target)
   end
 
@@ -270,5 +284,14 @@ class Player
 
   def short_string
     "#{self.name} - #{self.attack}/#{self.health}/#{self.armour}"
+  end
+
+  def win
+    self.wins += 1
+    deck.win
+  end
+
+  def lose
+    deck.lose
   end
 end

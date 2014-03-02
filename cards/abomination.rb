@@ -12,6 +12,6 @@ class Abomination < Minion
 
   def deathrattle
     super
-    Array.new.concat(owner.targets).concat(owner.opponent.targets).each {|target| deal_damage damage: 2}
+    Array.new.concat(owner.targets).concat(owner.opponent.targets).select{|a| a != self}.each {|target| deal_damage damage: 2}
   end
 end

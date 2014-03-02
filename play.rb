@@ -16,9 +16,17 @@ if ARGV.find_index '-n'
   end
 end
 
+rounds_per_deck = 100
+if ARGV.find_index '-r'
+  index = ARGV.find_index '-r'
+  if ARGV.size > index + 1
+    rounds_per_deck = ARGV[index + 1].to_i
+  end
+end
+
 Logger.log 'Starting Hearthstone Deckbuilder'
 
-player1 = AggroBot.new deck: 'Murloc Warlock'
+player1 = AggroBot.new deck: 'Eric Hunter', mutate: rounds_per_deck
 player2 = AggroBot.new deck: 'Murloc Warlock', opponent: player1
 
 Game.play number_of_games: number_of_games, game_opts: { player1: player1, player2: player2 }

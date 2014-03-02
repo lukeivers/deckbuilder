@@ -10,18 +10,7 @@ class OldMurkeye < Minion
     self.charge = true
 	  self.type = 'Murloc'
 	  self.legendary = true
-  end
-
-  def play(player)
-    super
-    $game.add_hook :summon, self
-    $game.add_hook :death, self
-  end
-
-  def die
-    super
-    $game.remove_hook :summon, self
-    $game.remove_hook :death, self
+    self.auto_hook = [:summon, :death]
   end
 
   def on_summon(opts = {})

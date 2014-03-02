@@ -11,6 +11,6 @@ class SunfuryProtector < Minion
 
   def battlecry
     super
-    owner.grant_adjacent_bonus taunt: true
+    owner.grant_adjacent_bonus taunt: true, source: self
   end
 end

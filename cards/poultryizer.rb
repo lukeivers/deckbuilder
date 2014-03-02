@@ -13,6 +13,7 @@ class Poultryizer < Minion
     target = owner.random_target(include_friendly: true)
     if target
       target.owner.summon Cards.get name: 'Chicken'
+      target.destruct
       target.owner.destroy_minion(target)
     end
   end

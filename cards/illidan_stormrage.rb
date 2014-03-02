@@ -12,7 +12,7 @@ class IllidanStormrage < Minion
   end
 
   def on_card_played(opts = {})
-    if opts[:source].owner == self.owner
+    if opts[:source].owner == self.owner and opts[:source] != self and opts[:source].name != 'Flame of Azzinoth'
       owner.summon Cards.get name: 'Flame of Azzinoth'
     end
   end

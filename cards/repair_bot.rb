@@ -16,7 +16,7 @@ class RepairBot < Minion
     if target
       amount = target.max_health - target.health
       amount = 6 if amount > 6
-      taret.health += amount
+      target.health += amount
     end
   end
 end

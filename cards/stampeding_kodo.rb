@@ -14,6 +14,7 @@ class StampedingKodo < Minion
     super
     target = owner.opponent.minions.select {|a| a.attack <= 2}.shuffle.first
     if target
+      target.destruct
       target.owner.destroy_minion(target)
     end
 	end

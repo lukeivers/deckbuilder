@@ -11,7 +11,12 @@ class MadBomber < Minion
 
   def battlecry
     super
-    3.times { owner.random_target(include_friendly: true, include_opponent: true, include_self: true).
-              select {|a| a != self}.deal_damage(damage: 1) }
+    3.times do
+      target = owner.random_target(include_friendly: true, include_opponent: true, include_self: true)
+      while target == self
+        target = owner.random_target(include_friendly: true, include_opponent: true, include_self: true)
+      end
+      deal_damage(damage: 1)
+    end
   end
 end

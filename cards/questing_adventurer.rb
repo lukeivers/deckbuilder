@@ -7,17 +7,8 @@ class QuestingAdventurer < Minion
     self.cost = 3
     self.attack = 2
     self.max_health = 2
+    self.auto_hook = :card_played
 	#Whenever you play a card, gain +1/+1
-  end
-
-  def play(player)
-    super
-    $game.add_hook :card_played, self
-  end
-
-  def die
-    super
-    $game.remove_hook :card_played, self
   end
 
   def on_card_played(opts = {})

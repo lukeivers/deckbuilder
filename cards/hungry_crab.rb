@@ -14,14 +14,14 @@ class HungryCrab < Minion
     target = owner.opponent.minions.by_type('Murloc').sort{|a, b| a.attack <=> b.attack}.reverse.first
     if target
       target.die
-      self.add_attack(2)
-      self.add_max_health(2)
+      self.attack += 2
+      self.max_health += 2
     else
       target = owner.minions.by_type('Murloc').sort{|a, b| a.attack <=> b.attack}.first
       if target
         target.die
-        self.add_attack(2)
-        self.add_max_health(2)
+        self.attack += 2
+        self.max_health += 2
       end
     end
   end

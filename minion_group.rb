@@ -2,8 +2,8 @@ class MinionGroup < Array
   attr_accessor :owner, :attack_bonus, :health_bonus
 
   def initialize
-    self.attack_bonus = { :all => 0, 'Beast' => 0, 'Murloc' => 0, 'Demon' => 0, 'Pirate' => 0 }
-    self.health_bonus = { :all => 0, 'Beast' => 0, 'Murloc' => 0, 'Demon' => 0, 'Pirate' => 0 }
+    self.attack_bonus = { :all => 0, 'Beast' => 0, 'Murloc' => 0, 'Demon' => 0, 'Pirate' => 0, 'Dragon' => 0 }
+    self.health_bonus = { :all => 0, 'Beast' => 0, 'Murloc' => 0, 'Demon' => 0, 'Pirate' => 0, 'Dragon' => 0 }
   end
 
   def owner=(player)
@@ -39,7 +39,7 @@ class MinionGroup < Array
 
   def destroy_all
     self.each do |minion|
-      owner.destroy_minion(minion)
+      minion.die
     end
   end
 
