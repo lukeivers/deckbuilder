@@ -34,6 +34,12 @@ class Cards
 	Gnoll.new,
 	FlameOfAzzinoth.new,
 	FinkleEinhorn.new,
+	Whelp.new,
+	Dream.new,
+	EmeraldDrake.new,
+	LaughingSister.new,
+	Nightmare.new,
+	YseraAwakens.new,
   ]
 
   def self.get(opts = {})
