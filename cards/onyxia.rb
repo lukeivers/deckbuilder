@@ -7,7 +7,6 @@ class Onyxia < Minion
     self.cost = 9
     self.attack = 8
     self.max_health = 8
-    self.charge = true
 	  self.legendary = true
 	self.type = "Dragon"
   end
