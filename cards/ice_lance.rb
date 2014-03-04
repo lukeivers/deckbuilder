@@ -10,6 +10,5 @@ class IceLance < Spell
 
   def battlecry
 	#Freeze a character.  If it was already frozen, deal 4 damage instead.
-    end
   end
 end

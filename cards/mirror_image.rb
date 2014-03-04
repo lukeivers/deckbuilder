@@ -11,5 +11,4 @@ class MirrorImage < Spell
   def battlecry
 	#Summon two 0/2 minions with Taunt.  I have not added this card in, because the summoned minion has the same name as this spell.....
     end
-  end
 end
